@@ -1,14 +1,18 @@
-name: "MultiSample_scATACseq"
+name: MAESTRO Multi-Sample scATACseq Pipeline
 output_dir: ../docs
 navbar:
-  title: "MultiSample_scATACseq"
+  title: MAESTRO Multi-Sample scATACseq Pipeline
   left:
-  - text: Home
+  - text: Set Up
     href: index.html
   - text: About
     href: about.html
   - text: License
     href: license.html
+  right:
+  - icon: fa-github
+    text: Source code
+    href: https://github.com/baigal628/MultiSample_scATACseq
 output:
   workflowr::wflow_html:
     toc: yes
