@@ -12,7 +12,7 @@ editor_options:
 
 MAESTRO scATAC-seq multi-sample pipeline is built upon the integration of single-sample analysis suits. By specifying different merging points, users can choose either to call bulk peaks or to call peaks by samples individually. At the end of each workflow, users will obtain both individual peak/gene matrix and merged peak/gene matrix. Each merging point has been shown in the below flow chart. The downstream analysis will then be conducted based on the output matrix. After collecting clustering information, the multi-sample pipeline will also split the fragment file by samples and clusters. This step was developed to facilitate the comparison between samples within each cluster.
 
-![](flowchart.png)
+![]("./docs/flowchart.png")
 
 ## Tutorial: 10X PBMC scATAC-seq in time-Dependent Sampling Studies
 
@@ -24,6 +24,11 @@ MAESTRO scATAC-seq multi-sample pipeline is built upon the integration of single
 
 
 **Create a list of accessions**
+```{r}
+
+getwd()
+```
+
 ```{bash, eval=FALSE}
 $ touch SraAccList.txt
 $ nano SraAccList.txt
@@ -89,8 +94,7 @@ $ cd multi_scatac
 $ MAESTRO samples-init --assay_type scatac --data_type fastq --data_dir time_data/data/
 ```
 
-** To get a full Description of command-line options**
-
+**To get a full Description of command-line options**
 ```{bash, eval=FALSE}
 $ MAESTRO samples-init -h
   usage: MAESTRO samples-init [-h] [--assay_type ASSAY_TYPE] [--data_type DATA_TYPE] 
