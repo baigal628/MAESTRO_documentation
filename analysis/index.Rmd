@@ -14,7 +14,7 @@ editor_options:
 
 ```{bash, eval=FALSE}
 usage: MAESTRO [-h] [-v]
-               {scrna-init,scatac-init,integrate-init, multi-scatac-init, samples-init, mtx-to-h5,count-to-h5,merge-h5,scrna-qc,scatac-qc,scatac-peakcount,scatac-genescore}
+               {scrna-init,scatac-init,integrate-init, fast-scatac-init, samples-init, mtx-to-h5,count-to-h5,merge-h5,scrna-qc,scatac-qc,scatac-peakcount,scatac-genescore}
 ```
 
 There are ten functions available in MAESTRO serving as sub-commands.

@@ -76,15 +76,16 @@ $ mv SRR11614703_S1_L001_R1_001.fastq.gz CLL0_S1_L001_R1_001.fastq.gz
 $ conda activate MAESTRO
 
 #Configure MAESTRO working directory
-$ MAESTRO multi-scatac-init --batch --bulk_peaks --downsample 
+$ MAESTRO fast-scatac-init --batch --bulk_peaks --downsample \
   --target_reads 5000000 --input_path time_data/data \
   --platform 10x-genomics --format fastq --species GRCh38 \
-  --cores 8 --directory multi_scatac --deduplication "cell level" \
+  --cores 16 --directory multi_scatac --deduplication "cell level" \
   --whitelist whitelist/737K-cratac-v1.txt \
   --peak_cutoff 100 --count_cutoff 1000 --frip_cutoff 0.2 --cell_cutoff 10 \
   --giggleannotation annotations/giggle.all \
   --clusterpeak \
-  --fasta references/Refdata_scATAC_MAESTRO_GRCh38_1.1.0/GRCh38_genome.fa \
+  --mapping chromap --index /liulab/galib/sc_CIDC/references/chromap/GRCh38_chromap.index \
+  --fasta /liulab/galib/sc_CIDC/references/Refdata_scATAC_MAESTRO_GRCh38_1.1.0/GRCh38_genome.fa \
   --rpmodel Enhanced  --genedistance 10000 \
   --annotation --method RP-based --signature human.immune.CIBERSORT
   
