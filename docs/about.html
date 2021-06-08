@@ -13,12 +13,22 @@
 
 <title>Downstream Analysis</title>
 
+<script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -33,6 +43,8 @@ div.section {
 }
 </style>
 
+
+
 <style type="text/css">
   code{white-space: pre-wrap;}
   span.smallcaps{font-variant: small-caps;}
@@ -43,11 +55,6 @@ div.section {
     </style>
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -60,32 +67,6 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
 
 
 
@@ -96,10 +77,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -116,40 +93,13 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 51px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h2 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h3 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h4 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h5 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h6 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -177,7 +127,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -189,7 +139,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -200,10 +150,23 @@ $(document).ready(function () {
   var menuAnchor = $('a[href="' + href + '"]');
 
   // mark it active
-  menuAnchor.parent().addClass('active');
+  menuAnchor.tab('show');
 
   // if it's got a parent navbar menu mark it active as well
   menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -215,7 +178,6 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -287,15 +249,60 @@ $(document).ready(function () {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">MAESTRO Multi-Sample scATACseq Pipeline</a>
+      <a class="navbar-brand" href="index.html">MAESTRO 1.5.0</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li>
-  <a href="index.html">Set Up</a>
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fas fa-gear"></span>
+     
+    scRNA-seq
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="scrna.html">10X PBMC 1k</a>
+    </li>
+    <li>
+      <a href="scrna_stepbystep.html">Custom Analysis</a>
+    </li>
+  </ul>
 </li>
-<li>
-  <a href="about.html">Analysis</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fas fa-gear"></span>
+     
+    scATAC-seq
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="scatac.html">10X PBMC 500</a>
+    </li>
+    <li>
+      <a href="scatac_stepbystep.html">Custom Analysis</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fas fa-gear"></span>
+     
+    fast scATAC-seq
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="fast-scatac.html">multi-sample scATAC-seq</a>
+    </li>
+    <li>
+      <a href="fast-scatac_stepbystep.html">Custom Analysis</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="license.html">License</a>
@@ -303,18 +310,20 @@ $(document).ready(function () {
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/baigal628/MultiSample_scATACseq">
+  <a>
     <span class="fas fa-github"></span>
      
-    Source code
   </a>
+</li>
+<li>
+  <a href="https://github.com/baigal628/MAESTRO_documentation">Source code</a>
 </li>
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -343,13 +352,13 @@ $(document).ready(function () {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-12-29
+<strong>Last updated:</strong> 2021-06-08
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 2 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
 </p>
 <p>
-<strong>Knit directory:</strong> <code>MultiSample_scATACseq/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+<strong>Knit directory:</strong> <code>MAESTRO_documentation/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
 </p>
 <p>
 This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
@@ -374,76 +383,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombaigal628MultiSamplescATACseqtreedf0c2882fe04c6abfaa338b9e6d3ff22f473e62ctargetblankdf0c288a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/baigal628/MultiSample_scATACseq/tree/df0c2882fe04c6abfaa338b9e6d3ff22f473e62c" target="_blank">df0c288</a> </a>
 </p>
 </div>
-<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
-<div class="panel-body">
-<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
-</div>
-</div>
-</div>
-<div class="panel panel-default">
-<div class="panel-heading">
-<p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20201223code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20201223)</code> </a>
-</p>
-</div>
-<div id="strongSeedstrongcodesetseed20201223code" class="panel-collapse collapse">
-<div class="panel-body">
-<p>The command <code>set.seed(20201223)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
-</div>
-</div>
-</div>
-<div class="panel panel-default">
-<div class="panel-heading">
-<p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
-</p>
-</div>
-<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
-<div class="panel-body">
-<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
-</div>
-</div>
-</div>
-<div class="panel panel-default">
-<div class="panel-heading">
-<p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
-</p>
-</div>
-<div id="strongCachestrongnone" class="panel-collapse collapse">
-<div class="panel-body">
-<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
-</div>
-</div>
-</div>
-<div class="panel panel-default">
-<div class="panel-heading">
-<p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
-</p>
-</div>
-<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
-<div class="panel-body">
-<p>Great job! Using relative paths to the files within your workflowr project makes it easier to run your code on other machines.</p>
-</div>
-</div>
-</div>
-<div class="panel panel-default">
-<div class="panel-heading">
-<p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombaigal628MultiSamplescATACseqtree94f43289d9c61ba404cbbd0fc13f3ad018e2a780targetblank94f4328a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/baigal628/MultiSample_scATACseq/tree/94f43289d9c61ba404cbbd0fc13f3ad018e2a780" target="_blank">94f4328</a> </a>
-</p>
-</div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombaigal628MultiSamplescATACseqtree94f43289d9c61ba404cbbd0fc13f3ad018e2a780targetblank94f4328a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombaigal628MultiSamplescATACseqtreedf0c2882fe04c6abfaa338b9e6d3ff22f473e62ctargetblankdf0c288a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/baigal628/MultiSample_scATACseq/tree/94f43289d9c61ba404cbbd0fc13f3ad018e2a780" target="_blank">94f4328</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/baigal628/MultiSample_scATACseq/tree/df0c2882fe04c6abfaa338b9e6d3ff22f473e62c" target="_blank">df0c288</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -457,12 +406,19 @@ Ignored files:
     Ignored:    data/.DS_Store
 
 Untracked files:
+    Untracked:  .RDataTmp
+    Untracked:  MAESTRO_documentation.Rproj
+    Untracked:  atac_pbmc_500_nextgem_DiffPeaks.tsv
+    Untracked:  atac_pbmc_500_nextgem_cluster.png
     Untracked:  code/Basic_Operations.R
     Untracked:  code/Downstream Analysis.R
-    Untracked:  data/all_samples_scATAC_Object.rds
+    Untracked:  data/fast-scatac/
+    Untracked:  data/scatac/
+    Untracked:  data/scrna/
+    Untracked:  pbmc_1k_v3.lisa/
 
 Unstaged changes:
-    Modified:   analysis/_site.yml
+    Deleted:    MultiSample_scATACseq.Rproj
 
 </code></pre>
 <p>
@@ -482,379 +438,6 @@ There are no past versions. Publish this analysis with <code>wflow_publish()</co
 </div>
 </div>
 </div>
-<div id="about" class="section level3">
-<h3>About</h3>
-<p>Custom analysis can be conducted using either MAESTRO or Seurat package. In this study, benchmarking experiments were designed to systematically test the effect of varying processing times on single-cell transcriptome and <strong>epigenome profiles</strong> from healthy and diseased donors. Peripheral blood mononuclear cells (PBMC) were isolated from healthy donors and from patients affected with chronic lymphocytic leukemia (CLL). Samples were either preserved immediately (0 h) or after 8 and 24 h.</p>
-<p><strong>Goal</strong>: Evaluating the effect of sampling time on scATAC-seq chromatin accessibility profiles.</p>
-</div>
-<div id="load-required-libraries" class="section level3">
-<h3>Load Required Libraries</h3>
-<pre class="r"><code>library(Seurat)
-library(tidyr)
-library(ggplot2)
-library(dplyr)</code></pre>
-<pre><code>
-Attaching package: &#39;dplyr&#39;</code></pre>
-<pre><code>The following objects are masked from &#39;package:stats&#39;:
-
-    filter, lag</code></pre>
-<pre><code>The following objects are masked from &#39;package:base&#39;:
-
-    intersect, setdiff, setequal, union</code></pre>
-<pre class="r"><code>library(RColorBrewer)
-library(presto)</code></pre>
-<pre><code>Loading required package: Rcpp</code></pre>
-<pre><code>Loading required package: data.table</code></pre>
-<pre><code>
-Attaching package: &#39;data.table&#39;</code></pre>
-<pre><code>The following objects are masked from &#39;package:dplyr&#39;:
-
-    between, first, last</code></pre>
-</div>
-<div id="read-seurta-object" class="section level3">
-<h3>Read Seurta object</h3>
-<pre class="r"><code>all_samples_scATAC_Object &lt;- readRDS(&quot;./data/all_samples_scATAC_Object.rds&quot;)
-ATAC &lt;- all_samples_scATAC_Object$ATAC
-ATAC</code></pre>
-<pre><code>An object of class Seurat 
-113906 features across 33524 samples within 2 assays 
-Active assay: ACTIVITY (28307 features, 2000 variable features)
- 1 other assay present: ATAC
- 2 dimensional reductions calculated: lsi, umap</code></pre>
-<pre class="r"><code>DefaultAssay(ATAC) &lt;- &#39;ATAC&#39;
-ATAC[[&#39;ATAC&#39;]]</code></pre>
-<pre><code>Assay data with 85599 features for 33524 cells
-Top 10 variable features:
- chr10-100006259-100006623, chr10-100009280-100010049,
-chr10-100014006-100014691, chr10-100020280-100021766,
-chr10-100045939-100046452, chr10-100185069-100186626,
-chr10-100228783-100229861, chr10-100267027-100268102,
-chr10-100286003-100287106, chr10-100326803-100327421 </code></pre>
-</div>
-<div id="extract-sample-information" class="section level3">
-<h3>Extract Sample Information</h3>
-<pre class="r"><code>df &lt;- as.data.frame(do.call(rbind, strsplit(row.names(ATAC@meta.data), &#39;@&#39;)))
-ATAC@meta.data[,c(&quot;sample&quot;, &quot;hours&quot;, &quot;cell&quot;)] &lt;- df  %&gt;% separate(V1,into = c(&quot;sample&quot;, &quot;hours&quot;), 
-                                                                  sep = &quot;(?&lt;=[A-Za-z])(?=[0-9])&quot;)
-head(ATAC@meta.data)</code></pre>
-<pre><code>                       orig.ident nCount_ATAC nFeature_ATAC ATAC_snn_res.0.6
-CLL0@AAACGAAAGACAACGC all_samples         868           868                0
-CLL0@AAACGAAAGGATTTGA all_samples        1122          1122                0
-CLL0@AAACGAAAGTCCCGCA all_samples         589           589                0
-CLL0@AAACGAAAGTGGGACT all_samples        1420          1420                0
-CLL0@AAACGAACAACGCAAG all_samples        1233          1233                0
-CLL0@AAACGAACAAGTTCGT all_samples         660           660                0
-                      seurat_clusters nCount_ACTIVITY nFeature_ACTIVITY
-CLL0@AAACGAAAGACAACGC               0        719.4433              2327
-CLL0@AAACGAAAGGATTTGA               0       1020.8120              3066
-CLL0@AAACGAAAGTCCCGCA               0        465.5627              1754
-CLL0@AAACGAAAGTGGGACT               0       1102.2685              3847
-CLL0@AAACGAACAACGCAAG               0        987.4834              3304
-CLL0@AAACGAACAAGTTCGT               0        517.8309              1754
-                      assign.ident assign.score assign.celltype sample hours
-CLL0@AAACGAAAGACAACGC            B     1.182212               B    CLL     0
-CLL0@AAACGAAAGGATTTGA            B     1.182212               B    CLL     0
-CLL0@AAACGAAAGTCCCGCA            B     1.182212               B    CLL     0
-CLL0@AAACGAAAGTGGGACT            B     1.182212               B    CLL     0
-CLL0@AAACGAACAACGCAAG            B     1.182212               B    CLL     0
-CLL0@AAACGAACAAGTTCGT            B     1.182212               B    CLL     0
-                                  cell
-CLL0@AAACGAAAGACAACGC AAACGAAAGACAACGC
-CLL0@AAACGAAAGGATTTGA AAACGAAAGGATTTGA
-CLL0@AAACGAAAGTCCCGCA AAACGAAAGTCCCGCA
-CLL0@AAACGAAAGTGGGACT AAACGAAAGTGGGACT
-CLL0@AAACGAACAACGCAAG AAACGAACAACGCAAG
-CLL0@AAACGAACAAGTTCGT AAACGAACAAGTTCGT</code></pre>
-</div>
-<div id="plot-umap-on-default-parameters-res0.6" class="section level3">
-<h3>Plot Umap on Default Parameters (Res=0.6)</h3>
-<pre class="r"><code>p1 &lt;-DimPlot(ATAC, label = TRUE, reduction = &quot;umap&quot;, group.by = &quot;seurat_clusters&quot;, repel=T, pt.size = 0.5, label.size = 3) + labs(title = &quot;Clustering of PBMCs from all samples&quot;)</code></pre>
-<pre><code>Warning: Using `as.character()` on a quosure is deprecated as of rlang 0.3.0.
-Please use `as_label()` or `as_name()` instead.
-This warning is displayed once per session.</code></pre>
-<pre class="r"><code>p2 &lt;- DimPlot(ATAC, label = TRUE, reduction = &quot;umap&quot;, group.by = &quot;assign.ident&quot;, repel=T, pt.size = 0.5, label.size = 3) + labs(title = &quot;Annotaion of PBMCs from all samples&quot;)
-
-p3 &lt;- DimPlot(ATAC, label = FALSE, reduction = &quot;umap&quot;, group.by = &quot;hours&quot;, repel=T, pt.size = 0.5, label.size = 2.5, cols = brewer.pal(3,&quot;Set2&quot;)) + labs(title = &quot;Clustering of PBMCs in different time points&quot;)
-
-p4 &lt;- DimPlot(ATAC, label = FALSE, reduction = &quot;umap&quot;, group.by = &quot;sample&quot;, repel=T, pt.size = 0.5, label.size = 2.5, cols = brewer.pal(3,&quot;Pastel2&quot;)) + labs(title = &quot;Clustering of PBMCs for treatment and control&quot;)
-p1</code></pre>
-<p><img src="figure/about.Rmd/UMAP-plot_default-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-UMAP-plot_default-1">
-Past versions of UMAP-plot_default-1.png
-</button>
-</p>
-<div id="fig-UMAP-plot_default-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/baigal628/MultiSample_scATACseq/blob/09f0973f7a3b4d4fea96271675b23669a61f970e/docs/figure/about.Rmd/UMAP-plot_default-1.png" target="_blank">09f0973</a>
-</td>
-<td>
-baigal628
-</td>
-<td>
-2020-12-29
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<pre class="r"><code>p2</code></pre>
-<p><img src="figure/about.Rmd/UMAP-plot_default-2.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-UMAP-plot_default-2">
-Past versions of UMAP-plot_default-2.png
-</button>
-</p>
-<div id="fig-UMAP-plot_default-2" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/baigal628/MultiSample_scATACseq/blob/09f0973f7a3b4d4fea96271675b23669a61f970e/docs/figure/about.Rmd/UMAP-plot_default-2.png" target="_blank">09f0973</a>
-</td>
-<td>
-baigal628
-</td>
-<td>
-2020-12-29
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<pre class="r"><code>p3</code></pre>
-<p><img src="figure/about.Rmd/UMAP-plot_default-3.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-UMAP-plot_default-3">
-Past versions of UMAP-plot_default-3.png
-</button>
-</p>
-<div id="fig-UMAP-plot_default-3" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/baigal628/MultiSample_scATACseq/blob/09f0973f7a3b4d4fea96271675b23669a61f970e/docs/figure/about.Rmd/UMAP-plot_default-3.png" target="_blank">09f0973</a>
-</td>
-<td>
-baigal628
-</td>
-<td>
-2020-12-29
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<pre class="r"><code>p4</code></pre>
-<p><img src="figure/about.Rmd/UMAP-plot_default-4.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-UMAP-plot_default-4">
-Past versions of UMAP-plot_default-4.png
-</button>
-</p>
-<div id="fig-UMAP-plot_default-4" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/baigal628/MultiSample_scATACseq/blob/09f0973f7a3b4d4fea96271675b23669a61f970e/docs/figure/about.Rmd/UMAP-plot_default-4.png" target="_blank">09f0973</a>
-</td>
-<td>
-baigal628
-</td>
-<td>
-2020-12-29
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p><strong>Conclusion:</strong> From the above figures, we can easily observe similar results as described in the paper. A remarkable effect of the sampling time on single-cell epigenome profiles are lying across all blood cell subtypes from healthy donors and CLL patient samples.</p>
-</div>
-<div id="find-differencially-accessible-peaks" class="section level3">
-<h3>Find Differencially Accessible Peaks</h3>
-<p><strong>Between Clusters</strong></p>
-<pre class="r"><code>da_peaks_C &lt;- wilcoxauc(ATAC, &#39;seurat_clusters&#39;, seurat_assay = &#39;ATAC&#39;, assay = &#39;data&#39;)
-##Use the &#39;data slots&#39; under &#39;ATAC&#39; peak assay
-head(da_peaks_C)</code></pre>
-<pre><code>                    feature group    avgExpr        logFC statistic       auc
-1 chr10-100006259-100006623     0 0.01227851  0.003487763  85479610 0.5006547
-2 chr10-100009280-100010049     0 0.03335661 -0.010454055  84840896 0.4969138
-3 chr10-100014006-100014691     0 0.25120048  0.185560191  92218850 0.5401265
-4 chr10-100020280-100021766     0 0.14339910  0.097291209  89076448 0.5217215
-5 chr10-100045939-100046452     0 0.02983188  0.014214105  85905865 0.5031513
-6 chr10-100185069-100186626     0 0.07909823 -0.014968209  84443356 0.4945854
-           pval          padj    pct_in   pct_out
-1  1.487466e-01  1.724858e-01  0.526904 0.3961704
-2  1.485060e-03  2.474300e-03  1.452978 2.0762261
-3 6.564270e-191 7.023687e-187 10.554048 2.4063681
-4  3.959014e-85  6.916074e-83  6.147214 1.7607571
-5  4.191537e-07  1.135524e-06  1.309277 0.6786251
-6  1.324840e-04  2.622020e-04  3.353026 4.4789259</code></pre>
-<p><strong>Between Samples</strong></p>
-<pre class="r"><code>da_peaks_S &lt;- wilcoxauc(ATAC, &#39;sample&#39;, seurat_assay = &#39;ATAC&#39;, assay = &#39;data&#39;)
-head(da_peaks_S)</code></pre>
-<pre><code>                    feature group    avgExpr        logFC statistic       auc
-1 chr10-100006259-100006623   CLL 0.01126072  0.003571778 140484070 0.5001718
-2 chr10-100009280-100010049   CLL 0.03416337 -0.015113507 138680874 0.4937518
-3 chr10-100014006-100014691   CLL 0.19718990  0.190303264 150660274 0.5364026
-4 chr10-100020280-100021766   CLL 0.11865609  0.106800907 146114479 0.5202180
-5 chr10-100045939-100046452   CLL 0.02351712  0.010300266 140824418 0.5013836
-6 chr10-100185069-100186626   CLL 0.06919982 -0.043351644 136192198 0.4848913
-           pval          padj    pct_in   pct_out
-1  6.269437e-01  6.398073e-01 0.4375038 0.4042890
-2  1.568061e-16  3.909260e-16 1.3125114 2.5839339
-3 1.002517e-257 7.211300e-255 7.6259343 0.3632742
-4 1.667918e-120 8.344366e-119 4.6302485 0.6035038
-5  4.379813e-03  4.925931e-03 0.9357720 0.6620964
-6  1.375562e-42  8.829240e-42 2.6797108 5.8006680</code></pre>
-<p><strong>Between Sampling Time</strong></p>
-<pre class="r"><code>da_peaks_S &lt;- wilcoxauc(ATAC, &#39;hours&#39;, seurat_assay = &#39;ATAC&#39;, assay = &#39;data&#39;)
-head(da_peaks_S)</code></pre>
-<pre><code>                    feature group     avgExpr        logFC statistic       auc
-1 chr10-100006259-100006623     0 0.008575977 -0.001400650 132505746 0.4996974
-2 chr10-100009280-100010049     0 0.038944731 -0.004709297 132194910 0.4985252
-3 chr10-100014006-100014691     0 0.132731773  0.052421468 135989911 0.5128367
-4 chr10-100020280-100021766     0 0.078521646  0.023018124 134239516 0.5062357
-5 chr10-100045939-100046452     0 0.022193322  0.006337562 132956986 0.5013991
-6 chr10-100185069-100186626     0 0.092887911  0.002615598 132532192 0.4997971
-          pval         padj    pct_in   pct_out
-1 4.056026e-01 5.101935e-01 0.3831717 0.4436728
-2 5.844202e-02 1.051382e-01 1.7751017 2.0736883
-3 7.071694e-32 1.277679e-28 5.5677197 2.9176312
-4 2.651505e-12 9.719620e-11 3.3703472 2.0929784
-5 5.115071e-03 1.312642e-02 0.9696591 0.6896219
-6 8.583799e-01 8.975869e-01 4.2305286 4.2920525</code></pre>
-<p>There are many other ways you can customize the analysis based on your research purpose. Also, <a href="https://github.com/liulab-dfci/MAESTRO/blob/master/example/ATAC_infrastructure_10x/ATAC_infrastructure_10x.md">MAESTRO R Package</a> have multiple functions you may also want to have a try. Single-sample tutorials can be applied similarly on a multi-sample object.</p>
-<br>
-<p>
-<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
-<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
-</button>
-</p>
-<div id="workflowr-sessioninfo" class="collapse">
-<pre class="r"><code>sessionInfo()</code></pre>
-<pre><code>R version 4.0.3 (2020-10-10)
-Platform: x86_64-apple-darwin17.0 (64-bit)
-Running under: macOS Big Sur 10.16
-
-Matrix products: default
-BLAS:   /Library/Frameworks/R.framework/Versions/4.0/Resources/lib/libRblas.dylib
-LAPACK: /Library/Frameworks/R.framework/Versions/4.0/Resources/lib/libRlapack.dylib
-
-locale:
-[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
-
-attached base packages:
-[1] stats     graphics  grDevices utils     datasets  methods   base     
-
-other attached packages:
-[1] presto_1.0.0       data.table_1.13.4  Rcpp_1.0.5         RColorBrewer_1.1-2
-[5] dplyr_1.0.2        ggplot2_3.3.2      tidyr_1.1.2        Seurat_3.2.3      
-[9] workflowr_1.6.2   
-
-loaded via a namespace (and not attached):
-  [1] nlme_3.1-151          matrixStats_0.57.0    fs_1.5.0             
-  [4] RcppAnnoy_0.0.18      httr_1.4.2            rprojroot_2.0.2      
-  [7] sctransform_0.3.2     tools_4.0.3           R6_2.5.0             
- [10] irlba_2.3.3           rpart_4.1-15          KernSmooth_2.23-18   
- [13] uwot_0.1.10           mgcv_1.8-33           lazyeval_0.2.2       
- [16] colorspace_2.0-0      withr_2.3.0           tidyselect_1.1.0     
- [19] gridExtra_2.3         compiler_4.0.3        git2r_0.27.1         
- [22] plotly_4.9.2.2        labeling_0.4.2        scales_1.1.1         
- [25] spatstat.data_1.7-0   lmtest_0.9-38         ggridges_0.5.2       
- [28] pbapply_1.4-3         goftest_1.2-2         spatstat_1.64-1      
- [31] stringr_1.4.0         digest_0.6.27         spatstat.utils_1.17-0
- [34] rmarkdown_2.6         pkgconfig_2.0.3       htmltools_0.5.0      
- [37] parallelly_1.22.0     fastmap_1.0.1         htmlwidgets_1.5.3    
- [40] rlang_0.4.9           rstudioapi_0.13       shiny_1.5.0          
- [43] farver_2.0.3          generics_0.1.0        zoo_1.8-8            
- [46] jsonlite_1.7.2        ica_1.0-2             magrittr_2.0.1       
- [49] patchwork_1.1.1       Matrix_1.3-0          munsell_0.5.0        
- [52] abind_1.4-5           reticulate_1.18       lifecycle_0.2.0      
- [55] whisker_0.4           stringi_1.5.3         yaml_2.2.1           
- [58] MASS_7.3-53           Rtsne_0.15            plyr_1.8.6           
- [61] grid_4.0.3            parallel_4.0.3        listenv_0.8.0        
- [64] promises_1.1.1        ggrepel_0.9.0         crayon_1.3.4         
- [67] deldir_0.2-3          miniUI_0.1.1.1        lattice_0.20-41      
- [70] cowplot_1.1.0         splines_4.0.3         tensor_1.5           
- [73] knitr_1.30            pillar_1.4.7          igraph_1.2.6         
- [76] future.apply_1.6.0    reshape2_1.4.4        codetools_0.2-18     
- [79] leiden_0.3.6          glue_1.4.2            evaluate_0.14        
- [82] vctrs_0.3.6           png_0.1-7             httpuv_1.5.4         
- [85] polyclip_1.10-0       gtable_0.3.0          RANN_2.6.1           
- [88] purrr_0.3.4           scattermore_0.7       future_1.21.0        
- [91] xfun_0.19             rsvd_1.0.3            mime_0.9             
- [94] xtable_1.8-4          later_1.1.0.1         survival_3.2-7       
- [97] viridisLite_0.3.0     tibble_3.0.4          cluster_2.1.0        
-[100] globals_0.14.0        fitdistrplus_1.1-3    ellipsis_0.3.1       
-[103] ROCR_1.0-11          </code></pre>
-</div>
-</div>
 
 
 <!-- Adjust MathJax settings so that all math formulae are shown using
@@ -868,6 +451,8 @@ footer is added to webpages before the MathJax javascript. -->
     "HTML-CSS": { availableFonts: ["TeX"] }
   });
 </script>
+
+
 
 
 
@@ -895,7 +480,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>

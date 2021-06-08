@@ -9,9 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="Gali Bai" />
 
 
-<title>MAESTRO</title>
+<title>multi-sample scATAC-seq</title>
 
 <script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
@@ -29,6 +30,9 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -230,6 +234,69 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
 
 </head>
 
@@ -237,6 +304,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-sm-12 col-md-4 col-lg-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-sm-12 col-md-8 col-lg-9">
 
 
 
@@ -327,7 +404,9 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">MAESTRO</h1>
+<h1 class="title toc-ignore">multi-sample scATAC-seq</h1>
+<h4 class="author">Gali Bai</h4>
+<h4 class="date">6/6/2021</h4>
 
 </div>
 
@@ -498,86 +577,161 @@ There are no past versions. Publish this analysis with <code>wflow_publish()</co
 </div>
 </div>
 </div>
-<p><strong>MAESTRO</strong>(<strong>M</strong>odel-based <strong>A</strong>nalys<strong>E</strong>s of <strong>S</strong>ingle-cell <strong>T</strong>ranscriptome and <strong>R</strong>egul<strong>O</strong>me) is a comprehensive single-cell RNA-seq and ATAC-seq analysis suit built using <a href="https://bitbucket.org/snakemake/snakemake/wiki/Home">snakemake</a>. MAESTRO combines several dozen tools and packages to create an integrative pipeline, which enables scRNA-seq and scATAC-seq analysis from raw sequencing data (fastq files) all the way through alignment, quality control, cell filtering, normalization, unsupervised clustering, differential expression and peak calling, celltype annotation and transcription regulation analysis. Currently, MAESTRO support <a href="https://www.ncbi.nlm.nih.gov/pubmed/24385147">Smart-seq2</a>, <a href="https://www.10xgenomics.com/solutions/single-cell/">10x-genomics</a>, <a href="https://www.cell.com/abstract/S0092-8674(15)00549-8">Drop-seq</a>, <a href="https://science.sciencemag.org/content/360/6385/176">SPLiT-seq</a> for scRNA-seq protocols; <a href="https://www.ncbi.nlm.nih.gov/pubmed/26083756">microfudics-based</a>, <a href="https://www.10xgenomics.com/solutions/single-cell-atac/">10x-genomics</a> and <a href="https://science.sciencemag.org/content/348/6237/910">sci-ATAC-seq</a> for scATAC-seq protocols.</p>
-<div id="usage" class="section level2">
-<h2>Usage</h2>
-<pre class="bash"><code>usage: MAESTRO [-h] [-v]
-               {scrna-init,scatac-init,integrate-init, multi-scatac-init, samples-init, mtx-to-h5,count-to-h5,merge-h5,scrna-qc,scatac-qc,scatac-peakcount,scatac-genescore}</code></pre>
-<p>There are ten functions available in MAESTRO serving as sub-commands.</p>
-<table>
-<colgroup>
-<col width="52%" />
-<col width="47%" />
-</colgroup>
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>MAESTRO scATAC-seq multi-sample pipeline is built upon the integration of single-sample analysis suits. By specifying different merging points, users can choose either to call bulk peaks or to call peaks by samples individually. At the end of each workflow, users will obtain both individual peak/gene matrix and merged peak/gene matrix. Each merging point has been shown in the below flow chart. The downstream analysis will then be conducted based on the output matrix. After collecting clustering information, the multi-sample pipeline will also split the fragment file by samples and clusters. This step was developed to facilitate the comparison between samples within each cluster.</p>
+<p><img src="assets/flowchart.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-flowchart">
+Past versions of flowchart.png
+</button>
+</p>
+<div id="fig-flowchart" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
 <thead>
-<tr class="header">
-<th>Subcommand</th>
-<th>Description</th>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td><code>scrna-init</code></td>
-<td>Initialize the MAESTRO scRNA-seq workflow.</td>
-</tr>
-<tr class="even">
-<td><code>scatac-init</code></td>
-<td>Initialize the MAESTRO scATAC-seq workflow.</td>
-</tr>
-<tr class="odd">
-<td><code>fast-scatac-init</code></td>
-<td>Initialize the MAESTRO scATAC-seq workflow with chromap as one of the mapping option.</td>
-</tr>
-<tr class="even">
-<td><code>integrate-init</code></td>
-<td>Initialize the MAESTRO integration workflow.</td>
-</tr>
-<tr class="odd">
-<td><code>samples-init</code></td>
-<td>Initialize samples.json file in the current directory.</td>
-</tr>
-<tr class="even">
-<td><code>mtx-to-h5</code></td>
-<td>Convert 10X mtx format matrix to HDF5 format.</td>
-</tr>
-<tr class="odd">
-<td><code>count-to-h5</code></td>
-<td>Convert plain text count table to HDF5 format.</td>
-</tr>
-<tr class="even">
-<td><code>merge-h5</code></td>
-<td>Merge multiple HDF5 files, e.g. different replicates.</td>
-</tr>
-<tr class="odd">
-<td><code>scrna-qc</code></td>
-<td>Perform quality control for scRNA-seq gene-cell count matrix.</td>
-</tr>
-<tr class="even">
-<td><code>scatac-qc</code></td>
-<td>Perform quality control for scATAC-seq peak-cell count matrix.</td>
-</tr>
-<tr class="odd">
-<td><code>scatac-peakcount</code></td>
-<td>Generate peak-cell binary count matrix.</td>
-</tr>
-<tr class="even">
-<td><code>scatac-genescore</code></td>
-<td>Calculate gene score based on the binarized scATAC peak count.</td>
+<tr>
+<td>
+<a href="https://github.com/baigal628/MultiSample_scATACseq/blob/d88199f8195c2478c620c703d41e3512dc1ff414/docs/assets/flowchart.png" target="_blank">d88199f</a>
+</td>
+<td>
+baigal628
+</td>
+<td>
+2020-12-29
+</td>
 </tr>
 </tbody>
 </table>
-<div id="required-annotations-for-maestro-workflow" class="section level3">
-<h3>Required annotations for MAESTRO workflow</h3>
-<p>The full MAESTRO workflow requires extra annotation files and tools:</p>
-<ul>
-<li><p>MAESTRO depends on <a href="https://github.com/alexdobin/STAR/blob/master/docs/STARsolo.md">starsolo</a>, chromap and <a href="https://github.com/lh3/minimap2">minimap2</a> for mapping scRNA-seq and scATAC-seq dataset. Users need to generate <strong>the reference files</strong> for the alignment software and specify the path of the annotations to MAESTRO through command line options.</p></li>
-<li><p>MAESTRO utilizes <strong>LISA2</strong> to evaluate the enrichment of transcription factors based on the marker genes from scRNA-seq clusters. If users want to use LISA2, they need to download and install reference data either for <a href="/project/dev/alynch/public_data/lisa_data/hg38_1000_2.0.h5">human</a> or for <a href="http://cistrome.org/~alynch/data/lisa_data/mm10_1000_2.0.h5">mouse</a> locally and build the data according to the <a href="https://github.com/liulab-dfci/lisa2/blob/master/docs/troubleshooting.md">LISA2 document</a>. The input gene set can be constituted of only official gene symbols, only RefSeq ids, only Ensembl ids, only Entrez ids, or a mixture of these identifiers.</p></li>
-<li><p>MAESTRO utilizes <strong>giggle</strong> to identify enrichment of transcription factor peaks in scATAC-seq cluster-specific peaks. By default <a href="https://github.com/ryanlayer/giggle">giggle</a> is installed in MAESTRO environment. The giggle index for Cistrome database can be downloaded <a href="http://cistrome.org/~galib/MAESTRO/references/giggle.all.tar.gz">here</a>. Users need to download the file and provide the location of the giggle annotation to MAESTRO if want to predict TFs on scATAC-seq.</p></li>
-</ul>
 </div>
-<div id="test-data" class="section level3">
-<h3>Test data</h3>
-<p>We also provide small data sets for testing pipeline (sampling from 10x fastq files). User can download both <a href="http://cistrome.org/~galib/MAESTRO/MAESTRO_samples/rna_pbmc_1k_v3_fastqs_sampling.tar.gz">scRNA-seq</a> and <a href="http://cistrome.org/~galib/MAESTRO/MAESTRO_samples/atac_pbmc_500_v1_fastqs_sampling.tar.gz">scATAC-seq</a>.</p>
+</div>
+</div>
+<div id="tutorial-10x-pbmc-scatac-seq-in-time-dependent-sampling-studies" class="section level2">
+<h2>Tutorial: 10X PBMC scATAC-seq in time-Dependent Sampling Studies</h2>
+<p><a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-020-02032-0">Paper</a><br />
+<a href="https://www.ncbi.nlm.nih.gov/Traces/study/?acc=PRJNA545828&amp;o=assay_type_s%3Aa">Data Source</a></p>
+<div id="step0.-data-preparation" class="section level3">
+<h3>Step0. Data Preparation</h3>
+<p><strong>Create a list of accessions</strong></p>
+<pre class="bash"><code>$ touch SraAccList.txt
+$ nano SraAccList.txt
+</code></pre>
+<p><strong>Copy the following accession numbers in SraAccList.txt:</strong></p>
+<pre class="bash"><code>SRR11614703
+SRR11614704
+SRR11614705
+SRR11614706
+SRR11614707
+SRR11614708</code></pre>
+<pre class="bash"><code>#Install sratoolkit through conda
+$ conda install -c bioconda sra-tools
+$ prefetch --option-file SraAccList.txt
+
+#Split .sra to .fastq.gz
+$ cat SraAccList.txt | while read i
+  do
+    time fastq-dump --gzip -split-files ${i}.sra
+    echo &quot;** ${i}.sra to fastq done **&quot;
+  done
+
+#Rename to 10X format
+$ cat SraAccList.txt | while read i
+  do
+    mv ${i}_1*.gz ${i}_S1_L001_R1_001.fastq.gz
+    mv ${i}_2*.gz ${i}_S1_L001_R3_001.fastq.gz
+    mv ${i}_3*.gz ${i}_S1_L001_R2_001.fastq.gz
+  done
+
+#I renamed each file based on sample information (Optional)
+$ mv SRR11614703_S1_L001_R1_001.fastq.gz CLL0_S1_L001_R1_001.fastq.gz
+</code></pre>
+</div>
+<div id="step1.-workflow-configuration" class="section level3">
+<h3>Step1. Workflow Configuration</h3>
+<pre class="bash"><code>$ conda activate MAESTRO
+
+#Configure MAESTRO working directory
+$ MAESTRO multi-scatac-init --batch --bulk_peaks --downsample 
+  --target_reads 5000000 --input_path time_data/data \
+  --platform 10x-genomics --format fastq --species GRCh38 \
+  --cores 8 --directory multi_scatac --deduplication &quot;cell level&quot; \
+  --whitelist whitelist/737K-cratac-v1.txt \
+  --peak_cutoff 100 --count_cutoff 1000 --frip_cutoff 0.2 --cell_cutoff 10 \
+  --giggleannotation annotations/giggle.all \
+  --clusterpeak \
+  --fasta references/Refdata_scATAC_MAESTRO_GRCh38_1.1.0/GRCh38_genome.fa \
+  --rpmodel Enhanced  --genedistance 10000 \
+  --annotation --method RP-based --signature human.immune.CIBERSORT
+  
+$ cd multi_scatac
+
+#Configure sample.json file
+$ MAESTRO samples-init --assay_type scatac --data_type fastq --data_dir time_data/data/</code></pre>
+<p><strong>To get a full Description of command-line options</strong></p>
+<pre class="bash"><code>$ MAESTRO samples-init -h
+  usage: MAESTRO samples-init [-h] [--assay_type ASSAY_TYPE] [--data_type DATA_TYPE] 
+  [--data_dir DATA_DIR]
+
+  optional arguments:
+    -h, --help            show this help message and exit.
+  
+  Input files arguments:
+    --assay_type ASSAY_TYPE
+                          Required. type of assay: either scatac or scrna.
+    --data_type DATA_TYPE
+                          Required. type of data: either fastq or fragment.
+    --data_dir DATA_DIR   Required. the FULL path to the fastq folder or the fragment folder.
+
+$ MAESTRO multi-scatac-init -h
+  usage: MAESTRO multi-scatac-init [-h] [--batch] [--consensus_peaks] 
+  [--cutoff_samples CUTOFF_SAMPLES] [--bulk_peaks] [--downsample] 
+  [--target_reads TARGET_READS] [--input_path INPUT_PATH]
+  [--species {GRCh38,GRCm38}] [--platform {10x-genomics,sci-ATAC-seq,microfluidic}] 
+  [--format {fastq,fragments,bam}] [--deduplication {cell level,bulk level}]
+  [--giggleannotation GIGGLEANNOTATION] [--fasta FASTA] [--whitelist WHITELIST] 
+  [--cores CORES] [--directory DIRECTORY] [--annotation]
+  [--method {RP-based,peak-based,both}] [--signature SIGNATURE] [--custompeaks] 
+  [--custompeak_file CUSTOMPEAK_FILE] [--shortpeaks] [--clusterpeak]
+  [--rpmodel {Simple,Enhanced}] [--genedistance GENEDISTANCE] [--peak_cutoff PEAK_CUTOFF] 
+  [--count_cutoff COUNT_CUTOFF] [--frip_cutoff FRIP_CUTOFF] [--cell_cutoff CELL_CUTOFF]</code></pre>
+</div>
+<div id="step3.-run-maestro" class="section level3">
+<h3>Step3. Run MAESTRO</h3>
+<pre class="bash"><code>$ snakemake -np
+$ nohup snakemake -j 8 &gt; 10X_PBMC.out &amp;</code></pre>
+</div>
+<div id="step4.-final-outputs" class="section level3">
+<h3>Step4. Final Outputs</h3>
+<pre class="bash"><code>$ ls Result
+Analysis  Benchmark  Log  minimap2  QC  Report
+
+$ ls Result/Analysis
+Batch  CLL0  CLL24  CLL8  Cluster  PBMC0  PBMC24  PBMC8</code></pre>
+<ul>
+<li><strong>Analysis/:</strong> The Analysis directory contains a Seurat R object, as well as clustering result, cell type annotation result and driver transcription factor identification result.
+<ul>
+<li>Batch/: All samples merged Results.</li>
+<li>Cluster/: Fragment and bigwig files for each sample within each cluster.</li>
+</ul></li>
+<li><strong>Benchmark/:</strong> The Benchmark directory stores benchmark files for all rules in Snakefile, each of which contains a tab-separated table of run times and memory usage in MiB.</li>
+<li><strong>Log/:</strong> The Log directory contains the log files generated in the pipeline analysis.</li>
+<li><strong>minimap2/:</strong> The minimap2 directory contains all the mapping results generated by minimap2.</li>
+<li><strong>QC/:</strong> The QC directory contains quality control analysis results of scATAC-seq data, including the barcode filtering table outprefix_scATAC_validcells.txt, filtered count matrix outprefix_filtered_peak_count.h5 and other QC results. The filtered count matrix is generated according to singlecell.txt and the parameters like –count-cutoff and –frip-cutoff that users provide.</li>
+<li><strong>Report/:</strong> The html file in Report directory summarizse all the results in an HTML based document.</li>
+</ul>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -604,15 +758,16 @@ other attached packages:
 [1] workflowr_1.6.2
 
 loaded via a namespace (and not attached):
- [1] Rcpp_1.0.6        knitr_1.33        magrittr_2.0.1    R6_2.5.0         
- [5] rlang_0.4.10      fansi_0.4.2       stringr_1.4.0     tools_4.0.5      
- [9] xfun_0.22         utf8_1.2.1        git2r_0.28.0      jquerylib_0.1.4  
-[13] htmltools_0.5.1.1 ellipsis_0.3.1    rprojroot_2.0.2   yaml_2.2.1       
-[17] digest_0.6.27     tibble_3.1.1      lifecycle_1.0.0   crayon_1.4.1     
-[21] later_1.2.0       sass_0.3.1        vctrs_0.3.7       promises_1.2.0.1 
-[25] fs_1.5.0          glue_1.4.2        evaluate_0.14     rmarkdown_2.7    
-[29] stringi_1.5.3     bslib_0.2.4       compiler_4.0.5    pillar_1.6.0     
-[33] jsonlite_1.7.2    httpuv_1.6.0      pkgconfig_2.0.3  </code></pre>
+ [1] Rcpp_1.0.6        whisker_0.4       knitr_1.33        magrittr_2.0.1   
+ [5] R6_2.5.0          rlang_0.4.10      fansi_0.4.2       highr_0.9        
+ [9] stringr_1.4.0     tools_4.0.5       xfun_0.22         utf8_1.2.1       
+[13] git2r_0.28.0      jquerylib_0.1.4   htmltools_0.5.1.1 ellipsis_0.3.1   
+[17] rprojroot_2.0.2   yaml_2.2.1        digest_0.6.27     tibble_3.1.1     
+[21] lifecycle_1.0.0   crayon_1.4.1      later_1.2.0       sass_0.3.1       
+[25] vctrs_0.3.7       promises_1.2.0.1  fs_1.5.0          glue_1.4.2       
+[29] evaluate_0.14     rmarkdown_2.7     stringi_1.5.3     bslib_0.2.4      
+[33] compiler_4.0.5    pillar_1.6.0      jsonlite_1.7.2    httpuv_1.6.0     
+[37] pkgconfig_2.0.3  </code></pre>
 </div>
 </div>
 </div>
@@ -633,6 +788,8 @@ footer is added to webpages before the MathJax javascript. -->
 
 
 
+</div>
+</div>
 
 </div>
 
@@ -665,6 +822,32 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

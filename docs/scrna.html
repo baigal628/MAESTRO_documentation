@@ -9,9 +9,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="Gali Bai" />
 
+<meta name="date" content="2021-06-06" />
 
-<title>MAESTRO</title>
+<title>scRNA-seq</title>
 
 <script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
@@ -29,6 +31,9 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -230,6 +235,69 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
 
 </head>
 
@@ -237,6 +305,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-sm-12 col-md-4 col-lg-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-sm-12 col-md-8 col-lg-9">
 
 
 
@@ -327,7 +405,9 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">MAESTRO</h1>
+<h1 class="title toc-ignore">scRNA-seq</h1>
+<h4 class="author">Gali Bai</h4>
+<h4 class="date">2021-06-06</h4>
 
 </div>
 
@@ -498,86 +578,257 @@ There are no past versions. Publish this analysis with <code>wflow_publish()</co
 </div>
 </div>
 </div>
-<p><strong>MAESTRO</strong>(<strong>M</strong>odel-based <strong>A</strong>nalys<strong>E</strong>s of <strong>S</strong>ingle-cell <strong>T</strong>ranscriptome and <strong>R</strong>egul<strong>O</strong>me) is a comprehensive single-cell RNA-seq and ATAC-seq analysis suit built using <a href="https://bitbucket.org/snakemake/snakemake/wiki/Home">snakemake</a>. MAESTRO combines several dozen tools and packages to create an integrative pipeline, which enables scRNA-seq and scATAC-seq analysis from raw sequencing data (fastq files) all the way through alignment, quality control, cell filtering, normalization, unsupervised clustering, differential expression and peak calling, celltype annotation and transcription regulation analysis. Currently, MAESTRO support <a href="https://www.ncbi.nlm.nih.gov/pubmed/24385147">Smart-seq2</a>, <a href="https://www.10xgenomics.com/solutions/single-cell/">10x-genomics</a>, <a href="https://www.cell.com/abstract/S0092-8674(15)00549-8">Drop-seq</a>, <a href="https://science.sciencemag.org/content/360/6385/176">SPLiT-seq</a> for scRNA-seq protocols; <a href="https://www.ncbi.nlm.nih.gov/pubmed/26083756">microfudics-based</a>, <a href="https://www.10xgenomics.com/solutions/single-cell-atac/">10x-genomics</a> and <a href="https://science.sciencemag.org/content/348/6237/910">sci-ATAC-seq</a> for scATAC-seq protocols.</p>
-<div id="usage" class="section level2">
-<h2>Usage</h2>
-<pre class="bash"><code>usage: MAESTRO [-h] [-v]
-               {scrna-init,scatac-init,integrate-init, multi-scatac-init, samples-init, mtx-to-h5,count-to-h5,merge-h5,scrna-qc,scatac-qc,scatac-peakcount,scatac-genescore}</code></pre>
-<p>There are ten functions available in MAESTRO serving as sub-commands.</p>
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>In this example, we will be analyzing a scRNA-seq dataset of 1K human peripheral blood mononuclear cells (PBMCs) freely available from 10X Genomics. The raw dataset can be downloaded from the 10X Genomics website. We will show you how to run through the whole MAESTRO pipeline from the raw sequencing fastq files to the final results. We also provide guidance on how to perform custom analysis starting from the pipeline output such as the expression count matrix.</p>
+</div>
+<div id="run-maestro-pipeline" class="section level2">
+<h2>Run MAESTRO pipeline</h2>
+<div id="step-0.-download-the-data-and-prepare-the-environment" class="section level3">
+<h3>Step 0. Download the data and prepare the environment</h3>
+<p>Please download the raw data from 10X genomics website.</p>
+<pre class="bash"><code>
+$ wget https://cf.10xgenomics.com/samples/cell-exp/3.0.0/pbmc_1k_v3/pbmc_1k_v3_fastqs.tar
+$ tar xvf pbmc_1k_v3_fastqs.tar
+</code></pre>
+<p>Before running MAESTRO, users need to activate the MAESTRO environment.</p>
+<pre class="bash"><code>
+$ conda activate MAESTRO
+</code></pre>
+</div>
+<div id="step-1.-configure-the-maestro-workflow" class="section level3">
+<h3>Step 1. Configure the MAESTRO workflow</h3>
+<p>Initialize the MAESTRO scRNA-seq workflow using MAESTRO scrna-init command. This will install a Snakefile and a config file in this directory.</p>
+<pre class="bash"><code>$ MAESTRO scrna-init --platform 10x-genomics --species GRCh38 \
+--fastq-dir data/pbmc_1k_v3_fastqs --fastq-prefix pbmc_1k_v3 \
+--cores 12 --rseqc --directory scRNA/pbmc_1k_v3 --outprefix pbmc_1k_v3 \
+--mapindex Refdata_scRNA_MAESTRO_GRCh38_1.2.2/GRCh38_STAR_2.7.6a \
+--whitelist barcodes/3M-february-2018.txt \
+--umi-length 12 --lisadir lisa/hg38_2.1.tar.gz --signature human.immune.CIBERSORT
+</code></pre>
+<p>To get a full description of command-line options, please use the command</p>
+<pre class="bash"><code>MAESTRO scrna-init -h</code></pre>
+<div id="here-we-list-all-the-arguments-and-their-description." class="section level4">
+<h4>Here we list all the arguments and their description.</h4>
+<p><strong>Input files arguments:</strong></p>
 <table>
 <colgroup>
-<col width="52%" />
-<col width="47%" />
+<col width="45%" />
+<col width="55%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th>Subcommand</th>
+<th>Arguments</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><code>scrna-init</code></td>
-<td>Initialize the MAESTRO scRNA-seq workflow.</td>
+<td><code>--platform</code></td>
+<td>{10x-genomics,Dropseq,Smartseq2} Platform of single cell RNA-seq. DEFAULT: 10x-genomics.</td>
 </tr>
 <tr class="even">
-<td><code>scatac-init</code></td>
-<td>Initialize the MAESTRO scATAC-seq workflow.</td>
+<td><code>--fastq-dir</code></td>
+<td>Directory where fastq files are stored.</td>
 </tr>
 <tr class="odd">
-<td><code>fast-scatac-init</code></td>
-<td>Initialize the MAESTRO scATAC-seq workflow with chromap as one of the mapping option.</td>
+<td><code>--fastq-prefix</code></td>
+<td>Sample name of fastq file, only for the platform of ‘10x-genomics’. If there is a file named pbmc_1k_v2_S1_L001_I1_001.fastq.gz, the prefix is ‘pbmc_1k_v2’.</td>
 </tr>
 <tr class="even">
-<td><code>integrate-init</code></td>
-<td>Initialize the MAESTRO integration workflow.</td>
+<td><code>--fastq-barcode</code></td>
+<td>Specify the barcode fastq file, only for the platform of ‘Dropseq’. If there are multiple pairs of fastq, please provide a comma-separated list of barcode fastq files. For example, <code>--fastq-barcode test1_1.fastq,test2_1.fastq</code>.</td>
 </tr>
 <tr class="odd">
-<td><code>samples-init</code></td>
-<td>Initialize samples.json file in the current directory.</td>
+<td><code>--fastq-transcript</code></td>
+<td>Specify the transcript fastq file, only for the platform of ‘Dropseq’.</td>
 </tr>
 <tr class="even">
-<td><code>mtx-to-h5</code></td>
-<td>Convert 10X mtx format matrix to HDF5 format.</td>
-</tr>
-<tr class="odd">
-<td><code>count-to-h5</code></td>
-<td>Convert plain text count table to HDF5 format.</td>
-</tr>
-<tr class="even">
-<td><code>merge-h5</code></td>
-<td>Merge multiple HDF5 files, e.g. different replicates.</td>
-</tr>
-<tr class="odd">
-<td><code>scrna-qc</code></td>
-<td>Perform quality control for scRNA-seq gene-cell count matrix.</td>
-</tr>
-<tr class="even">
-<td><code>scatac-qc</code></td>
-<td>Perform quality control for scATAC-seq peak-cell count matrix.</td>
-</tr>
-<tr class="odd">
-<td><code>scatac-peakcount</code></td>
-<td>Generate peak-cell binary count matrix.</td>
-</tr>
-<tr class="even">
-<td><code>scatac-genescore</code></td>
-<td>Calculate gene score based on the binarized scATAC peak count.</td>
+<td><code>--species</code></td>
+<td>{GRCh38,GRCm38} Specify the genome assembly (GRCh38 for human and GRCm38 for mouse). DEFAULT: GRCh38.</td>
 </tr>
 </tbody>
 </table>
-<div id="required-annotations-for-maestro-workflow" class="section level3">
-<h3>Required annotations for MAESTRO workflow</h3>
-<p>The full MAESTRO workflow requires extra annotation files and tools:</p>
-<ul>
-<li><p>MAESTRO depends on <a href="https://github.com/alexdobin/STAR/blob/master/docs/STARsolo.md">starsolo</a>, chromap and <a href="https://github.com/lh3/minimap2">minimap2</a> for mapping scRNA-seq and scATAC-seq dataset. Users need to generate <strong>the reference files</strong> for the alignment software and specify the path of the annotations to MAESTRO through command line options.</p></li>
-<li><p>MAESTRO utilizes <strong>LISA2</strong> to evaluate the enrichment of transcription factors based on the marker genes from scRNA-seq clusters. If users want to use LISA2, they need to download and install reference data either for <a href="/project/dev/alynch/public_data/lisa_data/hg38_1000_2.0.h5">human</a> or for <a href="http://cistrome.org/~alynch/data/lisa_data/mm10_1000_2.0.h5">mouse</a> locally and build the data according to the <a href="https://github.com/liulab-dfci/lisa2/blob/master/docs/troubleshooting.md">LISA2 document</a>. The input gene set can be constituted of only official gene symbols, only RefSeq ids, only Ensembl ids, only Entrez ids, or a mixture of these identifiers.</p></li>
-<li><p>MAESTRO utilizes <strong>giggle</strong> to identify enrichment of transcription factor peaks in scATAC-seq cluster-specific peaks. By default <a href="https://github.com/ryanlayer/giggle">giggle</a> is installed in MAESTRO environment. The giggle index for Cistrome database can be downloaded <a href="http://cistrome.org/~galib/MAESTRO/references/giggle.all.tar.gz">here</a>. Users need to download the file and provide the location of the giggle annotation to MAESTRO if want to predict TFs on scATAC-seq.</p></li>
-</ul>
+<p><strong>Running and output arguments:</strong></p>
+<table>
+<colgroup>
+<col width="45%" />
+<col width="55%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Arguments</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>--cores</code></td>
+<td>The number of cores to use. DEFAULT: 10.</td>
+</tr>
+<tr class="even">
+<td><code>--rseqc</code></td>
+<td>Whether or not to run RSeQC. If set, the pipeline will include the RSeQC part and then takes a longer time. By default (not set), the pipeline will skip the RSeQC part.</td>
+</tr>
+<tr class="odd">
+<td><code>--directory</code></td>
+<td>Path to the directory where the workflow shall be initialized and results shall be stored. DEFAULT: MAESTRO.</td>
+</tr>
+<tr class="even">
+<td><code>--outprefix</code></td>
+<td>Prefix of output files. DEFAULT: MAESTRO.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Quality control arguments:</strong></p>
+<table>
+<colgroup>
+<col width="45%" />
+<col width="55%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Arguments</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>--count-cutoff</code></td>
+<td>Cutoff for the number of count in each cell. DEFAULT: 1000.</td>
+</tr>
+<tr class="even">
+<td><code>--gene-cutoff</code></td>
+<td>Cutoff for the number of genes included in each cell. DEFAULT: 500.</td>
+</tr>
+<tr class="odd">
+<td><code>--cell-cutoff</code></td>
+<td>Cutoff for the number of cells covered by each gene. DEFAULT: 10.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Reference genome arguments:</strong></p>
+<table>
+<colgroup>
+<col width="45%" />
+<col width="55%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Arguments</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>--mapindex</code></td>
+<td>Genome index directory for STAR. Users can just download the index file for <a href="http://cistrome.org/~galib/Refdata_scRNA_MAESTRO_GRCh38_1.2.2.tar.gz">human</a> and <a href="http://cistrome.org/~galib/Refdata_scRNA_MAESTRO_GRCm38_1.2.2.tar.gz">mouse</a> from CistromeDB and decompress them. Then specify the index directory for STAR, for example, <code>--mapindex Refdata_scRNA_MAESTRO_GRCh38_1.1.0/GRCh38_STAR_2.7.3a</code>.</td>
+</tr>
+<tr class="even">
+<td><code>--rsem</code></td>
+<td>The prefix of transcript references for RSEM used by rsem-prepare-reference (Only required when the platform is Smartseq2). Users can directly download the reference file for <a href="http://cistrome.org/~chenfei/MAESTRO/Refdata_scRNA_MAESTRO_GRCh38_1.1.0.tar.gz">human</a> and <a href="http://cistrome.org/~chenfei/MAESTRO/Refdata_scRNA_MAESTRO_GRCm38_1.1.0.tar.gz">mouse</a> from CistromeDB and decompress them. Then specify the prefix for RSEM, for example, <code>--rsem Refdata_scRNA_MAESTRO_GRCh38_1.1.0/GRCh38_RSEM_1.3.2/GRCh38</code>.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Barcode arguments, for platform of ‘Dropseq’ or ‘10x-genomics’:</strong></p>
+<table>
+<colgroup>
+<col width="45%" />
+<col width="55%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Arguments</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>--whitelist</code></td>
+<td>If the platform is ‘Dropseq’ or ‘10x-genomics’, please specify the barcode library (whitelist) so that STARsolo can do the error correction and demultiplex of cell barcodes. The 10X Chromium whitelist file can be found inside the CellRanger distribution. Please make sure that the whitelist is compatible with the specific version of the 10X chemistry: V2 or V3. For example, in CellRanger 3.1.0, the V2 whitelist is ‘cellranger-3.1.0/cellranger-cs/3.1.0/lib/python/cellranger/barcodes/737K-august-2016.txt’. The V3 whitelist is ‘cellranger-3.1.0/cellranger-cs/3.1.0/lib/python/cellranger/barcodes/3M-february-2018.txt’.</td>
+</tr>
+<tr class="even">
+<td><code>--barcode-start</code></td>
+<td>The start site of each barcode. DEFAULT: 1.</td>
+</tr>
+<tr class="odd">
+<td><code>--barcode-length</code></td>
+<td>The length of cell barcode. For 10x-genomics, the length of barcode is 16. DEFAULT: 16.</td>
+</tr>
+<tr class="even">
+<td><code>--umi-start</code></td>
+<td>The start site of UMI. DEFAULT: 17.</td>
+</tr>
+<tr class="odd">
+<td><code>--umi-length</code></td>
+<td>The length of UMI. For 10x-genomics, the length of V2 chemistry is 10. For 10X V3 chemistry, the length is 12. DEFAULT: 10.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Regulator identification arguments:</strong></p>
+<table>
+<colgroup>
+<col width="45%" />
+<col width="55%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Arguments</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>--lisadir</code></td>
+<td>Path to the LISA data files. Please download LISA’s required data from cistrome.org: <a href="http://cistrome.org/~alynch/data/lisa_data/hg38_1000_2.0.h5">human</a> and <a href="http://cistrome.org/~alynch/data/lisa_data/mm10_1000_2.0.h5">mouse</a>. The latest version of <a href="https://github.com/liulab-dfci/lisa2">LISA2</a> was recently released to largely decrease processing time on multiple gene lists. Please check out for detailed information.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Cell signature arguments:</strong></p>
+<table>
+<colgroup>
+<col width="45%" />
+<col width="55%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Arguments</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>--signature</code></td>
+<td>Cell signature file used to annotate cell types. MAESTRO provides several sets of built-in cell signatures. Users can choose from [‘human.immune.CIBERSORT’, ‘mouse.brain.ALLEN’, ‘mouse.all.facs.TabulaMuris’, ‘mouse.all.droplet.TabulaMuris’]. Custom cell signatures are also supported. In this situation, users need to provide the file location of cell signatures, and the signature file is tab-seperated without header. The first column is cell type, and the second column is signature gene. DEFAULT: human.immune.CIBERSORT.</td>
+</tr>
+</tbody>
+</table>
 </div>
-<div id="test-data" class="section level3">
-<h3>Test data</h3>
-<p>We also provide small data sets for testing pipeline (sampling from 10x fastq files). User can download both <a href="http://cistrome.org/~galib/MAESTRO/MAESTRO_samples/rna_pbmc_1k_v3_fastqs_sampling.tar.gz">scRNA-seq</a> and <a href="http://cistrome.org/~galib/MAESTRO/MAESTRO_samples/atac_pbmc_500_v1_fastqs_sampling.tar.gz">scATAC-seq</a>.</p>
+</div>
+<div id="step-2.-run-maestro" class="section level3">
+<h3>Step 2. Run MAESTRO</h3>
+<p>Before running the workflow, please check the <code>config.yaml</code> and see if it is configured correctly. Once <code>config.yaml</code> is configured, users can use snakemake to run the workflow.</p>
+<pre class="bash"><code>$ cd scRNA/pbmc_1k_v3
+$ snakemake -np
+$ nohup snakemake -j 16 &gt; run.out &amp;
+</code></pre>
+</div>
+<div id="step-3.-understand-the-final-output-files" class="section level3">
+<h3>Step 3. Understand the final output files</h3>
+<p>The whole pipeline in this example takes about X hours with 12 cores. If MAESTRO runs successfully, an output folder will contain several useful outputs as described below.</p>
+<pre class="bash"><code>$ ls Result
+pbmc_1k_v3_scRNA_report.html  Analysis  Benchmark  Log  QC  STAR
+</code></pre>
+<div id="output-files" class="section level4">
+<h4>Output files</h4>
+<ul>
+<li><strong>STAR:</strong> The <code>STAR</code> directory contains all the mapping and analysis files generated by <code>STAR</code> normal (Smartseq2) or solo mode (10x-genomics or Dropseq). For solo mode, <code>Solo.out/Gene/</code> stores raw and filtered count matrix. In MAESTRO pipeline, raw count matrix is used for a further filter according to quality control arguments like <code>--count-cutoff</code> <code>--gene-cutoff</code> and <code>--cell-cutoff</code>.</li>
+<li><strong>QC:</strong> The <code>QC</code> directory contains quality control analysis results of scRNA-seq data, including the filtered count matrix <code>outprefix_filtered_gene_count.h5</code> and RSeQC results (if <code>--rseqc</code> is set).</li>
+<li><strong>Analysis:</strong> The <code>Analysis</code> directory contains a Seurat R object, as well as clustering result, cell type annotation result and driver transcription factor identification result, which we will introduce in the step-by-step analysis.</li>
+<li><strong>Benchmark:</strong> The <code>Benchmark</code> directory stores benchmark files for all rules in Snakefile, each of which contains a tab-separated table of run times and memory usage in MiB.</li>
+<li><strong>Log:</strong> The Log directory contains the log files generated in the pipeline analysis.</li>
+<li>**{outprefix}_scRNA_report.html:** The <code>{outprefix}_scRNA_report.html</code> file summarizes all the results in an HTML based document.</li>
+</ul>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -616,6 +867,7 @@ loaded via a namespace (and not attached):
 </div>
 </div>
 </div>
+</div>
 
 
 <!-- Adjust MathJax settings so that all math formulae are shown using
@@ -633,6 +885,8 @@ footer is added to webpages before the MathJax javascript. -->
 
 
 
+</div>
+</div>
 
 </div>
 
@@ -665,6 +919,32 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

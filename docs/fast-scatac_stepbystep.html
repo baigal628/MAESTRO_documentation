@@ -9,9 +9,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="Gali Bai" />
 
+<meta name="date" content="2021-06-07" />
 
-<title>MAESTRO</title>
+<title>multi-sample scATAC-seq custom analysis</title>
 
 <script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
@@ -29,6 +31,9 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -230,6 +235,69 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
 
 </head>
 
@@ -237,6 +305,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-sm-12 col-md-4 col-lg-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-sm-12 col-md-8 col-lg-9">
 
 
 
@@ -327,7 +405,9 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">MAESTRO</h1>
+<h1 class="title toc-ignore">multi-sample scATAC-seq custom analysis</h1>
+<h4 class="author">Gali Bai</h4>
+<h4 class="date">2021-06-07</h4>
 
 </div>
 
@@ -498,86 +578,164 @@ There are no past versions. Publish this analysis with <code>wflow_publish()</co
 </div>
 </div>
 </div>
-<p><strong>MAESTRO</strong>(<strong>M</strong>odel-based <strong>A</strong>nalys<strong>E</strong>s of <strong>S</strong>ingle-cell <strong>T</strong>ranscriptome and <strong>R</strong>egul<strong>O</strong>me) is a comprehensive single-cell RNA-seq and ATAC-seq analysis suit built using <a href="https://bitbucket.org/snakemake/snakemake/wiki/Home">snakemake</a>. MAESTRO combines several dozen tools and packages to create an integrative pipeline, which enables scRNA-seq and scATAC-seq analysis from raw sequencing data (fastq files) all the way through alignment, quality control, cell filtering, normalization, unsupervised clustering, differential expression and peak calling, celltype annotation and transcription regulation analysis. Currently, MAESTRO support <a href="https://www.ncbi.nlm.nih.gov/pubmed/24385147">Smart-seq2</a>, <a href="https://www.10xgenomics.com/solutions/single-cell/">10x-genomics</a>, <a href="https://www.cell.com/abstract/S0092-8674(15)00549-8">Drop-seq</a>, <a href="https://science.sciencemag.org/content/360/6385/176">SPLiT-seq</a> for scRNA-seq protocols; <a href="https://www.ncbi.nlm.nih.gov/pubmed/26083756">microfudics-based</a>, <a href="https://www.10xgenomics.com/solutions/single-cell-atac/">10x-genomics</a> and <a href="https://science.sciencemag.org/content/348/6237/910">sci-ATAC-seq</a> for scATAC-seq protocols.</p>
-<div id="usage" class="section level2">
-<h2>Usage</h2>
-<pre class="bash"><code>usage: MAESTRO [-h] [-v]
-               {scrna-init,scatac-init,integrate-init, multi-scatac-init, samples-init, mtx-to-h5,count-to-h5,merge-h5,scrna-qc,scatac-qc,scatac-peakcount,scatac-genescore}</code></pre>
-<p>There are ten functions available in MAESTRO serving as sub-commands.</p>
-<table>
-<colgroup>
-<col width="52%" />
-<col width="47%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Subcommand</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>scrna-init</code></td>
-<td>Initialize the MAESTRO scRNA-seq workflow.</td>
-</tr>
-<tr class="even">
-<td><code>scatac-init</code></td>
-<td>Initialize the MAESTRO scATAC-seq workflow.</td>
-</tr>
-<tr class="odd">
-<td><code>fast-scatac-init</code></td>
-<td>Initialize the MAESTRO scATAC-seq workflow with chromap as one of the mapping option.</td>
-</tr>
-<tr class="even">
-<td><code>integrate-init</code></td>
-<td>Initialize the MAESTRO integration workflow.</td>
-</tr>
-<tr class="odd">
-<td><code>samples-init</code></td>
-<td>Initialize samples.json file in the current directory.</td>
-</tr>
-<tr class="even">
-<td><code>mtx-to-h5</code></td>
-<td>Convert 10X mtx format matrix to HDF5 format.</td>
-</tr>
-<tr class="odd">
-<td><code>count-to-h5</code></td>
-<td>Convert plain text count table to HDF5 format.</td>
-</tr>
-<tr class="even">
-<td><code>merge-h5</code></td>
-<td>Merge multiple HDF5 files, e.g. different replicates.</td>
-</tr>
-<tr class="odd">
-<td><code>scrna-qc</code></td>
-<td>Perform quality control for scRNA-seq gene-cell count matrix.</td>
-</tr>
-<tr class="even">
-<td><code>scatac-qc</code></td>
-<td>Perform quality control for scATAC-seq peak-cell count matrix.</td>
-</tr>
-<tr class="odd">
-<td><code>scatac-peakcount</code></td>
-<td>Generate peak-cell binary count matrix.</td>
-</tr>
-<tr class="even">
-<td><code>scatac-genescore</code></td>
-<td>Calculate gene score based on the binarized scATAC peak count.</td>
-</tr>
-</tbody>
-</table>
-<div id="required-annotations-for-maestro-workflow" class="section level3">
-<h3>Required annotations for MAESTRO workflow</h3>
-<p>The full MAESTRO workflow requires extra annotation files and tools:</p>
-<ul>
-<li><p>MAESTRO depends on <a href="https://github.com/alexdobin/STAR/blob/master/docs/STARsolo.md">starsolo</a>, chromap and <a href="https://github.com/lh3/minimap2">minimap2</a> for mapping scRNA-seq and scATAC-seq dataset. Users need to generate <strong>the reference files</strong> for the alignment software and specify the path of the annotations to MAESTRO through command line options.</p></li>
-<li><p>MAESTRO utilizes <strong>LISA2</strong> to evaluate the enrichment of transcription factors based on the marker genes from scRNA-seq clusters. If users want to use LISA2, they need to download and install reference data either for <a href="/project/dev/alynch/public_data/lisa_data/hg38_1000_2.0.h5">human</a> or for <a href="http://cistrome.org/~alynch/data/lisa_data/mm10_1000_2.0.h5">mouse</a> locally and build the data according to the <a href="https://github.com/liulab-dfci/lisa2/blob/master/docs/troubleshooting.md">LISA2 document</a>. The input gene set can be constituted of only official gene symbols, only RefSeq ids, only Ensembl ids, only Entrez ids, or a mixture of these identifiers.</p></li>
-<li><p>MAESTRO utilizes <strong>giggle</strong> to identify enrichment of transcription factor peaks in scATAC-seq cluster-specific peaks. By default <a href="https://github.com/ryanlayer/giggle">giggle</a> is installed in MAESTRO environment. The giggle index for Cistrome database can be downloaded <a href="http://cistrome.org/~galib/MAESTRO/references/giggle.all.tar.gz">here</a>. Users need to download the file and provide the location of the giggle annotation to MAESTRO if want to predict TFs on scATAC-seq.</p></li>
-</ul>
+<div id="about" class="section level3">
+<h3>About</h3>
+<p>Custom analysis can be conducted using either MAESTRO or Seurat package. In this study, benchmarking experiments were designed to systematically test the effect of varying processing times on single-cell transcriptome and <strong>epigenome profiles</strong> from healthy and diseased donors. Peripheral blood mononuclear cells (PBMC) were isolated from healthy donors and from patients affected with chronic lymphocytic leukemia (CLL). Samples were either preserved immediately (0 h) or after 8 and 24 h.</p>
+<p><strong>Goal</strong>: Evaluating the effect of sampling time on scATAC-seq chromatin accessibility profiles.</p>
 </div>
-<div id="test-data" class="section level3">
-<h3>Test data</h3>
-<p>We also provide small data sets for testing pipeline (sampling from 10x fastq files). User can download both <a href="http://cistrome.org/~galib/MAESTRO/MAESTRO_samples/rna_pbmc_1k_v3_fastqs_sampling.tar.gz">scRNA-seq</a> and <a href="http://cistrome.org/~galib/MAESTRO/MAESTRO_samples/atac_pbmc_500_v1_fastqs_sampling.tar.gz">scATAC-seq</a>.</p>
+<div id="load-required-libraries" class="section level3">
+<h3>Load Required Libraries</h3>
+<pre class="r"><code>library(Seurat)</code></pre>
+<pre><code>Attaching SeuratObject</code></pre>
+<pre class="r"><code>library(tidyr)
+library(ggplot2)
+library(dplyr)</code></pre>
+<pre><code>
+Attaching package: &#39;dplyr&#39;</code></pre>
+<pre><code>The following objects are masked from &#39;package:stats&#39;:
+
+    filter, lag</code></pre>
+<pre><code>The following objects are masked from &#39;package:base&#39;:
+
+    intersect, setdiff, setequal, union</code></pre>
+<pre class="r"><code>library(RColorBrewer)
+library(presto)</code></pre>
+<pre><code>Loading required package: Rcpp</code></pre>
+<pre><code>Loading required package: data.table</code></pre>
+<pre><code>
+Attaching package: &#39;data.table&#39;</code></pre>
+<pre><code>The following objects are masked from &#39;package:dplyr&#39;:
+
+    between, first, last</code></pre>
+</div>
+<div id="read-seurat-object" class="section level3">
+<h3>Read Seurat object</h3>
+<pre class="r"><code>all_samples_scATAC_Object &lt;- readRDS(&quot;./data/fast-scatac/all_samples_scATAC_Object.rds&quot;)
+ATAC &lt;- all_samples_scATAC_Object$ATAC
+ATAC</code></pre>
+<pre><code>An object of class Seurat 
+113906 features across 33524 samples within 2 assays 
+Active assay: ACTIVITY (28307 features, 2000 variable features)
+ 1 other assay present: ATAC
+ 2 dimensional reductions calculated: lsi, umap</code></pre>
+<pre class="r"><code>DefaultAssay(ATAC) &lt;- &#39;ATAC&#39;
+ATAC[[&#39;ATAC&#39;]]</code></pre>
+<pre><code>Assay data with 85599 features for 33524 cells
+Top 10 variable features:
+ chr10-100006259-100006623, chr10-100009280-100010049,
+chr10-100014006-100014691, chr10-100020280-100021766,
+chr10-100045939-100046452, chr10-100185069-100186626,
+chr10-100228783-100229861, chr10-100267027-100268102,
+chr10-100286003-100287106, chr10-100326803-100327421 </code></pre>
+</div>
+<div id="extract-sample-information" class="section level3">
+<h3>Extract Sample Information</h3>
+<pre class="r"><code>df &lt;- as.data.frame(do.call(rbind, strsplit(row.names(ATAC@meta.data), &#39;@&#39;)))
+ATAC@meta.data[,c(&quot;sample&quot;, &quot;hours&quot;, &quot;cell&quot;)] &lt;- df  %&gt;% separate(V1,into = c(&quot;sample&quot;, &quot;hours&quot;), 
+                                                                  sep = &quot;(?&lt;=[A-Za-z])(?=[0-9])&quot;)
+head(ATAC@meta.data)</code></pre>
+<pre><code>                       orig.ident nCount_ATAC nFeature_ATAC ATAC_snn_res.0.6
+CLL0@AAACGAAAGACAACGC all_samples         868           868                0
+CLL0@AAACGAAAGGATTTGA all_samples        1122          1122                0
+CLL0@AAACGAAAGTCCCGCA all_samples         589           589                0
+CLL0@AAACGAAAGTGGGACT all_samples        1420          1420                0
+CLL0@AAACGAACAACGCAAG all_samples        1233          1233                0
+CLL0@AAACGAACAAGTTCGT all_samples         660           660                0
+                      seurat_clusters nCount_ACTIVITY nFeature_ACTIVITY
+CLL0@AAACGAAAGACAACGC               0        719.4433              2327
+CLL0@AAACGAAAGGATTTGA               0       1020.8120              3066
+CLL0@AAACGAAAGTCCCGCA               0        465.5627              1754
+CLL0@AAACGAAAGTGGGACT               0       1102.2685              3847
+CLL0@AAACGAACAACGCAAG               0        987.4834              3304
+CLL0@AAACGAACAAGTTCGT               0        517.8309              1754
+                      assign.ident assign.score assign.celltype sample hours
+CLL0@AAACGAAAGACAACGC            B     1.182212               B    CLL     0
+CLL0@AAACGAAAGGATTTGA            B     1.182212               B    CLL     0
+CLL0@AAACGAAAGTCCCGCA            B     1.182212               B    CLL     0
+CLL0@AAACGAAAGTGGGACT            B     1.182212               B    CLL     0
+CLL0@AAACGAACAACGCAAG            B     1.182212               B    CLL     0
+CLL0@AAACGAACAAGTTCGT            B     1.182212               B    CLL     0
+                                  cell
+CLL0@AAACGAAAGACAACGC AAACGAAAGACAACGC
+CLL0@AAACGAAAGGATTTGA AAACGAAAGGATTTGA
+CLL0@AAACGAAAGTCCCGCA AAACGAAAGTCCCGCA
+CLL0@AAACGAAAGTGGGACT AAACGAAAGTGGGACT
+CLL0@AAACGAACAACGCAAG AAACGAACAACGCAAG
+CLL0@AAACGAACAAGTTCGT AAACGAACAAGTTCGT</code></pre>
+</div>
+<div id="plot-umap-on-default-parameters-res0.6" class="section level3">
+<h3>Plot Umap on Default Parameters (Res=0.6)</h3>
+<pre class="r"><code>p1 &lt;-DimPlot(ATAC, label = TRUE, reduction = &quot;umap&quot;, group.by = &quot;seurat_clusters&quot;, repel=T, pt.size = 0.5, label.size = 3) + labs(title = &quot;Clustering of PBMCs from all samples&quot;)
+
+p2 &lt;- DimPlot(ATAC, label = TRUE, reduction = &quot;umap&quot;, group.by = &quot;assign.ident&quot;, repel=T, pt.size = 0.5, label.size = 3) + labs(title = &quot;Annotaion of PBMCs from all samples&quot;)
+
+p3 &lt;- DimPlot(ATAC, label = FALSE, reduction = &quot;umap&quot;, group.by = &quot;hours&quot;, repel=T, pt.size = 0.5, label.size = 2.5, cols = brewer.pal(3,&quot;Set2&quot;)) + labs(title = &quot;Clustering of PBMCs in different time points&quot;)
+
+p4 &lt;- DimPlot(ATAC, label = FALSE, reduction = &quot;umap&quot;, group.by = &quot;sample&quot;, repel=T, pt.size = 0.5, label.size = 2.5, cols = brewer.pal(3,&quot;Pastel2&quot;)) + labs(title = &quot;Clustering of PBMCs for treatment and control&quot;)
+p1</code></pre>
+<p><img src="figure/fast-scatac_stepbystep.Rmd/UMAP-plot_default-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>p2</code></pre>
+<p><img src="figure/fast-scatac_stepbystep.Rmd/UMAP-plot_default-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>p3</code></pre>
+<p><img src="figure/fast-scatac_stepbystep.Rmd/UMAP-plot_default-3.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>p4</code></pre>
+<p><img src="figure/fast-scatac_stepbystep.Rmd/UMAP-plot_default-4.png" width="672" style="display: block; margin: auto;" /></p>
+<p><strong>Conclusion:</strong> From the above figures, we can easily observe similar results as described in the paper. A remarkable effect of the sampling time on single-cell epigenome profiles are lying across all blood cell subtypes from healthy donors and CLL patient samples.</p>
+</div>
+<div id="find-differencially-accessible-peaks" class="section level3">
+<h3>Find Differencially Accessible Peaks</h3>
+<p><strong>Between Clusters</strong></p>
+<pre class="r"><code>da_peaks_C &lt;- wilcoxauc(ATAC, &#39;seurat_clusters&#39;, seurat_assay = &#39;ATAC&#39;, assay = &#39;data&#39;)
+##Use the &#39;data slots&#39; under &#39;ATAC&#39; peak assay
+head(da_peaks_C)</code></pre>
+<pre><code>                    feature group    avgExpr        logFC statistic       auc
+1 chr10-100006259-100006623     0 0.01227851  0.003487763  85479610 0.5006547
+2 chr10-100009280-100010049     0 0.03335661 -0.010454055  84840896 0.4969138
+3 chr10-100014006-100014691     0 0.25120048  0.185560191  92218850 0.5401265
+4 chr10-100020280-100021766     0 0.14339910  0.097291209  89076448 0.5217215
+5 chr10-100045939-100046452     0 0.02983188  0.014214105  85905865 0.5031513
+6 chr10-100185069-100186626     0 0.07909823 -0.014968209  84443356 0.4945854
+           pval          padj    pct_in   pct_out
+1  1.487466e-01  1.724858e-01  0.526904 0.3961704
+2  1.485060e-03  2.474300e-03  1.452978 2.0762261
+3 6.564270e-191 7.023687e-187 10.554048 2.4063681
+4  3.959014e-85  6.916074e-83  6.147214 1.7607571
+5  4.191537e-07  1.135524e-06  1.309277 0.6786251
+6  1.324840e-04  2.622020e-04  3.353026 4.4789259</code></pre>
+<p><strong>Between Samples</strong></p>
+<pre class="r"><code>da_peaks_S &lt;- wilcoxauc(ATAC, &#39;sample&#39;, seurat_assay = &#39;ATAC&#39;, assay = &#39;data&#39;)
+head(da_peaks_S)</code></pre>
+<pre><code>                    feature group    avgExpr        logFC statistic       auc
+1 chr10-100006259-100006623   CLL 0.01126072  0.003571778 140484070 0.5001718
+2 chr10-100009280-100010049   CLL 0.03416337 -0.015113507 138680874 0.4937518
+3 chr10-100014006-100014691   CLL 0.19718990  0.190303264 150660274 0.5364026
+4 chr10-100020280-100021766   CLL 0.11865609  0.106800907 146114479 0.5202180
+5 chr10-100045939-100046452   CLL 0.02351712  0.010300266 140824418 0.5013836
+6 chr10-100185069-100186626   CLL 0.06919982 -0.043351644 136192198 0.4848913
+           pval          padj    pct_in   pct_out
+1  6.269437e-01  6.398073e-01 0.4375038 0.4042890
+2  1.568061e-16  3.909260e-16 1.3125114 2.5839339
+3 1.002517e-257 7.211300e-255 7.6259343 0.3632742
+4 1.667918e-120 8.344366e-119 4.6302485 0.6035038
+5  4.379813e-03  4.925931e-03 0.9357720 0.6620964
+6  1.375562e-42  8.829240e-42 2.6797108 5.8006680</code></pre>
+<p><strong>Between Sampling Time</strong></p>
+<pre class="r"><code>da_peaks_S &lt;- wilcoxauc(ATAC, &#39;hours&#39;, seurat_assay = &#39;ATAC&#39;, assay = &#39;data&#39;)
+head(da_peaks_S)</code></pre>
+<pre><code>                    feature group     avgExpr        logFC statistic       auc
+1 chr10-100006259-100006623     0 0.008575977 -0.001400650 132505746 0.4996974
+2 chr10-100009280-100010049     0 0.038944731 -0.004709297 132194910 0.4985252
+3 chr10-100014006-100014691     0 0.132731773  0.052421468 135989911 0.5128367
+4 chr10-100020280-100021766     0 0.078521646  0.023018124 134239516 0.5062357
+5 chr10-100045939-100046452     0 0.022193322  0.006337562 132956986 0.5013991
+6 chr10-100185069-100186626     0 0.092887911  0.002615598 132532192 0.4997971
+          pval         padj    pct_in   pct_out
+1 4.056026e-01 5.101935e-01 0.3831717 0.4436728
+2 5.844202e-02 1.051382e-01 1.7751017 2.0736883
+3 7.071694e-32 1.277679e-28 5.5677197 2.9176312
+4 2.651505e-12 9.719620e-11 3.3703472 2.0929784
+5 5.115071e-03 1.312642e-02 0.9696591 0.6896219
+6 8.583799e-01 8.975869e-01 4.2305286 4.2920525</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -601,19 +759,48 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] workflowr_1.6.2
+ [1] presto_1.0.0       data.table_1.14.0  Rcpp_1.0.6         RColorBrewer_1.1-2
+ [5] dplyr_1.0.5        ggplot2_3.3.3      tidyr_1.1.3        SeuratObject_4.0.0
+ [9] Seurat_4.0.1       workflowr_1.6.2   
 
 loaded via a namespace (and not attached):
- [1] Rcpp_1.0.6        knitr_1.33        magrittr_2.0.1    R6_2.5.0         
- [5] rlang_0.4.10      fansi_0.4.2       stringr_1.4.0     tools_4.0.5      
- [9] xfun_0.22         utf8_1.2.1        git2r_0.28.0      jquerylib_0.1.4  
-[13] htmltools_0.5.1.1 ellipsis_0.3.1    rprojroot_2.0.2   yaml_2.2.1       
-[17] digest_0.6.27     tibble_3.1.1      lifecycle_1.0.0   crayon_1.4.1     
-[21] later_1.2.0       sass_0.3.1        vctrs_0.3.7       promises_1.2.0.1 
-[25] fs_1.5.0          glue_1.4.2        evaluate_0.14     rmarkdown_2.7    
-[29] stringi_1.5.3     bslib_0.2.4       compiler_4.0.5    pillar_1.6.0     
-[33] jsonlite_1.7.2    httpuv_1.6.0      pkgconfig_2.0.3  </code></pre>
-</div>
+  [1] Rtsne_0.15            colorspace_2.0-0      deldir_0.2-10        
+  [4] ellipsis_0.3.1        ggridges_0.5.3        rprojroot_2.0.2      
+  [7] fs_1.5.0              spatstat.data_2.1-0   farver_2.1.0         
+ [10] leiden_0.3.7          listenv_0.8.0         ggrepel_0.9.1        
+ [13] fansi_0.4.2           codetools_0.2-18      splines_4.0.5        
+ [16] knitr_1.33            polyclip_1.10-0       jsonlite_1.7.2       
+ [19] ica_1.0-2             cluster_2.1.2         png_0.1-7            
+ [22] uwot_0.1.10           shiny_1.6.0           sctransform_0.3.2    
+ [25] spatstat.sparse_2.0-0 compiler_4.0.5        httr_1.4.2           
+ [28] assertthat_0.2.1      Matrix_1.3-2          fastmap_1.1.0        
+ [31] lazyeval_0.2.2        later_1.2.0           htmltools_0.5.1.1    
+ [34] tools_4.0.5           igraph_1.2.6          gtable_0.3.0         
+ [37] glue_1.4.2            RANN_2.6.1            reshape2_1.4.4       
+ [40] scattermore_0.7       jquerylib_0.1.4       vctrs_0.3.7          
+ [43] nlme_3.1-152          lmtest_0.9-38         xfun_0.22            
+ [46] stringr_1.4.0         globals_0.14.0        mime_0.10            
+ [49] miniUI_0.1.1.1        lifecycle_1.0.0       irlba_2.3.3          
+ [52] goftest_1.2-2         future_1.21.0         MASS_7.3-53.1        
+ [55] zoo_1.8-9             scales_1.1.1          spatstat.core_2.1-2  
+ [58] promises_1.2.0.1      spatstat.utils_2.1-0  parallel_4.0.5       
+ [61] yaml_2.2.1            reticulate_1.19       pbapply_1.4-3        
+ [64] gridExtra_2.3         sass_0.3.1            rpart_4.1-15         
+ [67] stringi_1.5.3         highr_0.9             rlang_0.4.10         
+ [70] pkgconfig_2.0.3       matrixStats_0.58.0    evaluate_0.14        
+ [73] lattice_0.20-41       ROCR_1.0-11           purrr_0.3.4          
+ [76] tensor_1.5            labeling_0.4.2        patchwork_1.1.1      
+ [79] htmlwidgets_1.5.3     cowplot_1.1.1         tidyselect_1.1.0     
+ [82] parallelly_1.24.0     RcppAnnoy_0.0.18      plyr_1.8.6           
+ [85] magrittr_2.0.1        R6_2.5.0              generics_0.1.0       
+ [88] DBI_1.1.1             withr_2.4.2           pillar_1.6.0         
+ [91] mgcv_1.8-35           fitdistrplus_1.1-3    survival_3.2-10      
+ [94] abind_1.4-5           tibble_3.1.1          future.apply_1.7.0   
+ [97] crayon_1.4.1          KernSmooth_2.23-18    utf8_1.2.1           
+[100] spatstat.geom_2.1-0   plotly_4.9.3          rmarkdown_2.7        
+[103] grid_4.0.5            git2r_0.28.0          digest_0.6.27        
+[106] xtable_1.8-4          httpuv_1.6.0          munsell_0.5.0        
+[109] viridisLite_0.4.0     bslib_0.2.4          </code></pre>
 </div>
 </div>
 
@@ -633,6 +820,8 @@ footer is added to webpages before the MathJax javascript. -->
 
 
 
+</div>
+</div>
 
 </div>
 
@@ -665,6 +854,32 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
