@@ -1,0 +1,153 @@
+---
+title: "multi-sample scATAC-seq"
+author: "Gali Bai"
+date: "6/6/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction
+
+MAESTRO scATAC-seq multi-sample pipeline is built upon the integration of single-sample analysis suits. By specifying different merging points, users can choose either to call bulk peaks or to call peaks by samples individually. At the end of each workflow, users will obtain both individual peak/gene matrix and merged peak/gene matrix. Each merging point has been shown in the below flow chart. The downstream analysis will then be conducted based on the output matrix. After collecting clustering information, the multi-sample pipeline will also split the fragment file by samples and clusters. This step was developed to facilitate the comparison between samples within each cluster.
+
+```{r echo=FALSE}
+knitr::include_graphics("assets/flowchart.png", error = FALSE)
+
+```
+
+## Tutorial: 10X PBMC scATAC-seq in time-Dependent Sampling Studies
+
+[Paper](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-020-02032-0)\
+[Data Source](https://www.ncbi.nlm.nih.gov/Traces/study/?acc=PRJNA545828&o=assay_type_s%3Aa)
+
+
+### Step0. Data Preparation
+
+
+**Create a list of accessions**
+
+```{bash, eval=FALSE}
+$ touch SraAccList.txt
+$ nano SraAccList.txt
+
+```
+
+**Copy the following accession numbers in SraAccList.txt:**
+```{bash, eval=FALSE}
+SRR11614703
+SRR11614704
+SRR11614705
+SRR11614706
+SRR11614707
+SRR11614708
+```
+
+
+```{bash, eval=FALSE}
+#Install sratoolkit through conda
+$ conda install -c bioconda sra-tools
+$ prefetch --option-file SraAccList.txt
+
+#Split .sra to .fastq.gz
+$ cat SraAccList.txt | while read i
+  do
+    time fastq-dump --gzip -split-files ${i}.sra
+    echo "** ${i}.sra to fastq done **"
+  done
+
+#Rename to 10X format
+$ cat SraAccList.txt | while read i
+  do
+    mv ${i}_1*.gz ${i}_S1_L001_R1_001.fastq.gz
+    mv ${i}_2*.gz ${i}_S1_L001_R3_001.fastq.gz
+    mv ${i}_3*.gz ${i}_S1_L001_R2_001.fastq.gz
+  done
+
+#I renamed each file based on sample information (Optional)
+$ mv SRR11614703_S1_L001_R1_001.fastq.gz CLL0_S1_L001_R1_001.fastq.gz
+
+```
+
+### Step1. Workflow Configuration
+```{bash, eval=FALSE}
+$ conda activate MAESTRO
+
+#Configure MAESTRO working directory
+$ MAESTRO multi-scatac-init --batch --bulk_peaks --downsample 
+  --target_reads 5000000 --input_path time_data/data \
+  --platform 10x-genomics --format fastq --species GRCh38 \
+  --cores 8 --directory multi_scatac --deduplication "cell level" \
+  --whitelist whitelist/737K-cratac-v1.txt \
+  --peak_cutoff 100 --count_cutoff 1000 --frip_cutoff 0.2 --cell_cutoff 10 \
+  --giggleannotation annotations/giggle.all \
+  --clusterpeak \
+  --fasta references/Refdata_scATAC_MAESTRO_GRCh38_1.1.0/GRCh38_genome.fa \
+  --rpmodel Enhanced  --genedistance 10000 \
+  --annotation --method RP-based --signature human.immune.CIBERSORT
+  
+$ cd multi_scatac
+
+#Configure sample.json file
+$ MAESTRO samples-init --assay_type scatac --data_type fastq --data_dir time_data/data/
+```
+
+**To get a full Description of command-line options**
+```{bash, eval=FALSE}
+$ MAESTRO samples-init -h
+  usage: MAESTRO samples-init [-h] [--assay_type ASSAY_TYPE] [--data_type DATA_TYPE] 
+  [--data_dir DATA_DIR]
+
+  optional arguments:
+    -h, --help            show this help message and exit.
+  
+  Input files arguments:
+    --assay_type ASSAY_TYPE
+                          Required. type of assay: either scatac or scrna.
+    --data_type DATA_TYPE
+                          Required. type of data: either fastq or fragment.
+    --data_dir DATA_DIR   Required. the FULL path to the fastq folder or the fragment folder.
+
+$ MAESTRO multi-scatac-init -h
+  usage: MAESTRO multi-scatac-init [-h] [--batch] [--consensus_peaks] 
+  [--cutoff_samples CUTOFF_SAMPLES] [--bulk_peaks] [--downsample] 
+  [--target_reads TARGET_READS] [--input_path INPUT_PATH]
+  [--species {GRCh38,GRCm38}] [--platform {10x-genomics,sci-ATAC-seq,microfluidic}] 
+  [--format {fastq,fragments,bam}] [--deduplication {cell level,bulk level}]
+  [--giggleannotation GIGGLEANNOTATION] [--fasta FASTA] [--whitelist WHITELIST] 
+  [--cores CORES] [--directory DIRECTORY] [--annotation]
+  [--method {RP-based,peak-based,both}] [--signature SIGNATURE] [--custompeaks] 
+  [--custompeak_file CUSTOMPEAK_FILE] [--shortpeaks] [--clusterpeak]
+  [--rpmodel {Simple,Enhanced}] [--genedistance GENEDISTANCE] [--peak_cutoff PEAK_CUTOFF] 
+  [--count_cutoff COUNT_CUTOFF] [--frip_cutoff FRIP_CUTOFF] [--cell_cutoff CELL_CUTOFF]
+```
+
+
+### Step3. Run MAESTRO
+```{bash, eval=FALSE}
+$ snakemake -np
+$ nohup snakemake -j 8 > 10X_PBMC.out &
+```
+
+
+### Step4. Final Outputs
+
+```{bash, eval=FALSE}
+$ ls Result
+Analysis  Benchmark  Log  minimap2  QC  Report
+
+$ ls Result/Analysis
+Batch  CLL0  CLL24  CLL8  Cluster  PBMC0  PBMC24  PBMC8
+```
+
+*  **Analysis/:** The Analysis directory contains a Seurat R object, as well as clustering result, cell type annotation result and driver transcription factor identification result.
+    + Batch/: All samples merged Results.
+    + Cluster/: Fragment and bigwig files for each sample within each cluster.
+    
+*  **Benchmark/:** The Benchmark directory stores benchmark files for all rules in Snakefile, each of which contains a tab-separated table of run times and memory usage in MiB.
+*  **Log/:** The Log directory contains the log files generated in the pipeline analysis.
+*  **minimap2/:** The minimap2 directory contains all the mapping results generated by minimap2.
+*  **QC/:** The QC directory contains quality control analysis results of scATAC-seq data, including the barcode filtering table outprefix_scATAC_validcells.txt, filtered count matrix outprefix_filtered_peak_count.h5 and other QC results. The filtered count matrix is generated according to singlecell.txt and the parameters like --count-cutoff and --frip-cutoff that users provide. 
+*  **Report/:** The html file in Report directory summarizse all the results in an HTML based document.

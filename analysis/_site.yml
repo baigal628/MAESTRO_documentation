@@ -1,18 +1,36 @@
-name: MAESTRO Multi-Sample scATACseq Pipeline
+name: "MAESTRO"
 output_dir: ../docs
 navbar:
-  title: MAESTRO Multi-Sample scATACseq Pipeline
+  title: "MAESTRO 1.5.0"
   left:
-  - text: Set Up
-    href: index.html
-  - text: About
-    href: about.html
+  - text: "scRNA-seq"
+    icon: fa-gear
+    menu:
+      - text: "10X PBMC 1k"
+        href: scrna.html
+      - text: "Custom Analysis"
+        href: scrna_stepbystep.html
+  - text: "scATAC-seq"
+    icon: fa-gear
+    menu:
+      - text: "10X PBMC 500"
+        href: scatac.html
+      - text: "Custom Analysis"
+        href: scatac_stepbystep.html
+  - text: "fast scATAC-seq"
+    icon: fa-gear
+    menu:
+      - text: "multi-sample scATAC-seq"
+        href: fast-scatac.html
+      - text: "Custom Analysis"
+        href: fast-scatac_stepbystep.html
   - text: License
     href: license.html
+
   right:
   - icon: fa-github
-    text: Source code
-    href: https://github.com/baigal628/MultiSample_scATACseq
+  - text: Source code
+    href: https://github.com/baigal628/MAESTRO_documentation
 output:
   workflowr::wflow_html:
     toc: yes
