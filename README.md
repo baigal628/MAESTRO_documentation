@@ -1,5 +1,5 @@
-# MultiSample_scATACseq
+# MAESTRO Documentation
 
-A [workflowr][] project.
+Latest Version: 1.5.0
 
-[workflowr]: https://github.com/jdblischak/workflowr
+[MAESTRO Documentation](https://baigal628.github.io/MAESTRO_documentation/): A step by step tutorial for running MAESTRO
