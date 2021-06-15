@@ -344,7 +344,7 @@ div.tocify {
       <a href="scrna.html">10X PBMC 1k</a>
     </li>
     <li>
-      <a href="scrna_stepbystep.html">Custom Analysis</a>
+      <a href="scrna_stepbystep.html">10X PBMC 1k_Custom Analysis</a>
     </li>
   </ul>
 </li>
@@ -361,7 +361,10 @@ div.tocify {
       <a href="scatac.html">10X PBMC 500</a>
     </li>
     <li>
-      <a href="scatac_stepbystep.html">Custom Analysis</a>
+      <a href="scatac_stepbystep.html">10X PBMC 500_Custom Analysis</a>
+    </li>
+    <li>
+      <a href="sci_atac.html">sci-ATAC-seq</a>
     </li>
   </ul>
 </li>
@@ -369,7 +372,7 @@ div.tocify {
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     <span class="fas fa-gear"></span>
      
-    fast scATAC-seq
+    multi-sample scATAC-seq
      
     <span class="caret"></span>
   </a>
@@ -432,7 +435,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2021-06-08
+<strong>Last updated:</strong> 2021-06-15
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -523,16 +526,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombaigal628MultiSamplescATACseqtreedf0c2882fe04c6abfaa338b9e6d3ff22f473e62ctargetblankdf0c288a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/baigal628/MultiSample_scATACseq/tree/df0c2882fe04c6abfaa338b9e6d3ff22f473e62c" target="_blank">df0c288</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombaigal628MultiSamplescATACseqtree08d1d91fa9a238a0c1d5e69bcb90cb9c05e506d3targetblank08d1d91a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/baigal628/MultiSample_scATACseq/tree/08d1d91fa9a238a0c1d5e69bcb90cb9c05e506d3" target="_blank">08d1d91</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombaigal628MultiSamplescATACseqtreedf0c2882fe04c6abfaa338b9e6d3ff22f473e62ctargetblankdf0c288a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombaigal628MultiSamplescATACseqtree08d1d91fa9a238a0c1d5e69bcb90cb9c05e506d3targetblank08d1d91a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/baigal628/MultiSample_scATACseq/tree/df0c2882fe04c6abfaa338b9e6d3ff22f473e62c" target="_blank">df0c288</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/baigal628/MultiSample_scATACseq/tree/08d1d91fa9a238a0c1d5e69bcb90cb9c05e506d3" target="_blank">08d1d91</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -559,6 +562,8 @@ Untracked files:
 
 Unstaged changes:
     Deleted:    MultiSample_scATACseq.Rproj
+    Deleted:    analysis/fast-scatac.Rmd
+    Deleted:    analysis/fast-scatac_stepbystep.Rmd
 
 </code></pre>
 <p>
@@ -639,20 +644,20 @@ pbmc.gene &lt;- ATACCalculateGenescore(pbmc.peaks, organism = &quot;GRCh38&quot;
 <pre><code>Warning: The default method for RunUMAP has changed from calling Python UMAP via reticulate to the R-native UWOT using the cosine metric
 To use Python UMAP via reticulate, set umap.method to &#39;umap-learn&#39; and metric to &#39;correlation&#39;
 This message will be shown once per session</code></pre>
-<pre><code>07:56:42 UMAP embedding parameters a = 0.9922 b = 1.112</code></pre>
-<pre><code>07:56:42 Read 580 rows and found 30 numeric columns</code></pre>
-<pre><code>07:56:42 Using Annoy for neighbor search, n_neighbors = 30</code></pre>
-<pre><code>07:56:42 Building Annoy index with metric = cosine, n_trees = 50</code></pre>
+<pre><code>08:23:24 UMAP embedding parameters a = 0.9922 b = 1.112</code></pre>
+<pre><code>08:23:24 Read 580 rows and found 30 numeric columns</code></pre>
+<pre><code>08:23:24 Using Annoy for neighbor search, n_neighbors = 30</code></pre>
+<pre><code>08:23:24 Building Annoy index with metric = cosine, n_trees = 50</code></pre>
 <pre><code>0%   10   20   30   40   50   60   70   80   90   100%</code></pre>
 <pre><code>[----|----|----|----|----|----|----|----|----|----|</code></pre>
 <pre><code>**************************************************|
-07:56:42 Writing NN index file to temp file /var/folders/bx/3yng1lx579x084wwkjz1xc6c0000gp/T//RtmpHY78dv/file171d479d57dc
-07:56:42 Searching Annoy index using 1 thread, search_k = 3000
-07:56:42 Annoy recall = 100%
-07:56:43 Commencing smooth kNN distance calibration using 1 thread
-07:56:44 Initializing from normalized Laplacian + noise
-07:56:44 Commencing optimization for 500 epochs, with 22356 positive edges
-07:56:45 Optimization finished</code></pre>
+08:23:24 Writing NN index file to temp file /var/folders/bx/3yng1lx579x084wwkjz1xc6c0000gp/T//RtmpU7q2Bd/file63545bfa1815
+08:23:24 Searching Annoy index using 1 thread, search_k = 3000
+08:23:24 Annoy recall = 100%
+08:23:25 Commencing smooth kNN distance calibration using 1 thread
+08:23:27 Initializing from normalized Laplacian + noise
+08:23:27 Commencing optimization for 500 epochs, with 22356 positive edges
+08:23:28 Optimization finished</code></pre>
 <pre><code>Warning: The following arguments are not used: dims1, dims2, dims3, dims4,
 dims5, dims6, dims7, dims8, dims9, dims10, dims11, dims12, dims13, dims14,
 dims15, dims16, dims17, dims18, dims19, dims20, dims21, dims22, dims23, dims24,
@@ -825,6 +830,43 @@ p &lt;- DimPlot(object = pbmc.ATAC.res$ATAC, label = TRUE, pt.size = 0.15,
        theme_linedraw() + NoLegend()
 p</code></pre>
 <p><img src="figure/scatac_stepbystep.Rmd/unnamed-chunk-11-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-11-1">
+Past versions of unnamed-chunk-11-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-11-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/baigal628/MultiSample_scATACseq/blob/f083ec51c21b927bcfe237d32577d2fdd2430e7c/docs/figure/scatac_stepbystep.Rmd/unnamed-chunk-11-1.png" target="_blank">f083ec5</a>
+</td>
+<td>
+baigal628
+</td>
+<td>
+2021-06-08
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="step-3.-identify-driver-transcription-regulators" class="section level3">
 <h3>Step 3. Identify driver transcription regulators</h3>
