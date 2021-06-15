@@ -8,16 +8,18 @@ navbar:
     menu:
       - text: "10X PBMC 1k"
         href: scrna.html
-      - text: "Custom Analysis"
+      - text: "10X PBMC 1k_Custom Analysis"
         href: scrna_stepbystep.html
   - text: "scATAC-seq"
     icon: fa-gear
     menu:
       - text: "10X PBMC 500"
         href: scatac.html
-      - text: "Custom Analysis"
+      - text: "10X PBMC 500_Custom Analysis"
         href: scatac_stepbystep.html
-  - text: "fast scATAC-seq"
+      - text: "sci-ATAC-seq"
+        href: sci_atac.html
+  - text: "multi-sample scATAC-seq"
     icon: fa-gear
     menu:
       - text: "multi-sample scATAC-seq"

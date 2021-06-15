@@ -14,7 +14,7 @@ editor_options:
 
 ```{bash, eval=FALSE}
 usage: MAESTRO [-h] [-v]
-               {scrna-init,scatac-init,integrate-init, fast-scatac-init, samples-init, mtx-to-h5,count-to-h5,merge-h5,scrna-qc,scatac-qc,scatac-peakcount,scatac-genescore}
+               {scrna-init,scatac-init,integrate-init, samples-init, mtx-to-h5,count-to-h5,merge-h5,scrna-qc,scatac-qc,scatac-peakcount,scatac-genescore}
 ```
 
 There are ten functions available in MAESTRO serving as sub-commands.
@@ -23,7 +23,6 @@ Subcommand | Description
 -----------|----------
 `scrna-init` | Initialize the MAESTRO scRNA-seq workflow.
 `scatac-init` | Initialize the MAESTRO scATAC-seq workflow.
-`fast-scatac-init` | Initialize the MAESTRO scATAC-seq workflow with chromap as one of the mapping option.
 `integrate-init` | Initialize the MAESTRO integration workflow.
 `samples-init` | Initialize samples.json file in the current directory.
 `mtx-to-h5` | Convert 10X mtx format matrix to HDF5 format.
