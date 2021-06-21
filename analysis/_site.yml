@@ -19,13 +19,18 @@ navbar:
         href: scatac_stepbystep.html
       - text: "sci-ATAC-seq"
         href: sci_atac.html
+  - text: "multi-sample scRNA-seq"
+    icon: fa-gear
+    menu:
+      - text: "10X multi-sample"
+        href: multi-scrna.html
   - text: "multi-sample scATAC-seq"
     icon: fa-gear
     menu:
-      - text: "multi-sample scATAC-seq"
-        href: fast-scatac.html
+      - text: "time-dependent multi-sample"
+        href: multi-scatac.html
       - text: "Custom Analysis"
-        href: fast-scatac_stepbystep.html
+        href: multi-scatac_stepbystep.html
   - text: License
     href: license.html
 
@@ -37,5 +42,5 @@ output:
   workflowr::wflow_html:
     toc: yes
     toc_float: yes
-    theme: cosmo
+    theme: flatly
     highlight: textmate

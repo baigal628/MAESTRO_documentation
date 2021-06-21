@@ -17,6 +17,7 @@ First users need to read the peak count matrix as well as the gene regulatory po
 ```{r}
 library(MAESTRO)
 library(Seurat)
+library(Signac)
 pbmc.peak <- Read10X_h5('./data/scatac/atac_pbmc_500_nextgem_filtered_peak_count.h5')
 pbmc.gene <- Read10X_h5('./data/scatac/atac_pbmc_500_nextgem_gene_score.h5')
 ```
@@ -36,9 +37,9 @@ Use reticulate::install_miniconda() if you'd like to install a Miniconda Python 
 It means reticulate R package cannot find the python shared library. If Anaconda has been installed, users just need to specify an alternate version of python, for example:
 
 ```{r, eval = FALSE}
-> library(reticulate)
-> use_python("/usr/miniconda3/bin/python", required = TRUE)
-> pbmc.gene <- ATACCalculateGenescore(pbmc.peak)
+library(reticulate)
+use_python("/usr/miniconda3/bin/python", required = TRUE)
+pbmc.gene <- ATACCalculateGenescore(pbmc.peak)
 ```
 
 If users don't install Miniconda or Anaconda, we recommend to use `reticulate::install_miniconda()` to install a Miniconda Python environment and specify the version through `use_python`.
@@ -68,7 +69,8 @@ pbmc.ATAC.res <- ATACRunSeurat(inputMat = pbmc.peak,
                                  peaks.test.use = "presto",
                                  peaks.cutoff = 1e-05,
                                  peaks.pct = 0.1,
-                                 peaks.logfc = 0.2)
+                                 peaks.logfc = 0.2,
+                                 outdir = "./docs/assets/scatac/")
 
 ```
 
@@ -110,11 +112,11 @@ knitr::include_graphics("assets/scatac/atac_pbmc_500_nextgem_annotated.png", err
 
 Another method `ATACAnnotateChromatinAccessibility` to annotate scATAC-seq data is based on chromatin accessibility directly. MAESTRO incorporates public bulk chromatin accessibility data (DNase-seq and ATAC-seq) from Cistrome database. All the datesets are clustered into 80 clusters and the cluster identities are determined by the cell-type or tissue type information of datasets within each cluster. For scATAC-seq clusters, MAESTRO utilizes giggle to evaluate the enrichment of bulk chromatin accessibility peaks on cluster-specific peaks from scATAC-seq data. Then the Cistrome cluster identity from the most enriched bulk chromatin accessibility data is used to represent the cell-type annotation for the scATAC-seq cluster. Giggle has been installed in the MAESTRO conda environment. If users only installed the stand-alone R pcakage, please install [giggle](https://github.com/ryanlayer/giggle) first. Users need to download the giggle index from [Cistrome website](http://cistrome.org/~galib/giggle.all.tar.gz) (**Note:** If the version of MAESTRO is higher than v1.2.0, please update the giggle index to the [latest](http://cistrome.org/~galib/giggle.all.tar.gz)), and provide the file location of the index to `ATACAnnotateChromatinAccessibility`. Cell type annotation based on bulk chromatin accessibility data is stored in `Object@meta.data$biological_resource`.
 
-```{r, eval= FALSE}
+```{r, eval = FALSE}
 pbmc.ATAC.res$ATAC <- ATACAnnotateChromatinAccessibility(ATAC = pbmc.ATAC.res$ATAC,
                                                   peaks = pbmc.ATAC.res$peaks,
                                                   project = "atac_pbmc_500_nextgem",
-                                                  giggle.path = "~/annotations/MAESTRO/giggle.all",
+                                                  giggle.path = "/Users/galib/Downloads/giggle.all",
                                                   organism = "GRCh38")
 p <- DimPlot(pbmc.ATAC.res$ATAC, label = TRUE, reduction = "umap", group.by = "biological_resource", repel=T, pt.size = 0.5, label.size = 2.5)
 ggsave(file.path(paste0(result$ATAC@project.name, "_CistromeTop_annotated.png")), p, width=7.5, height=4)
@@ -126,11 +128,11 @@ All the reduction results are stored in `Object@reductions`. For example, users 
 ```{r}
 library(ggplot2)
 library(RColorBrewer)
-p <- DimPlot(object = pbmc.ATAC.res$ATAC, label = TRUE, pt.size = 0.15,
+p2 <- DimPlot(object = pbmc.ATAC.res$ATAC, label = TRUE, pt.size = 0.15,
                group.by = "assign.ident", label.size = 3,
                cols = brewer.pal(8,"Set2")) +
        theme_linedraw() + NoLegend()
-p
+p2
 ```
 
 ### Step 3. Identify driver transcription regulators  
@@ -142,12 +144,13 @@ After identifying enriched transcription regulators, MAESTRO also provides the p
 pbmc.ATAC.tfs <- ATACAnnotateTranscriptionFactor(ATAC = pbmc.ATAC.res$ATAC,
                                                    peaks = pbmc.ATAC.res$peaks,
                                                    project = "atac_pbmc_500_nextgem",
-                                                   giggle.path = "~/annotations/MAESTRO/giggle.all")
+                                                   giggle.path = "/Users/galib/Downloads/giggle.all")
 pbmc.ATAC.tfs[["0"]]
 
 ```
 
 Besides indentifying TFs for all the clusters, we also support the differential peaks from a single comparison.
+
 ```{r,eval=FALSE}
 DefaultAssay(pbmc.ATAC.res$ATAC) = "ATAC"
 de.peakset <- FindMarkersMAESTRO(pbmc.ATAC.res$ATAC, ident.1 = c(0,2,10,12))
@@ -155,6 +158,103 @@ pbmc.ATAC.monocyte.tfs <- ATACAnnotateTranscriptionFactor(ATAC = pbmc.ATAC.res$A
                                                             peaks = de.peakset,
                                                             cluster = c(0,2,10,12),
                                                             project = "atac_pbmc_500_nextgem",
-                                                            giggle.path = "~/annotations/MAESTRO/giggle.all")
+                                                            giggle.path = ""/Users/galib/Downloads/giggle.all")
 ```
 
+
+Visualize driver transcription factors for each cluster
+According to the annotation of the clusters, we know that cluster 4 is Monocytes. Next, we want to visualize the enriched regulators in Monocytes from 
+
+### Step 4. Visualize driver transcription factors for each cluster
+
+Visualize driver transcription factors for each cluster
+According to the annotation of the clusters, we know that cluster 4 is Monocytes. Next, we want to visualize the enriched regulators in Monocytes from Step4. 
+
+The output TFs from MAESTRO have already been pre-filtered using TF regulatory potential score.
+```{r, eval = FALSE}
+tfs <- sapply(pbmc.ATAC.tfs[["1"]], function(x) {return(unlist(strsplit(x, split = " | ", fixed = TRUE))[1])})
+p <- VisualizeTFenrichment(TFs = tfs,
+                             cluster.1 = 4,
+                             type = "ATAC",
+                             SeuratObj = pbmc.ATAC.res$ATAC,
+                             GIGGLE.table = "atac_pbmc_500_nextgem.PredictedTFScore.txt",
+                             visual.totalnumber = 100,
+                             name = "atac_pbmc_500_nextgem_Monocyte_filtered")
+```
+
+
+If users want to visualize the top factors without filtering using regulatory potential. Please leave the TFs to blank, then the top 10 regulators will be visualized.
+
+```{r, eval = FALSE}
+VisualizeTFenrichment(cluster.1 = 4,
+                             type = "ATAC",
+                             SeuratObj = pbmc.ATAC.res$ATAC,
+                             GIGGLE.table = "atac_pbmc_500_nextgem_giggle.txt",
+                             visual.topnumber = 10,
+                             visual.totalnumber = 100,
+                             name = "atac_pbmc_500_nextgem_Monocyte_top")  
+
+```
+
+
+To further filter the regulators, users may want to visualize the expression level of the predicted transcription factors. Here, we use the gene regulatory potential score as the predicted gene expression level. We provide the function for visualize TF/genes regulatory potential using Vlnplot and Umap.
+```{r}
+VisualizeVlnplot(genes = c("SPI1","RARA"),
+                        type = "ATAC",
+                        SeuratObj = pbmc.ATAC.res$ATAC,
+                        ncol = 2,
+                        width = 9,
+                        height = 4,
+                        name = "atac_pbmc_500_nextgem_Monocyte")
+
+```
+
+
+```{r}
+VisualizeUmap(genes = c("SPI1","RARA"),
+                     type = "ATAC",
+                     SeuratObj = pbmc.ATAC.res$ATAC,
+                     ncol = 2,
+                     width = 8,
+                     height = 3,
+                     name = "atac_pbmc_500_nextgem_Monocyte")
+
+```
+
+
+Based on the regulatory potential of TFs, we can see that SPI1 is highly expressed in the Monocytes from PBMC, while RARA is generally distributed among all cell-types.
+
+MAESTRO can also provide a genome browser function `ATACViewTrack` for visualizing the scATAC-seq signal for different clusters. The fragment file `fragments_corrected_count.tsv.gz` and its index `fragments_corrected_count.tsv.gz.tbi` are needed for this function. If users start from the output of 10x Cell Ranger pipeline, `fragments.tsv.gz` and `fragments.tsv.gz.tbi` are the substitutes.
+
+```{r, eval=FALSE}
+library(TxDb.Hsapiens.UCSC.hg38.knownGene)
+library(org.Hs.eg.db)
+txdb = TxDb.Hsapiens.UCSC.hg38.knownGene
+genome = "hg38"
+fragment = "../Mapping/fragments_corrected_count.tsv.gz"
+
+meta_info = data.frame(cell = rownames(pbmc.ATAC.res[["ATAC"]]@meta.data),
+                       cluster = pbmc.ATAC.res[["ATAC"]]@meta.data$seurat_clusters,
+                       depth = pbmc.ATAC.res[["ATAC"]]@meta.data$nCount_ATAC)
+
+ATACViewTrack(gene_name = "SPI1", downstream = 8000,
+              yaxis_cex = 1,
+              fragment = fragment,
+              grouping = meta_info,
+              tick_label_cex = 1, tick.dist = 5000,
+              track_cols = "blue",
+              label_cex = 1,
+              minor.tick.dist = 1000, label.margin = -0.6,
+              txdb = txdb,
+              genome = genome)
+```
+
+
+### Step 5. Save the project for future analysis
+Finally, users can save the R project, including the raw data, normalized data, clustering result, and meta information for future analysis.
+
+```{r, eval = FALSE}
+saveRDS(pbmc.ATAC.res, "atac_pbmc_500_nextgem_res.rds")
+```
+
+The differential peaks, predicted TFs, and target genes and all the figures have already been saved in the current directory by MAESTRO.

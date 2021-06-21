@@ -35,7 +35,8 @@ Initialize the MAESTRO scATAC-seq workflow using `MAESTRO scATAC-init` command. 
 $ MAESTRO scatac-init --input_path sci-ATAC \
 --gzip --species GRCh38 --platform sci-ATAC-seq --format fastq --mapping minimap2 \
 --deduplication cell-level \
---giggleannotation annotations/giggle.all --fasta references/Refdata_scATAC_MAESTRO_GRCh38_1.1.0/GRCh38_genome.fa \
+--giggleannotation annotations/giggle.all \
+--fasta references/Refdata_scATAC_MAESTRO_GRCh38_1.1.0/GRCh38_genome.fa \
 --cores 16 --directory sci-scATAC-seq \
 --annotation --method RP-based --signature human.immune.CIBERSORT \
 --peak_cutoff 5 --count_cutoff 10 --frip_cutoff 0.05 --cell_cutoff 5

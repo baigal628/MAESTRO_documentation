@@ -25,7 +25,7 @@ pbmc.gene <- Read10X_h5("./data/scrna/pbmc_1k_v3_filtered_gene_count.h5")
 We also support the processed dataset from 10x Cell Ranger pipeline or STARsolo. Users can load the gene matrix into R through `Read10X` function in Seurat package
 
 ```{r, eval=FALSE}
-pbmc.gene <- Read10X('Result/STAR/10X_PBMC_8kSolo.out/Gene/filtered')
+pbmc.gene <- Read10X('Result/STAR/pbmc_1k_v3Solo.out/Gene/filtered')
 ```
 
 ### Step 1. Perform clustering and differential gene analysis
@@ -35,7 +35,7 @@ We next create a Seurat object using the gene expression matrix and perform the 
 * **Cell and gene coverage:**
 Cells with less than 200 genes expressed, and genes expressed in less than 10 cells will be removed from the analysis.
 * **Mitochondrial gene and ERCC:**
-If `mito = TRUE` and `mito.cutoff = 0.2` is set, we will also filter the cells with more than 20% mitochondrial reads or more than 5% ERCC spike-ins. Mitochondrial genes are expressed in most cells and their expression level is specific to cell types. High expression level (i.e., high percentage) of mitochondrial genes could be detected from apoptotic or lysing cells, which should not be included in the analysis. ERCC spike-ins are used to estimate total mRNA content captured in cells. High level of ERCC is likely caused by cell death. Similarly, cells with a high percentage of ERCC need to be filtered.
+If `mito = TRUE` and `mito.cutoff = 20` is set, we will also filter the cells with more than 20% mitochondrial reads or more than 5% ERCC spike-ins. Mitochondrial genes are expressed in most cells and their expression level is specific to cell types. High expression level (i.e., high percentage) of mitochondrial genes could be detected from apoptotic or lysing cells, which should not be included in the analysis. ERCC spike-ins are used to estimate total mRNA content captured in cells. High level of ERCC is likely caused by cell death. Similarly, cells with a high percentage of ERCC need to be filtered.
 2. **Normalization**
 * **Removing unwanted confounding factors:**
 Single cells may contain unwanted sources of variation, such as technical noise. These factors may have a disturbing effect on downstream analysis and should be removed out. Seurat provides a function to regress user-defined variables out.
@@ -58,7 +58,7 @@ pbmc.RNA.res <- RNARunSeurat(inputMat = pbmc.gene,
                                min.c = 10,
                                min.g = 200,
                                mito = TRUE,
-                               mito.cutoff = 0.2,
+                               mito.cutoff = 20,
                                variable.genes = 2000,
                                organism = "GRCh38",
                                dims.use = 1:15,
@@ -82,7 +82,7 @@ head(pbmc.RNA.res$genes)
 ```
 
 ```{r echo=FALSE}
-knitr::include_graphics("assets/scrna/pbmc_1k_v3.spikein.png", error = FALSE)
+knitr::include_graphics("assets/scrna/pbmc_1k_v3.spikein.png", error = FALSE,)
 knitr::include_graphics("assets/scrna/pbmc_1k_v3_PCElbowPlot.png", error = FALSE)
 knitr::include_graphics("assets/scrna/pbmc_1k_v3_cluster.png", error = FALSE)
 
@@ -95,7 +95,7 @@ We next try to annotate different clusters based on their marker genes. We use p
 data(human.immune.CIBERSORT)
 pbmc.RNA.res$RNA <- RNAAnnotateCelltype(RNA = pbmc.RNA.res$RNA,
                                           gene = pbmc.RNA.res$genes,
-                                          signatures = human.immune.CIBERSORT,
+                                          signatures = "human.immune.CIBERSORT",
                                           min.score = 0.05,
                                           outdir = "./docs/assets/scrna/")
 head(pbmc.RNA.res$RNA@meta.data)
@@ -125,9 +125,79 @@ pbmc.RNA.tfs <- RNAAnnotateTranscriptionFactor(RNA = pbmc.RNA.res$RNA,
                                                  genes = pbmc.RNA.res$genes,
                                                  project = pbmc.RNA.res$RNA@project.name,
                                                  organism = "GRCh38",
-                                                 lisa.path = "/Users/galib/miniconda3/envs/lisa/bin/lisa",
-                                                 top.tf = 10)
+                                                 lisa.path = "/Users/galib/miniconda3/envs/lisa_env/bin/lisa",
+                                                 top.tf = 10,
+                                                 outdir = "./docs/assets/scrna/")
+pbmc.RNA.tfs[["0"]]
+```
+
+Besides identifying TFs for all the clusters, we also support the differential gene list from a single comparison.
+```{r, eval = FALSE}
+de.geneset <- FindMarkersMAESTRO(pbmc.RNA.res$RNA, ident.1 = c(3))
+pbmc.RNA.monocyte.tfs <- RNAAnnotateTranscriptionFactor(RNA = pbmc.RNA.res$RNA,
+                                                          genes = de.geneset,
+                                                          cluster = c(3),
+                                                          project = "pbmc_1k_v3_Monocyte",
+                                                          organism = "GRCh38",
+                                                          top.tf = 20,
+                                                          lisa.path = "/Users/galib/miniconda3/envs/lisa_env/bin/lisa",
+                                                          outdir = "./docs/assets/scrna/")
+```
+
+### Step 4. Visualize driver transcription factors for each cluster  
+According to the annotation of the clusters, we know that cluster 3 is Monocyte. Next, we want to visualize the enriched regulators in Monocyte from Step 5.
+
+The output TFs returned from `RNAAnnotateTranscriptionFactor` have already been pre-filtered based on TF expression level.
+```{r, eval = FALSE}
+tfs <- sapply(pbmc.RNA.monocyte.tfs[[1]], function(x){
+                return(unlist(strsplit(x, split = " | ", fixed = TRUE))[1])})
+p <- VisualizeTFenrichment(TFs = tfs,
+                             cluster.1 = 3,
+                             type = "RNA",
+                             SeuratObj = pbmc.RNA.res$RNA,
+                             LISA.table = "pbmc_1k_v3_Monocyte_lisa.txt",
+                             visual.totalnumber = 100,
+                             name = "pbmc_1k_v3_Monocyte_filtered")
+```
+
+If users want to visualize the top factors without filtering. Please leave the TFs to NULL, then the top 10 regulators will be visualized.
+```{r,eval=FALSE}
+p <- VisualizeTFenrichment(cluster.1 = 3,
+                             type = "RNA",
+                             SeuratObj = pbmc.RNA.res$RNA,
+                             LISA.table = "pbmc_1k_v3_Monocyte_lisa.txt",
+                             visual.topnumber = 10,
+                             visual.totalnumber = 100,
+                             name = "pbmc_1k_v3_Monocyte_top")
+```
+
+To further filter the regulators, users may want to visualize the expression level of the predicted transcription factors. We provide the function for visualize TF/genes expression level using Vlnplot and Umap.
+```{r}
+VisualizeVlnplot(genes = c("SPI1","CEBPB"),
+                        type = "RNA",
+                        SeuratObj = pbmc.RNA.res$RNA,
+                        ncol = 2,
+                        width = 8.5,
+                        height = 4,
+                        name = "pbmc_1k_v3_Monocyte")
+```
+
+```{r}
+VisualizeUmap(genes = c("SPI1","CEBPB"),
+                     type = "RNA",
+                     SeuratObj = pbmc.RNA.res$RNA,
+                     ncol = 2,
+                     width = 8,
+                     height = 3,
+                     name = "pbmc_1k_v3_Monocyte")
 
 ```
 
+
+### Step 5. Save the object for future analysis
+Finally, users can save the R object, including the raw data, normalized data, clustering result, and meta information for future analysis.
+
+```{r}
+saveRDS(pbmc.RNA.res, "pbmc_1k_v3_8k_res.rds")
+```
 

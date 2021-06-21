@@ -1,7 +1,7 @@
 ---
-title: "scRNA-seq"
-author: "Gali Bai"
-date: "2021-06-06"
+title: "multi-scrna"
+author: "baigal628"
+date: "2021-06-20"
 output: workflowr::wflow_html
 editor_options:
   chunk_output_type: console
@@ -9,7 +9,7 @@ editor_options:
 
 ## Introduction
 
-In this example, we will be analyzing a scRNA-seq dataset of 1K human peripheral blood mononuclear cells (PBMCs) freely available from 10X Genomics. The raw dataset can be downloaded from the 10X Genomics website. We will show you how to run through the whole MAESTRO pipeline from the raw sequencing fastq files to the final results.
+In this example, we will be analyzing two scRNA-seq datasets together using PBMC data freely available from 10X Genomics. The raw dataset can be downloaded from the 10X Genomics website. We will show you how to run through the whole MAESTRO pipeline from the raw sequencing fastq files to the final results.
 
 
 ## Run MAESTRO pipeline
@@ -20,9 +20,15 @@ In this example, we will be analyzing a scRNA-seq dataset of 1K human peripheral
 Please download the raw data from 10X genomics website.
 
 ```{bash, eval=FALSE}
+mkdir data/multi-scrna
+cd data/multi-scrna
 
 $ wget https://cf.10xgenomics.com/samples/cell-exp/3.0.0/pbmc_1k_v3/pbmc_1k_v3_fastqs.tar
 $ tar xvf pbmc_1k_v3_fastqs.tar
+
+$ wget https://cg.10xgenomics.com/samples/cell-exp/3.0.2/5k_pbmc_v3/5k_pbmc_v3_fastqs.tar
+$ tar xvf 5k_pbmc_v3_fastqs.tar
+
 
 ```
 
@@ -41,12 +47,13 @@ Initialize the MAESTRO scRNA-seq workflow using MAESTRO scrna-init command. This
 ```{bash, eval=FALSE}
 MAESTRO scrna-init \
 --platform 10x-genomics --species GRCh38 \
---cores 32 --rseqc --directory pbmc_1k_v3_fastqs \
+--cores 32 --rseqc --directory multi-scrna \
+--mergedname 10X_multi \
 --count-cutoff 1000 --gene-cutoff 500 --cell-cutoff 10 \
 --mapindex references/Refdata_scRNA_MAESTRO_GRCh38_1.2.2/GRCh38_STAR_2.7.6a \
 --whitelist references/whitelist/3M-february-2018.txt \
 --barcode-start 1 --barcode-length 16 --umi-start 17 --umi-length 12 \
---lisadir references/hg38_1000_2.0.h5 \
+--lisadir annotation/hg38_1000_2.0.h5 \
 --signature human.immune.CIBERSORT
 
 ```
@@ -124,9 +131,9 @@ Before running the workflow, please check the `config.yaml` and see if it is con
 
 
 ```{bash, eval=FALSE}
-$ cd pbmc_1k_v3_fastqs/
+$ cd multi-scrna/
 
-$ MAESTRO samples-init --assay_type scrna --platform 10x-genomics --data_typ fastq --data_dir data/pbmc_1k_v3_fastqs/
+$ MAESTRO samples-init --assay_type scrna --platform 10x-genomics --data_typ fastq --data_dir /liulab/galib/sc_CIDC/MAESTRO/test/tutorial/data/multi-scrna
 
 ```
 
@@ -135,7 +142,7 @@ $ MAESTRO samples-init --assay_type scrna --platform 10x-genomics --data_typ fas
 ```{bash, eval=FALSE}
 $ snakemake -np
 
-$ nohup snakemake -j 16 > run.out &
+$ nohup snakemake -j 32 > run.out &
 
 ```
 
@@ -162,4 +169,4 @@ The `Benchmark` directory stores benchmark files for all rules in Snakefile, eac
 * **Log:**
 The Log directory contains the log files generated in the pipeline analysis.
 * **Report:**
-Contain the `{outprefix}_scRNA_report.html` file summarizes all the results in an HTML based document. The summary HTML for the example can be found [here](http://cistrome.org/~galib/MAESTRO/MAESTRO_report/pbmc_1k_v3_scRNA_report.html).
+Contain the `{outprefix}_scRNA_report.html` file summarizes all the results in an HTML based document. The multi-sample summary report can be found [here](http://cistrome.org/~galib/MAESTRO/MAESTRO_report/10x_multi_scRNA_report.html).
