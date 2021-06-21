@@ -18,7 +18,7 @@
 <script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
@@ -372,16 +372,30 @@ div.tocify {
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     <span class="fas fa-gear"></span>
      
+    multi-sample scRNA-seq
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="multi-scrna.html">10X multi-sample</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fas fa-gear"></span>
+     
     multi-sample scATAC-seq
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="fast-scatac.html">multi-sample scATAC-seq</a>
+      <a href="multi-scatac.html">time-dependent multi-sample</a>
     </li>
     <li>
-      <a href="fast-scatac_stepbystep.html">Custom Analysis</a>
+      <a href="multi-scatac_stepbystep.html">Custom Analysis</a>
     </li>
   </ul>
 </li>
@@ -435,7 +449,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2021-06-15
+<strong>Last updated:</strong> 2021-06-21
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -526,16 +540,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombaigal628MultiSamplescATACseqtree08d1d91fa9a238a0c1d5e69bcb90cb9c05e506d3targetblank08d1d91a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/baigal628/MultiSample_scATACseq/tree/08d1d91fa9a238a0c1d5e69bcb90cb9c05e506d3" target="_blank">08d1d91</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombaigal628MultiSamplescATACseqtree317af89d7aef97fabb8b8a3d3df9579a676ad5fctargetblank317af89a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/baigal628/MultiSample_scATACseq/tree/317af89d7aef97fabb8b8a3d3df9579a676ad5fc" target="_blank">317af89</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombaigal628MultiSamplescATACseqtree08d1d91fa9a238a0c1d5e69bcb90cb9c05e506d3targetblank08d1d91a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombaigal628MultiSamplescATACseqtree317af89d7aef97fabb8b8a3d3df9579a676ad5fctargetblank317af89a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/baigal628/MultiSample_scATACseq/tree/08d1d91fa9a238a0c1d5e69bcb90cb9c05e506d3" target="_blank">08d1d91</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/baigal628/MultiSample_scATACseq/tree/317af89d7aef97fabb8b8a3d3df9579a676ad5fc" target="_blank">317af89</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -546,22 +560,31 @@ Ignored files:
     Ignored:    .RData
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
+    Ignored:    analysis/.DS_Store
     Ignored:    data/.DS_Store
+    Ignored:    data/multi-scrna/
 
 Untracked files:
     Untracked:  .RDataTmp
     Untracked:  MAESTRO_documentation.Rproj
     Untracked:  atac_pbmc_500_nextgem_DiffPeaks.tsv
+    Untracked:  atac_pbmc_500_nextgem_Monocyte_umapplot.png
+    Untracked:  atac_pbmc_500_nextgem_Monocyte_vlnplot.png
     Untracked:  atac_pbmc_500_nextgem_cluster.png
     Untracked:  code/Basic_Operations.R
     Untracked:  code/Downstream Analysis.R
-    Untracked:  data/fast-scatac/
+    Untracked:  code/Venn_diagram.R
+    Untracked:  data/fragments/
+    Untracked:  data/multi-scatac/
     Untracked:  data/scatac/
     Untracked:  data/scrna/
-    Untracked:  pbmc_1k_v3.lisa/
+    Untracked:  pbmc_1k_v3_8k_res.rds
+    Untracked:  pbmc_1k_v3_Monocyte_umapplot.png
+    Untracked:  pbmc_1k_v3_Monocyte_vlnplot.png
 
 Unstaged changes:
     Deleted:    MultiSample_scATACseq.Rproj
+    Deleted:    analysis/about.Rmd
     Deleted:    analysis/fast-scatac.Rmd
     Deleted:    analysis/fast-scatac_stepbystep.Rmd
 
@@ -605,7 +628,7 @@ pbmc.gene &lt;- Read10X_h5(&quot;./data/scrna/pbmc_1k_v3_filtered_gene_count.h5&
 <pre><code>Warning in sparseMatrix(i = indices[] + 1, p = indptr[], x = as.numeric(x =
 counts[]), : &#39;giveCsparse&#39; has been deprecated; setting &#39;repr = &quot;T&quot;&#39; for you</code></pre>
 <p>We also support the processed dataset from 10x Cell Ranger pipeline or STARsolo. Users can load the gene matrix into R through <code>Read10X</code> function in Seurat package</p>
-<pre class="r"><code>pbmc.gene &lt;- Read10X(&#39;Result/STAR/10X_PBMC_8kSolo.out/Gene/filtered&#39;)</code></pre>
+<pre class="r"><code>pbmc.gene &lt;- Read10X(&#39;Result/STAR/pbmc_1k_v3Solo.out/Gene/filtered&#39;)</code></pre>
 </div>
 <div id="step-1.-perform-clustering-and-differential-gene-analysis" class="section level3">
 <h3>Step 1. Perform clustering and differential gene analysis</h3>
@@ -615,7 +638,7 @@ counts[]), : &#39;giveCsparse&#39; has been deprecated; setting &#39;repr = &quo
 </ol>
 <ul>
 <li><strong>Cell and gene coverage:</strong> Cells with less than 200 genes expressed, and genes expressed in less than 10 cells will be removed from the analysis.</li>
-<li><strong>Mitochondrial gene and ERCC:</strong> If <code>mito = TRUE</code> and <code>mito.cutoff = 0.2</code> is set, we will also filter the cells with more than 20% mitochondrial reads or more than 5% ERCC spike-ins. Mitochondrial genes are expressed in most cells and their expression level is specific to cell types. High expression level (i.e., high percentage) of mitochondrial genes could be detected from apoptotic or lysing cells, which should not be included in the analysis. ERCC spike-ins are used to estimate total mRNA content captured in cells. High level of ERCC is likely caused by cell death. Similarly, cells with a high percentage of ERCC need to be filtered.</li>
+<li><strong>Mitochondrial gene and ERCC:</strong> If <code>mito = TRUE</code> and <code>mito.cutoff = 20</code> is set, we will also filter the cells with more than 20% mitochondrial reads or more than 5% ERCC spike-ins. Mitochondrial genes are expressed in most cells and their expression level is specific to cell types. High expression level (i.e., high percentage) of mitochondrial genes could be detected from apoptotic or lysing cells, which should not be included in the analysis. ERCC spike-ins are used to estimate total mRNA content captured in cells. High level of ERCC is likely caused by cell death. Similarly, cells with a high percentage of ERCC need to be filtered.</li>
 </ul>
 <ol start="2" style="list-style-type: decimal">
 <li><strong>Normalization</strong></li>
@@ -639,7 +662,7 @@ counts[]), : &#39;giveCsparse&#39; has been deprecated; setting &#39;repr = &quo
                                min.c = 10,
                                min.g = 200,
                                mito = TRUE,
-                               mito.cutoff = 0.2,
+                               mito.cutoff = 20,
                                variable.genes = 2000,
                                organism = &quot;GRCh38&quot;,
                                dims.use = 1:15,
@@ -656,58 +679,58 @@ counts[]), : &#39;giveCsparse&#39; has been deprecated; setting &#39;repr = &quo
 <pre><code>Centering and scaling data matrix</code></pre>
 <pre><code>PCA analysis ...</code></pre>
 <pre><code>PC_ 1 
-Positive:  LTB, TRAC, TRBC2, CD3D, LCK, ISG20, IL32, IL7R, TCF7, BCL11B 
+Positive:  LTB, TRAC, TRBC2, CD3D, LCK, IL32, IL7R, TCF7, BCL11B, ISG20 
        LDHB, CD27, CD3G, CD69, ARL4C, PEBP1, SPOCK2, MZT2A, CD2, CD247 
-       NOSIP, CD7, AQP3, TRBC1, CD6, PLAAT4, PRKCQ-AS1, PRDX2, GZMM, RORA 
-Negative:  LYZ, FCN1, S100A9, MNDA, S100A8, FGL2, CST3, VCAN, CTSS, SERPINA1 
-       CSTA, NCF2, PSAP, KLF4, AIF1, TYMP, MPEG1, S100A12, GRN, MS4A6A 
-       CYBB, CD14, CLEC7A, FTL, TNFAIP2, LST1, CSF3R, SLC7A7, CD36, FCER1G 
+       NOSIP, CD7, TRBC1, AQP3, CD6, PRKCQ-AS1, PLAAT4, PRDX2, GZMM, SYNE2 
+Negative:  FCN1, LYZ, S100A9, MNDA, S100A8, FGL2, CST3, VCAN, CTSS, SERPINA1 
+       CSTA, NCF2, PSAP, AIF1, KLF4, S100A12, TYMP, MPEG1, MS4A6A, GRN 
+       CYBB, CD14, LST1, CLEC7A, TYROBP, FCER1G, TNFAIP2, CD36, CSF3R, SLC7A7 
 PC_ 2 
-Positive:  IL32, CTSW, GZMM, CD247, LCK, CD7, GZMA, NKG7, CD3D, S100A4 
-       ANXA1, KLRB1, PRF1, CST7, CCL5, RORA, PLAAT4, TRAC, ARL4C, CD3G 
-       IL7R, BCL11B, KLRG1, ZAP70, SAMD3, CD2, SYNE2, TRBC1, MATK, KLRD1 
-Negative:  CD79A, MS4A1, IGHM, BANK1, LINC00926, HLA-DQA1, CD74, CD79B, IGHD, HLA-DRB1 
-       HLA-DQB1, HLA-DRA, CD22, HLA-DPA1, HLA-DPB1, TNFRSF13C, TCL1A, SPIB, HLA-DQA2, HLA-DRB6 
-       BCL11A, AFF3, VPREB3, MEF2C, FCER2, NIBAN3, RALGPS2, HVCN1, HLA-DRB5, IGKC 
+Positive:  IL32, LCK, CD247, GZMM, CTSW, CD3D, CD7, GZMA, ANXA1, S100A4 
+       NKG7, TRAC, IL7R, BCL11B, CD3G, ARL4C, CST7, PRF1, KLRB1, PLAAT4 
+       RORA, CCL5, ZAP70, CD2, KLRG1, TRBC1, SAMD3, SYNE2, ITGB2, S100A10 
+Negative:  CD79A, MS4A1, IGHM, BANK1, LINC00926, HLA-DQA1, CD79B, IGHD, CD74, HLA-DQB1 
+       CD22, HLA-DRB1, HLA-DRA, HLA-DPA1, HLA-DPB1, TNFRSF13C, TCL1A, SPIB, HLA-DQA2, BCL11A 
+       AFF3, HLA-DRB6, FCER2, VPREB3, RALGPS2, MEF2C, NIBAN3, FCRL1, HVCN1, IGKC 
 PC_ 3 
-Positive:  LDHB, IL7R, TCF7, TRABD2A, LEF1, RCAN3, MAL, CD3D, NOSIP, BCL11B 
-       CCR7, TRAC, LTB, CD3G, VIM, CAMK4, CD27, NELL2, PASK, CD5 
-       FHIT, CHRM3-AS2, TSHZ2, FAM153CP, CD6, INPP4B, PRKCQ-AS1, LINC01550, EGR1, SLC2A3 
-Negative:  GZMB, GNLY, KLRD1, NKG7, KLRF1, CLIC3, SPON2, PRF1, CST7, FGFBP2 
-       ADGRG1, GZMA, CCL4, HOPX, TRDC, TTC38, TBX21, IL2RB, RHOC, MATK 
-       CTSW, FCGR3A, CD160, C12orf75, APMAP, APOBEC3G, CCL5, SH2D1B, PTGDR, S1PR5 
+Positive:  LDHB, TCF7, LEF1, TRABD2A, MAL, RCAN3, IL7R, CCR7, BCL11B, NOSIP 
+       CD3D, LTB, TRAC, CD3G, NELL2, PASK, CAMK4, CD27, VIM, CD5 
+       TSHZ2, FHIT, FAM153CP, CHRM3-AS2, CD6, INPP4B, SLC2A3, EGR1, ADTRP, PRKCQ-AS1 
+Negative:  GZMB, GNLY, NKG7, KLRD1, KLRF1, PRF1, CST7, CLIC3, SPON2, FGFBP2 
+       GZMA, ADGRG1, HOPX, CCL4, TRDC, MATK, TTC38, IL2RB, CTSW, TBX21 
+       RHOC, APMAP, APOBEC3G, CD160, PTGDR, FCGR3A, CCL5, S1PR5, SH2D1B, C12orf75 
 PC_ 4 
-Positive:  CAVIN2, PRKAR2B, TUBB1, GNG11, PPBP, PF4, ITGA2B, CLU, GP9, TREML1 
-       PTCRA, ESAM, ANKRD9, CTTN, C2orf88, CD9, GMPR, MPIG6B, TMEM158, TNNC2 
-       MTURN, ITGB3, SPARC, FAXDC2, GP1BA, H2AC6, CXCR2P1, MYLK, ACRBP, LMNA 
-Negative:  TMSB10, MT-CO1, GNLY, KLRD1, NKG7, KLRF1, CST7, SPON2, PRF1, FGFBP2 
-       ADGRG1, GZMA, CCL4, APOBEC3G, HOPX, TRDC, TTC38, EFHD2, TBX21, GZMB 
-       IL2RB, MATK, FCGR3A, ITGB2, CD160, CMC1, S1PR5, MYOM2, GZMH, CLIC3 
+Positive:  PRKAR2B, CAVIN2, GNG11, TUBB1, PPBP, PF4, PTCRA, ITGA2B, CLU, GP9 
+       TREML1, ESAM, C2orf88, CTTN, ANKRD9, CD9, GMPR, MTURN, MPIG6B, TMEM158 
+       ITGB3, FAXDC2, SPARC, GP1BA, CXCR2P1, H2AC6, MYLK, LMNA, SMOX, ACRBP 
+Negative:  TMSB10, NKG7, GNLY, CST7, KLRD1, PRF1, KLRF1, GZMA, FGFBP2, HOPX 
+       SPON2, APOBEC3G, CCL4, ITGB2, EFHD2, ADGRG1, MATK, TRDC, TTC38, IL2RB 
+       TBX21, CMC1, CX3CR1, S1PR5, CD160, LSP1, FCGR3A, GZMM, GZMH, MYOM2 
 PC_ 5 
-Positive:  FCGR3A, CDKN1C, HES4, TCF7L2, AC104809.2, MTSS1, SIGLEC10, RHOC, NEURL1, ZNF703 
-       SMIM25, CKB, IFITM3, RPS15AP30, IFI30, ABI3, FAM110A, C3AR1, CAMK1, CSF1R 
-       CHST2, SECTM1, MS4A7, MYOF, HMOX1, RRAS, CD79B, ARRB1, VASP, GPBAR1 
-Negative:  SERPINF1, LILRA4, SMPD3, CLEC4C, AL096865.1, TPM2, PACSIN1, DNASE1L3, DERL3, GAS6 
-       TNFRSF21, IL3RA, NRP1, MYBL2, CIB2, SCN9A, LINC00996, NOTCH4, ITM2C, LINC01226 
-       LAMP5, BX571818.1, UGCG, SMIM5, LINC02812, MZB1, RUNX2, ZFAT, SLC7A5, CCDC50 </code></pre>
+Positive:  SERPINF1, LILRA4, SMPD3, CLEC4C, AL096865.1, TPM2, DNASE1L3, PACSIN1, DERL3, GAS6 
+       TNFRSF21, IL3RA, NRP1, MYBL2, SCN9A, CIB2, LINC00996, ITM2C, LAMP5, LINC01226 
+       UGCG, MZB1, JCHAIN, SMIM5, NOTCH4, CCDC50, BX571818.1, SLC7A5, SERPINF2, PPM1J 
+Negative:  CDKN1C, HES4, FCGR3A, TCF7L2, MTSS1, AC104809.2, SIGLEC10, SMIM25, RHOC, CKB 
+       ZNF703, NEURL1, RPS15AP30, IFITM3, CAMK1, C3AR1, IFI30, ABI3, CSF1R, FAM110A 
+       HMOX1, MS4A7, RRAS, SECTM1, MYOF, CHST2, ARRB1, GPBAR1, WARS1, PPM1N </code></pre>
 <pre><code>UMAP analysis ...</code></pre>
 <pre><code>Warning: The default method for RunUMAP has changed from calling Python UMAP via reticulate to the R-native UWOT using the cosine metric
 To use Python UMAP via reticulate, set umap.method to &#39;umap-learn&#39; and metric to &#39;correlation&#39;
 This message will be shown once per session</code></pre>
-<pre><code>08:24:19 UMAP embedding parameters a = 0.9922 b = 1.112</code></pre>
-<pre><code>08:24:19 Read 1094 rows and found 15 numeric columns</code></pre>
-<pre><code>08:24:19 Using Annoy for neighbor search, n_neighbors = 30</code></pre>
-<pre><code>08:24:19 Building Annoy index with metric = cosine, n_trees = 50</code></pre>
+<pre><code>01:14:52 UMAP embedding parameters a = 0.9922 b = 1.112</code></pre>
+<pre><code>01:14:52 Read 1160 rows and found 15 numeric columns</code></pre>
+<pre><code>01:14:52 Using Annoy for neighbor search, n_neighbors = 30</code></pre>
+<pre><code>01:14:52 Building Annoy index with metric = cosine, n_trees = 50</code></pre>
 <pre><code>0%   10   20   30   40   50   60   70   80   90   100%</code></pre>
 <pre><code>[----|----|----|----|----|----|----|----|----|----|</code></pre>
 <pre><code>**************************************************|
-08:24:19 Writing NN index file to temp file /var/folders/bx/3yng1lx579x084wwkjz1xc6c0000gp/T//RtmpzMTxO0/file642e57b2d6fa
-08:24:19 Searching Annoy index using 1 thread, search_k = 3000
-08:24:19 Annoy recall = 100%
-08:24:20 Commencing smooth kNN distance calibration using 1 thread
-08:24:21 Initializing from normalized Laplacian + noise
-08:24:21 Commencing optimization for 500 epochs, with 43956 positive edges
-08:24:23 Optimization finished</code></pre>
+01:14:52 Writing NN index file to temp file /var/folders/bx/3yng1lx579x084wwkjz1xc6c0000gp/T//Rtmp0VNWSK/filec18c4d29dd40
+01:14:52 Searching Annoy index using 1 thread, search_k = 3000
+01:14:52 Annoy recall = 100%
+01:14:53 Commencing smooth kNN distance calibration using 1 thread
+01:14:54 Initializing from normalized Laplacian + noise
+01:14:54 Commencing optimization for 500 epochs, with 46456 positive edges
+01:14:57 Optimization finished</code></pre>
 <pre><code>Warning: The following arguments are not used: dims1, dims2, dims3, dims4,
 dims5, dims6, dims7, dims8, dims9, dims10, dims11, dims12, dims13, dims14,
 dims15</code></pre>
@@ -718,28 +741,28 @@ dims15</code></pre>
 Computing SNN</code></pre>
 <pre><code>Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
 
-Number of nodes: 1094
-Number of edges: 33610
+Number of nodes: 1160
+Number of edges: 35895
 
 Running Louvain algorithm...
-Maximum modularity in 10 random starts: 0.8690
+Maximum modularity in 10 random starts: 0.8707
 Number of communities: 9
 Elapsed time: 0 seconds</code></pre>
 <pre><code>Identify cluster specific genes ...</code></pre>
 <p><code>RNARunSeurat()</code> generates plots of QC and clustering in the current working directory, and returns a list of a Seurat object <code>RNA</code> and dataframe <code>genes</code>. Please see <a href="https://github.com/satijalab/seurat/wiki">Seurat Github wiki</a> for more details of the Seurat object structure. Users can use the <code>str()</code> command to get an intuitive understanding of the object.</p>
 <pre class="r"><code>pbmc.RNA.res$RNA</code></pre>
 <pre><code>An object of class Seurat 
-13773 features across 1094 samples within 1 assay 
+13773 features across 1160 samples within 1 assay 
 Active assay: RNA (13773 features, 2000 variable features)
  2 dimensional reductions calculated: pca, umap</code></pre>
 <pre class="r"><code>head(pbmc.RNA.res$genes)</code></pre>
-<pre><code>         p_val avg_logFC pct.1 pct.2    p_val_adj cluster   gene
-1 4.237662e-75 1.2913449 0.940 0.277 5.836532e-71       0   IL7R
-2 1.289178e-66 1.0775462 0.980 0.309 6.085858e-63       0   IL32
-3 1.325606e-66 1.0440925 0.980 0.362 6.085858e-63       0   TRAC
-4 1.510841e-58 0.8737180 0.990 0.708 5.202204e-55       0   LDHB
-5 7.694181e-56 0.8424584 0.955 0.312 2.119439e-52       0   CD3D
-6 4.956137e-54 0.8062849 0.899 0.295 1.137681e-50       0 BCL11B</code></pre>
+<pre><code>         p_val avg_logFC pct.1 pct.2    p_val_adj cluster gene
+1 2.885224e-69 1.2206186 0.883 0.277 3.973820e-65       0 IL7R
+2 2.297775e-61 0.9914223 0.924 0.308 1.582363e-57       0 IL32
+3 2.688309e-59 0.9542208 0.915 0.360 1.234203e-55       0 TRAC
+4 2.847565e-52 0.8090400 0.897 0.312 9.804877e-49       0 CD3D
+5 6.764645e-51 0.7714020 0.753 0.242 1.863389e-47       0  CD2
+6 1.682254e-50 0.7802363 0.928 0.351 3.861613e-47       0 CD3E</code></pre>
 <p><img src="assets/scrna/pbmc_1k_v3.spikein.png" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-pbmc_1k_v3.spikein">
@@ -803,6 +826,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/baigal628/MultiSample_scATACseq/blob/317af89d7aef97fabb8b8a3d3df9579a676ad5fc/docs/assets/scrna/pbmc_1k_v3_PCElbowPlot.png" target="_blank">317af89</a>
+</td>
+<td>
+baigal628
+</td>
+<td>
+2021-06-21
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/baigal628/MultiSample_scATACseq/blob/df0c2882fe04c6abfaa338b9e6d3ff22f473e62c/docs/assets/scrna/pbmc_1k_v3_PCElbowPlot.png" target="_blank">df0c288</a>
 </td>
 <td>
@@ -841,6 +875,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/baigal628/MultiSample_scATACseq/blob/317af89d7aef97fabb8b8a3d3df9579a676ad5fc/docs/assets/scrna/pbmc_1k_v3_cluster.png" target="_blank">317af89</a>
+</td>
+<td>
+baigal628
+</td>
+<td>
+2021-06-21
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/baigal628/MultiSample_scATACseq/blob/df0c2882fe04c6abfaa338b9e6d3ff22f473e62c/docs/assets/scrna/pbmc_1k_v3_cluster.png" target="_blank">df0c288</a>
 </td>
 <td>
@@ -861,10 +906,11 @@ baigal628
 <pre class="r"><code>data(human.immune.CIBERSORT)
 pbmc.RNA.res$RNA &lt;- RNAAnnotateCelltype(RNA = pbmc.RNA.res$RNA,
                                           gene = pbmc.RNA.res$genes,
-                                          signatures = human.immune.CIBERSORT,
+                                          signatures = &quot;human.immune.CIBERSORT&quot;,
                                           min.score = 0.05,
-                                          outdir = &quot;./docs/assets/scrna/&quot;)
-head(pbmc.RNA.res$RNA@meta.data)</code></pre>
+                                          outdir = &quot;./docs/assets/scrna/&quot;)</code></pre>
+<pre><code>The following `from` values were not present in `x`: ActDCs, ActMast, ActMemCD4Tcells, ActNK, ActpDCs, CD8Tex, Endothelial, Eosinophils, Fibroblasts, MacrophagesM0, MacrophagesM1, MacrophagesM2, Myofibroblasts, Neutrophils, PlasmaCells, RestDCs, RestMast, RestpDCs, Tfh, TMKI67, Treg</code></pre>
+<pre class="r"><code>head(pbmc.RNA.res$RNA@meta.data)</code></pre>
 <pre><code>                 orig.ident nCount_RNA nFeature_RNA percent.mito percent.ercc
 AAACCCAAGGAGAGTA pbmc_1k_v3       8333         2672   0.11844474 0.0001200048
 AAACGCTTCAGCCCAG pbmc_1k_v3       5579         1858   0.09302742 0.0001792436
@@ -872,13 +918,13 @@ AAAGAACAGACGACTG pbmc_1k_v3       4278         1584   0.06778869 0.0000000000
 AAAGAACCAATGGCAG pbmc_1k_v3       2793         1239   0.07375582 0.0003580380
 AAAGAACGTCTGCAAT pbmc_1k_v3       6595         1882   0.07172100 0.0003032600
 AAAGGATAGTAGACAT pbmc_1k_v3       8887         2129   0.08765613 0.0001125239
-                 RNA_snn_res.0.6 seurat_clusters     assign.ident assign.score
-AAACCCAAGGAGAGTA               1               1        Monocytes     5.843310
-AAACGCTTCAGCCCAG               4               4      NaiveBcells     7.149870
-AAAGAACAGACGACTG               5               5        CD8Tcells     4.902097
-AAAGAACCAATGGCAG               5               5        CD8Tcells     4.902097
-AAAGAACGTCTGCAAT               0               0 RestMemCD4Tcells     2.761635
-AAAGGATAGTAGACAT               6               6     MemoryBcells     4.086750</code></pre>
+                 RNA_snn_res.0.6 seurat_clusters assign.ident assign.score
+AAACCCAAGGAGAGTA               1               1   Mono/Macro     5.769480
+AAACGCTTCAGCCCAG               4               4            B     6.898449
+AAAGAACAGACGACTG               5               5         CD8T     5.153062
+AAAGAACCAATGGCAG               5               5         CD8T     5.153062
+AAAGAACGTCTGCAAT               0               0     CD4Tconv     2.576955
+AAAGGATAGTAGACAT               6               6            B     4.456919</code></pre>
 <p><img src="assets/scrna/pbmc_1k_v3_annotated.png" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-pbmc_1k_v3_annotated">
@@ -902,6 +948,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/baigal628/MultiSample_scATACseq/blob/317af89d7aef97fabb8b8a3d3df9579a676ad5fc/docs/assets/scrna/pbmc_1k_v3_annotated.png" target="_blank">317af89</a>
+</td>
+<td>
+baigal628
+</td>
+<td>
+2021-06-21
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/baigal628/MultiSample_scATACseq/blob/df0c2882fe04c6abfaa338b9e6d3ff22f473e62c/docs/assets/scrna/pbmc_1k_v3_annotated.png" target="_blank">df0c288</a>
@@ -971,8 +1028,67 @@ baigal628
                                                  genes = pbmc.RNA.res$genes,
                                                  project = pbmc.RNA.res$RNA@project.name,
                                                  organism = &quot;GRCh38&quot;,
-                                                 lisa.path = &quot;/Users/galib/miniconda3/envs/lisa/bin/lisa&quot;,
-                                                 top.tf = 10)</code></pre>
+                                                 lisa.path = &quot;/Users/galib/miniconda3/envs/lisa_env/bin/lisa&quot;,
+                                                 top.tf = 10,
+                                                 outdir = &quot;./docs/assets/scrna/&quot;)
+pbmc.RNA.tfs[[&quot;0&quot;]]</code></pre>
+<p>Besides identifying TFs for all the clusters, we also support the differential gene list from a single comparison.</p>
+<pre class="r"><code>de.geneset &lt;- FindMarkersMAESTRO(pbmc.RNA.res$RNA, ident.1 = c(3))
+pbmc.RNA.monocyte.tfs &lt;- RNAAnnotateTranscriptionFactor(RNA = pbmc.RNA.res$RNA,
+                                                          genes = de.geneset,
+                                                          cluster = c(3),
+                                                          project = &quot;pbmc_1k_v3_Monocyte&quot;,
+                                                          organism = &quot;GRCh38&quot;,
+                                                          top.tf = 20,
+                                                          lisa.path = &quot;/Users/galib/miniconda3/envs/lisa_env/bin/lisa&quot;,
+                                                          outdir = &quot;./docs/assets/scrna/&quot;)</code></pre>
+</div>
+<div id="step-4.-visualize-driver-transcription-factors-for-each-cluster" class="section level3">
+<h3>Step 4. Visualize driver transcription factors for each cluster</h3>
+<p>According to the annotation of the clusters, we know that cluster 3 is Monocyte. Next, we want to visualize the enriched regulators in Monocyte from Step 5.</p>
+<p>The output TFs returned from <code>RNAAnnotateTranscriptionFactor</code> have already been pre-filtered based on TF expression level.</p>
+<pre class="r"><code>tfs &lt;- sapply(pbmc.RNA.monocyte.tfs[[1]], function(x){
+                return(unlist(strsplit(x, split = &quot; | &quot;, fixed = TRUE))[1])})
+p &lt;- VisualizeTFenrichment(TFs = tfs,
+                             cluster.1 = 3,
+                             type = &quot;RNA&quot;,
+                             SeuratObj = pbmc.RNA.res$RNA,
+                             LISA.table = &quot;pbmc_1k_v3_Monocyte_lisa.txt&quot;,
+                             visual.totalnumber = 100,
+                             name = &quot;pbmc_1k_v3_Monocyte_filtered&quot;)</code></pre>
+<p>If users want to visualize the top factors without filtering. Please leave the TFs to NULL, then the top 10 regulators will be visualized.</p>
+<pre class="r"><code>p &lt;- VisualizeTFenrichment(cluster.1 = 3,
+                             type = &quot;RNA&quot;,
+                             SeuratObj = pbmc.RNA.res$RNA,
+                             LISA.table = &quot;pbmc_1k_v3_Monocyte_lisa.txt&quot;,
+                             visual.topnumber = 10,
+                             visual.totalnumber = 100,
+                             name = &quot;pbmc_1k_v3_Monocyte_top&quot;)</code></pre>
+<p>To further filter the regulators, users may want to visualize the expression level of the predicted transcription factors. We provide the function for visualize TF/genes expression level using Vlnplot and Umap.</p>
+<pre class="r"><code>VisualizeVlnplot(genes = c(&quot;SPI1&quot;,&quot;CEBPB&quot;),
+                        type = &quot;RNA&quot;,
+                        SeuratObj = pbmc.RNA.res$RNA,
+                        ncol = 2,
+                        width = 8.5,
+                        height = 4,
+                        name = &quot;pbmc_1k_v3_Monocyte&quot;)</code></pre>
+<pre><code>Warning: CombinePlots is being deprecated. Plots should now be combined using
+the patchwork system.</code></pre>
+<p><img src="figure/scrna_stepbystep.Rmd/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>VisualizeUmap(genes = c(&quot;SPI1&quot;,&quot;CEBPB&quot;),
+                     type = &quot;RNA&quot;,
+                     SeuratObj = pbmc.RNA.res$RNA,
+                     ncol = 2,
+                     width = 8,
+                     height = 3,
+                     name = &quot;pbmc_1k_v3_Monocyte&quot;)</code></pre>
+<pre><code>Warning: CombinePlots is being deprecated. Plots should now be combined using
+the patchwork system.</code></pre>
+</div>
+<div id="step-5.-save-the-object-for-future-analysis" class="section level3">
+<h3>Step 5. Save the object for future analysis</h3>
+<p>Finally, users can save the R object, including the raw data, normalized data, clustering result, and meta information for future analysis.</p>
+<pre class="r"><code>saveRDS(pbmc.RNA.res, &quot;pbmc_1k_v3_8k_res.rds&quot;)</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">

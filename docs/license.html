@@ -16,7 +16,7 @@
 <script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
@@ -294,16 +294,30 @@ $(document).ready(function () {
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     <span class="fas fa-gear"></span>
      
+    multi-sample scRNA-seq
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="multi-scrna.html">10X multi-sample</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fas fa-gear"></span>
+     
     multi-sample scATAC-seq
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="fast-scatac.html">multi-sample scATAC-seq</a>
+      <a href="multi-scatac.html">time-dependent multi-sample</a>
     </li>
     <li>
-      <a href="fast-scatac_stepbystep.html">Custom Analysis</a>
+      <a href="multi-scatac_stepbystep.html">Custom Analysis</a>
     </li>
   </ul>
 </li>
@@ -355,7 +369,7 @@ $(document).ready(function () {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2021-06-15
+<strong>Last updated:</strong> 2021-06-21
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 2 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -386,16 +400,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombaigal628MultiSamplescATACseqtree08d1d91fa9a238a0c1d5e69bcb90cb9c05e506d3targetblank08d1d91a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/baigal628/MultiSample_scATACseq/tree/08d1d91fa9a238a0c1d5e69bcb90cb9c05e506d3" target="_blank">08d1d91</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombaigal628MultiSamplescATACseqtree317af89d7aef97fabb8b8a3d3df9579a676ad5fctargetblank317af89a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/baigal628/MultiSample_scATACseq/tree/317af89d7aef97fabb8b8a3d3df9579a676ad5fc" target="_blank">317af89</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombaigal628MultiSamplescATACseqtree08d1d91fa9a238a0c1d5e69bcb90cb9c05e506d3targetblank08d1d91a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombaigal628MultiSamplescATACseqtree317af89d7aef97fabb8b8a3d3df9579a676ad5fctargetblank317af89a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/baigal628/MultiSample_scATACseq/tree/08d1d91fa9a238a0c1d5e69bcb90cb9c05e506d3" target="_blank">08d1d91</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/baigal628/MultiSample_scATACseq/tree/317af89d7aef97fabb8b8a3d3df9579a676ad5fc" target="_blank">317af89</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -406,22 +420,31 @@ Ignored files:
     Ignored:    .RData
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
+    Ignored:    analysis/.DS_Store
     Ignored:    data/.DS_Store
+    Ignored:    data/multi-scrna/
 
 Untracked files:
     Untracked:  .RDataTmp
     Untracked:  MAESTRO_documentation.Rproj
     Untracked:  atac_pbmc_500_nextgem_DiffPeaks.tsv
+    Untracked:  atac_pbmc_500_nextgem_Monocyte_umapplot.png
+    Untracked:  atac_pbmc_500_nextgem_Monocyte_vlnplot.png
     Untracked:  atac_pbmc_500_nextgem_cluster.png
     Untracked:  code/Basic_Operations.R
     Untracked:  code/Downstream Analysis.R
-    Untracked:  data/fast-scatac/
+    Untracked:  code/Venn_diagram.R
+    Untracked:  data/fragments/
+    Untracked:  data/multi-scatac/
     Untracked:  data/scatac/
     Untracked:  data/scrna/
-    Untracked:  pbmc_1k_v3.lisa/
+    Untracked:  pbmc_1k_v3_8k_res.rds
+    Untracked:  pbmc_1k_v3_Monocyte_umapplot.png
+    Untracked:  pbmc_1k_v3_Monocyte_vlnplot.png
 
 Unstaged changes:
     Deleted:    MultiSample_scATACseq.Rproj
+    Deleted:    analysis/about.Rmd
     Deleted:    analysis/fast-scatac.Rmd
     Deleted:    analysis/fast-scatac_stepbystep.Rmd
 
