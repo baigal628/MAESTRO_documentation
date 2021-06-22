@@ -4,14 +4,12 @@ navbar:
   title: "MAESTRO 1.5.0"
   left:
   - text: "scRNA-seq"
-    icon: fa-gear
     menu:
       - text: "10X PBMC 1k"
         href: scrna.html
       - text: "10X PBMC 1k_Custom Analysis"
         href: scrna_stepbystep.html
   - text: "scATAC-seq"
-    icon: fa-gear
     menu:
       - text: "10X PBMC 500"
         href: scatac.html
@@ -20,12 +18,10 @@ navbar:
       - text: "sci-ATAC-seq"
         href: sci_atac.html
   - text: "multi-sample scRNA-seq"
-    icon: fa-gear
     menu:
       - text: "10X multi-sample"
         href: multi-scrna.html
   - text: "multi-sample scATAC-seq"
-    icon: fa-gear
     menu:
       - text: "time-dependent multi-sample"
         href: multi-scatac.html
@@ -37,7 +33,7 @@ navbar:
   right:
   - icon: fa-github
   - text: Source code
-    href: https://github.com/baigal628/MAESTRO_documentation
+    href: https://github.com/liulab-dfci/MAESTRO
 output:
   workflowr::wflow_html:
     toc: yes

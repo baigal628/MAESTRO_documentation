@@ -40,7 +40,7 @@ Subcommand | Description
 The most general use case for MAESTRO is to process single-cell data with a streamlined pipeline. The basic idea of running MAESTRO is summarized as the following three steps.
 
 ```{r echo=FALSE}
-knitr::include_graphics("assets/MAESTRO_usecase.png", error = FALSE)
+knitr::include_graphics("assets/MAESTRO_usecase.pdf",error = FALSE)
 
 ```
 
