@@ -15,7 +15,7 @@
 
 <title>scRNA-seq custom analysis</title>
 
-<script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
@@ -309,12 +309,12 @@ div.tocify {
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
 <div class="row">
-<div class="col-sm-12 col-md-4 col-lg-3">
+<div class="col-xs-12 col-sm-4 col-md-3">
 <div id="TOC" class="tocify">
 </div>
 </div>
 
-<div class="toc-content col-sm-12 col-md-8 col-lg-9">
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -333,7 +333,7 @@ div.tocify {
       <ul class="nav navbar-nav">
         <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    <span class="fas fa-gear"></span>
+    <span class="fa fa-gear"></span>
      
     scRNA-seq
      
@@ -350,7 +350,7 @@ div.tocify {
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    <span class="fas fa-gear"></span>
+    <span class="fa fa-gear"></span>
      
     scATAC-seq
      
@@ -370,7 +370,7 @@ div.tocify {
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    <span class="fas fa-gear"></span>
+    <span class="fa fa-gear"></span>
      
     multi-sample scRNA-seq
      
@@ -384,7 +384,7 @@ div.tocify {
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    <span class="fas fa-gear"></span>
+    <span class="fa fa-gear"></span>
      
     multi-sample scATAC-seq
      
@@ -406,7 +406,7 @@ div.tocify {
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a>
-    <span class="fas fa-github"></span>
+    <span class="fa fa-github"></span>
      
   </a>
 </li>
@@ -540,16 +540,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombaigal628MultiSamplescATACseqtreef6f7108c15645f6945a121dce3920546ac23739atargetblankf6f7108a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/baigal628/MultiSample_scATACseq/tree/f6f7108c15645f6945a121dce3920546ac23739a" target="_blank">f6f7108</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombaigal628MultiSamplescATACseqtree52a6a2f7dc0b803961f565f025d526b3af8eb776targetblank52a6a2fa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/baigal628/MultiSample_scATACseq/tree/52a6a2f7dc0b803961f565f025d526b3af8eb776" target="_blank">52a6a2f</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombaigal628MultiSamplescATACseqtreef6f7108c15645f6945a121dce3920546ac23739atargetblankf6f7108a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombaigal628MultiSamplescATACseqtree52a6a2f7dc0b803961f565f025d526b3af8eb776targetblank52a6a2fa" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/baigal628/MultiSample_scATACseq/tree/f6f7108c15645f6945a121dce3920546ac23739a" target="_blank">f6f7108</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/baigal628/MultiSample_scATACseq/tree/52a6a2f7dc0b803961f565f025d526b3af8eb776" target="_blank">52a6a2f</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -613,11 +613,6 @@ There are no past versions. Publish this analysis with <code>wflow_publish()</co
 <h3>Step 0. Read data</h3>
 <p>First users need to read the gene expression count matrix generated by MAESTRO pipeline into the R environment. To support the processing of large datasets, in MAESTRO we use <a href="https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/advanced/h5_matrices">HDF5 format</a> for all the expression, atac-seq peak count and RP tables.</p>
 <pre class="r"><code>library(MAESTRO)</code></pre>
-<pre><code>Registered S3 method overwritten by &#39;GGally&#39;:
-  method from   
-  +.gg   ggplot2</code></pre>
-<pre><code>Bioconductor version &#39;3.12&#39; is out-of-date; the current release version &#39;3.13&#39;
-  is available with R version &#39;4.1&#39;; see https://bioconductor.org/install</code></pre>
 <pre><code>Registered S3 method overwritten by &#39;cli&#39;:
   method     from         
   print.boxx spatstat.geom</code></pre>
@@ -717,20 +712,20 @@ Negative:  CDKN1C, HES4, FCGR3A, TCF7L2, MTSS1, AC104809.2, SIGLEC10, SMIM25, RH
 <pre><code>Warning: The default method for RunUMAP has changed from calling Python UMAP via reticulate to the R-native UWOT using the cosine metric
 To use Python UMAP via reticulate, set umap.method to &#39;umap-learn&#39; and metric to &#39;correlation&#39;
 This message will be shown once per session</code></pre>
-<pre><code>14:46:25 UMAP embedding parameters a = 0.9922 b = 1.112</code></pre>
-<pre><code>14:46:25 Read 1160 rows and found 15 numeric columns</code></pre>
-<pre><code>14:46:25 Using Annoy for neighbor search, n_neighbors = 30</code></pre>
-<pre><code>14:46:25 Building Annoy index with metric = cosine, n_trees = 50</code></pre>
+<pre><code>16:38:45 UMAP embedding parameters a = 0.9922 b = 1.112</code></pre>
+<pre><code>16:38:45 Read 1160 rows and found 15 numeric columns</code></pre>
+<pre><code>16:38:45 Using Annoy for neighbor search, n_neighbors = 30</code></pre>
+<pre><code>16:38:45 Building Annoy index with metric = cosine, n_trees = 50</code></pre>
 <pre><code>0%   10   20   30   40   50   60   70   80   90   100%</code></pre>
 <pre><code>[----|----|----|----|----|----|----|----|----|----|</code></pre>
 <pre><code>**************************************************|
-14:46:26 Writing NN index file to temp file /var/folders/bx/3yng1lx579x084wwkjz1xc6c0000gp/T//RtmpYlQJv2/file12a7841320d9e
-14:46:26 Searching Annoy index using 1 thread, search_k = 3000
-14:46:26 Annoy recall = 100%
-14:46:26 Commencing smooth kNN distance calibration using 1 thread
-14:46:28 Initializing from normalized Laplacian + noise
-14:46:28 Commencing optimization for 500 epochs, with 46456 positive edges
-14:46:30 Optimization finished</code></pre>
+16:38:45 Writing NN index file to temp file /var/folders/bx/3yng1lx579x084wwkjz1xc6c0000gp/T//RtmpM5DRXG/file13c0e66b0425c
+16:38:45 Searching Annoy index using 1 thread, search_k = 3000
+16:38:45 Annoy recall = 100%
+16:38:46 Commencing smooth kNN distance calibration using 1 thread
+16:38:47 Initializing from normalized Laplacian + noise
+16:38:47 Commencing optimization for 500 epochs, with 46456 positive edges
+16:38:49 Optimization finished</code></pre>
 <pre><code>Warning: The following arguments are not used: dims1, dims2, dims3, dims4,
 dims5, dims6, dims7, dims8, dims9, dims10, dims11, dims12, dims13, dims14,
 dims15</code></pre>
@@ -1160,13 +1155,13 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] RColorBrewer_1.1-2 ggplot2_3.3.3      SeuratObject_4.0.0 Seurat_4.0.1      
+[1] RColorBrewer_1.1-2 ggplot2_3.3.4      SeuratObject_4.0.2 Seurat_4.0.3      
 [5] MAESTRO_1.4.0      workflowr_1.6.2   
 
 loaded via a namespace (and not attached):
   [1] rappdirs_0.3.3              SnowballC_0.7.0            
   [3] rtracklayer_1.50.0          scattermore_0.7            
-  [5] GGally_2.1.1                tidyr_1.1.3                
+  [5] ragg_1.1.3                  tidyr_1.1.3                
   [7] bit64_4.0.5                 knitr_1.33                 
   [9] irlba_2.3.3                 DelayedArray_0.16.3        
  [11] data.table_1.14.0           rpart_4.1-15               
@@ -1178,98 +1173,96 @@ loaded via a namespace (and not attached):
  [23] RANN_2.6.1                  future_1.21.0              
  [25] bit_4.0.4                   spatstat.data_2.1-0        
  [27] xml2_1.3.2                  lubridate_1.7.10           
- [29] httpuv_1.6.0                SummarizedExperiment_1.20.0
- [31] assertthat_0.2.1            xfun_0.22                  
- [33] hms_1.0.0                   jquerylib_0.1.4            
+ [29] httpuv_1.6.1                SummarizedExperiment_1.20.0
+ [31] assertthat_0.2.1            xfun_0.24                  
+ [33] hms_1.1.0                   jquerylib_0.1.4            
  [35] evaluate_0.14               promises_1.2.0.1           
- [37] fansi_0.4.2                 progress_1.2.2             
+ [37] fansi_0.5.0                 progress_1.2.2             
  [39] caTools_1.18.2              dbplyr_2.1.1               
  [41] igraph_1.2.6                DBI_1.1.1                  
- [43] htmlwidgets_1.5.3           reshape_0.8.8              
- [45] spatstat.geom_2.1-0         stats4_4.0.5               
- [47] purrr_0.3.4                 ellipsis_0.3.1             
- [49] RSpectra_0.16-0             dplyr_1.0.5                
+ [43] htmlwidgets_1.5.3           sparsesvd_0.2              
+ [45] spatstat.geom_2.2-0         stats4_4.0.5               
+ [47] purrr_0.3.4                 ellipsis_0.3.2             
+ [49] RSpectra_0.16-0             dplyr_1.0.7                
  [51] backports_1.2.1             biomaRt_2.46.3             
  [53] deldir_0.2-10               MatrixGenerics_1.2.1       
- [55] vctrs_0.3.7                 Biobase_2.50.0             
- [57] remotes_2.3.0               ensembldb_2.14.0           
+ [55] vctrs_0.3.8                 Biobase_2.50.0             
+ [57] remotes_2.4.0               ensembldb_2.14.0           
  [59] ROCR_1.0-11                 abind_1.4-5                
- [61] withr_2.4.2                 cachem_1.0.4               
- [63] ggforce_0.3.3               BSgenome_1.58.0            
- [65] presto_1.0.0                checkmate_2.0.0            
- [67] sctransform_0.3.2           GenomicAlignments_1.26.0   
- [69] prettyunits_1.1.1           goftest_1.2-2              
- [71] cluster_2.1.2               lazyeval_0.2.2             
- [73] crayon_1.4.1                hdf5r_1.3.3                
- [75] labeling_0.4.2              pkgconfig_2.0.3            
+ [61] cachem_1.0.5                withr_2.4.2                
+ [63] ggforce_0.3.3               presto_1.0.0               
+ [65] checkmate_2.0.0             sctransform_0.3.2          
+ [67] GenomicAlignments_1.26.0    prettyunits_1.1.1          
+ [69] goftest_1.2-2               cluster_2.1.2              
+ [71] lazyeval_0.2.2              crayon_1.4.1               
+ [73] hdf5r_1.3.3                 labeling_0.4.2             
+ [75] pkgconfig_2.0.3             slam_0.1-48                
  [77] tweenr_1.0.2                GenomeInfoDb_1.26.7        
- [79] pkgload_1.2.1               nlme_3.1-152               
- [81] ProtGenerics_1.22.0         nnet_7.3-15                
- [83] devtools_2.4.0              rlang_0.4.10               
+ [79] nlme_3.1-152                pkgload_1.2.1              
+ [81] ProtGenerics_1.22.0         nnet_7.3-16                
+ [83] devtools_2.4.2              rlang_0.4.11               
  [85] globals_0.14.0              lifecycle_1.0.0            
  [87] miniUI_0.1.1.1              BiocFileCache_1.14.0       
- [89] dichromat_2.0-0             rprojroot_2.0.2            
- [91] polyclip_1.10-0             matrixStats_0.58.0         
- [93] lmtest_0.9-38               graph_1.68.0               
- [95] Matrix_1.3-2                ggseqlogo_0.1              
- [97] zoo_1.8-9                   base64enc_0.1-3            
- [99] whisker_0.4                 processx_3.5.1             
-[101] ggridges_0.5.3              png_0.1-7                  
-[103] viridisLite_0.4.0           bitops_1.0-7               
-[105] KernSmooth_2.23-18          Biostrings_2.58.0          
-[107] blob_1.2.1                  stringr_1.4.0              
-[109] forestplot_1.10.1           parallelly_1.24.0          
-[111] jpeg_0.1-8.1                S4Vectors_0.28.1           
-[113] scales_1.1.1                memoise_2.0.0              
-[115] magrittr_2.0.1              plyr_1.8.6                 
-[117] ica_1.0-2                   gplots_3.1.1               
-[119] zlibbioc_1.36.0             compiler_4.0.5             
-[121] Gmisc_2.0.1                 fitdistrplus_1.1-3         
-[123] Rsamtools_2.6.0             cli_2.5.0                  
-[125] XVector_0.30.0              listenv_0.8.0              
-[127] ps_1.6.0                    patchwork_1.1.1            
-[129] pbapply_1.4-3               htmlTable_2.1.0            
-[131] Formula_1.2-4               MASS_7.3-53.1              
-[133] mgcv_1.8-35                 tidyselect_1.1.0           
-[135] stringi_1.5.3               highr_0.9                  
-[137] yaml_2.2.1                  askpass_1.1                
-[139] latticeExtra_0.6-29         ggrepel_0.9.1              
-[141] grid_4.0.5                  sass_0.3.1                 
-[143] VariantAnnotation_1.36.0    fastmatch_1.1-0            
-[145] EnsDb.Hsapiens.v86_2.99.0   tools_4.0.5                
-[147] future.apply_1.7.0          parallel_4.0.5             
-[149] rstudioapi_0.13             foreign_0.8-81             
-[151] lsa_0.73.2                  git2r_0.28.0               
-[153] gridExtra_2.3               farver_2.1.0               
-[155] Rtsne_0.15                  digest_0.6.27              
-[157] BiocManager_1.30.12         shiny_1.6.0                
-[159] Rcpp_1.0.6                  GenomicRanges_1.42.0       
-[161] later_1.2.0                 RcppAnnoy_0.0.18           
-[163] OrganismDbi_1.32.0          httr_1.4.2                 
-[165] AnnotationDbi_1.52.0        ggbio_1.38.0               
-[167] biovizBase_1.38.0           colorspace_2.0-0           
-[169] XML_3.99-0.6                fs_1.5.0                   
-[171] tensor_1.5                  reticulate_1.19            
-[173] IRanges_2.24.1              splines_4.0.5              
-[175] uwot_0.1.10                 RBGL_1.66.0                
-[177] RcppRoll_0.3.0              spatstat.utils_2.1-0       
-[179] sessioninfo_1.1.1           plotly_4.9.3               
-[181] xtable_1.8-4                jsonlite_1.7.2             
-[183] testthat_3.0.2              R6_2.5.0                   
-[185] Hmisc_4.5-0                 pillar_1.6.0               
-[187] htmltools_0.5.1.1           mime_0.10                  
-[189] glue_1.4.2                  fastmap_1.1.0              
-[191] BiocParallel_1.24.1         codetools_0.2-18           
-[193] pkgbuild_1.2.0              Signac_1.1.1               
-[195] utf8_1.2.1                  lattice_0.20-41            
-[197] bslib_0.2.4                 spatstat.sparse_2.0-0      
-[199] tibble_3.1.1                curl_4.3                   
-[201] leiden_0.3.7                gtools_3.8.2               
-[203] openssl_1.4.3               survival_3.2-10            
-[205] rmarkdown_2.7               desc_1.3.0                 
-[207] munsell_0.5.0               GenomeInfoDbData_1.2.4     
-[209] reshape2_1.4.4              gtable_0.3.0               
-[211] spatstat.core_2.1-2        </code></pre>
+ [89] rprojroot_2.0.2             polyclip_1.10-0            
+ [91] matrixStats_0.59.0          lmtest_0.9-38              
+ [93] Matrix_1.3-4                ggseqlogo_0.1              
+ [95] zoo_1.8-9                   base64enc_0.1-3            
+ [97] whisker_0.4                 ggridges_0.5.3             
+ [99] processx_3.5.2              png_0.1-7                  
+[101] viridisLite_0.4.0           bitops_1.0-7               
+[103] KernSmooth_2.23-20          Biostrings_2.58.0          
+[105] blob_1.2.1                  stringr_1.4.0              
+[107] forestplot_1.10.1           parallelly_1.26.0          
+[109] jpeg_0.1-8.1                S4Vectors_0.28.1           
+[111] scales_1.1.1                memoise_2.0.0              
+[113] magrittr_2.0.1              plyr_1.8.6                 
+[115] ica_1.0-2                   gplots_3.1.1               
+[117] zlibbioc_1.36.0             compiler_4.0.5             
+[119] Gmisc_2.0.2                 fitdistrplus_1.1-5         
+[121] Rsamtools_2.6.0             cli_2.5.0                  
+[123] XVector_0.30.0              listenv_0.8.0              
+[125] patchwork_1.1.1             pbapply_1.4-3              
+[127] ps_1.6.0                    htmlTable_2.2.1            
+[129] Formula_1.2-4               MASS_7.3-54                
+[131] mgcv_1.8-36                 tidyselect_1.1.1           
+[133] stringi_1.6.2               textshaping_0.3.5          
+[135] highr_0.9                   yaml_2.2.1                 
+[137] askpass_1.1                 latticeExtra_0.6-29        
+[139] ggrepel_0.9.1               grid_4.0.5                 
+[141] sass_0.4.0                  fastmatch_1.1-0            
+[143] EnsDb.Hsapiens.v86_2.99.0   tools_4.0.5                
+[145] future.apply_1.7.0          parallel_4.0.5             
+[147] rstudioapi_0.13             foreign_0.8-81             
+[149] lsa_0.73.2                  git2r_0.28.0               
+[151] gridExtra_2.3               farver_2.1.0               
+[153] Rtsne_0.15                  digest_0.6.27              
+[155] shiny_1.6.0                 qlcMatrix_0.9.7            
+[157] Rcpp_1.0.6                  GenomicRanges_1.42.0       
+[159] later_1.2.0                 RcppAnnoy_0.0.18           
+[161] httr_1.4.2                  AnnotationDbi_1.52.0       
+[163] colorspace_2.0-1            XML_3.99-0.6               
+[165] fs_1.5.0                    tensor_1.5                 
+[167] reticulate_1.20             IRanges_2.24.1             
+[169] splines_4.0.5               uwot_0.1.10                
+[171] RcppRoll_0.3.0              spatstat.utils_2.2-0       
+[173] systemfonts_1.0.2           sessioninfo_1.1.1          
+[175] plotly_4.9.4.1              xtable_1.8-4               
+[177] jsonlite_1.7.2              testthat_3.0.3             
+[179] R6_2.5.0                    Hmisc_4.5-0                
+[181] pillar_1.6.1                htmltools_0.5.1.1          
+[183] mime_0.10                   glue_1.4.2                 
+[185] fastmap_1.1.0               BiocParallel_1.24.1        
+[187] codetools_0.2-18            pkgbuild_1.2.0             
+[189] Signac_1.2.1                utf8_1.2.1                 
+[191] lattice_0.20-44             bslib_0.2.5.1              
+[193] spatstat.sparse_2.0-0       tibble_3.1.2               
+[195] curl_4.3.1                  leiden_0.3.8               
+[197] gtools_3.9.2                openssl_1.4.4              
+[199] survival_3.2-11             rmarkdown_2.9              
+[201] docopt_0.7.1                desc_1.3.0                 
+[203] munsell_0.5.0               GenomeInfoDbData_1.2.4     
+[205] reshape2_1.4.4              gtable_0.3.0               
+[207] spatstat.core_2.2-0        </code></pre>
 </div>
 </div>
 </div>
@@ -1326,6 +1319,9 @@ $(document).ready(function () {
 
 <script>
 $(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
 
     // move toc-ignore selectors from section div to header
     $('div.section.toc-ignore')
