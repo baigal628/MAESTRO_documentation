@@ -96,7 +96,6 @@ FeaturePlot(
 
 **Between Samples**
 ```{r, da-peaks-2}
-
 da_peaks_S <- wilcoxauc(ATAC, 'sample', seurat_assay = 'ATAC', assay = 'data')
 head(da_peaks_S)
 
@@ -123,7 +122,6 @@ VlnPlot(
 ```{r, da-peaks-3}
 da_peaks_S <- wilcoxauc(ATAC, 'hours', seurat_assay = 'ATAC', assay = 'data')
 head(da_peaks_S)
-
 ```
 
 

@@ -15,7 +15,6 @@ MAESTRO multi-sample scATAC-seq function is the extension of the scATAC-seq pipe
 
 ```{r echo=FALSE}
 knitr::include_graphics("assets/flowchart.png", error = FALSE)
-
 ```
 
 ## Tutorial: 10X PBMC scATAC-seq in time-Dependent Sampling Studies
@@ -32,16 +31,15 @@ knitr::include_graphics("assets/flowchart.png", error = FALSE)
 ```{bash, eval=FALSE}
 $ touch SraAccList.txt
 $ nano SraAccList.txt
-
 ```
 
 **Copy the following accession numbers in SraAccList.txt:**
 ```{bash, eval=FALSE}
-mkdir data
-cd data
+$ mkdir data
+$ cd data
 
-touch SraAccList.txt
-nano SraAccList.txt
+$ touch SraAccList.txt
+$ nano SraAccList.txt
 
 #copy the following accession numbers
 SRR11614703
@@ -75,7 +73,6 @@ $ cat SraAccList.txt | while read i
 
 #I renamed each file based on sample information (Optional)
 $ mv SRR11614703_S1_L001_R1_001.fastq.gz CLL0_S1_L001_R1_001.fastq.gz
-
 ```
 
 ### Step 1. Configure the MAESTRO workflow
@@ -100,9 +97,7 @@ $ MAESTRO scatac-init --batch --bulk_peaks --downsample \
 To get a full description of command-line options, please use the command
 
 ```{bash, eval=FALSE}
-
 $ MAESTRO scatac-init -h
-
 ```
 
 #### Here we list all the arguments and their description.

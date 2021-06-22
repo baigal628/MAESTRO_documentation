@@ -84,7 +84,6 @@ head(pbmc.ATAC.res$peaks)
 
 ```{r echo=FALSE}
 knitr::include_graphics("assets/scatac/atac_pbmc_500_nextgem_cluster.png", error = FALSE)
-
 ```
 
 ### Step 2. Annotate cell types
@@ -146,7 +145,6 @@ pbmc.ATAC.tfs <- ATACAnnotateTranscriptionFactor(ATAC = pbmc.ATAC.res$ATAC,
                                                    project = "atac_pbmc_500_nextgem",
                                                    giggle.path = "/Users/galib/Downloads/giggle.all")
 pbmc.ATAC.tfs[["0"]]
-
 ```
 
 Besides indentifying TFs for all the clusters, we also support the differential peaks from a single comparison.
@@ -192,7 +190,7 @@ VisualizeTFenrichment(cluster.1 = 4,
                              GIGGLE.table = "atac_pbmc_500_nextgem_giggle.txt",
                              visual.topnumber = 10,
                              visual.totalnumber = 100,
-                             name = "atac_pbmc_500_nextgem_Monocyte_top")  
+                             name = "atac_pbmc_500_nextgem_Monocyte_top")
 
 ```
 
