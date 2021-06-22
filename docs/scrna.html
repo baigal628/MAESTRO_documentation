@@ -532,16 +532,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombaigal628MultiSamplescATACseqtreedf5cd89e684667ade7c1390c814fa0c953d006d9targetblankdf5cd89a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/baigal628/MultiSample_scATACseq/tree/df5cd89e684667ade7c1390c814fa0c953d006d9" target="_blank">df5cd89</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombaigal628MultiSamplescATACseqtreece1948a55cd4ec40db4bb0ff2df3f1c620eaa3aetargetblankce1948aa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/baigal628/MultiSample_scATACseq/tree/ce1948a55cd4ec40db4bb0ff2df3f1c620eaa3ae" target="_blank">ce1948a</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombaigal628MultiSamplescATACseqtreedf5cd89e684667ade7c1390c814fa0c953d006d9targetblankdf5cd89a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombaigal628MultiSamplescATACseqtreece1948a55cd4ec40db4bb0ff2df3f1c620eaa3aetargetblankce1948aa" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/baigal628/MultiSample_scATACseq/tree/df5cd89e684667ade7c1390c814fa0c953d006d9" target="_blank">df5cd89</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/baigal628/MultiSample_scATACseq/tree/ce1948a55cd4ec40db4bb0ff2df3f1c620eaa3ae" target="_blank">ce1948a</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -607,19 +607,15 @@ There are no past versions. Publish this analysis with <code>wflow_publish()</co
 <div id="step-0.-download-the-data-and-prepare-the-environment" class="section level3">
 <h3>Step 0. Download the data and prepare the environment</h3>
 <p>Please download the raw data from 10X genomics website.</p>
-<pre class="bash"><code>
-$ wget https://cf.10xgenomics.com/samples/cell-exp/3.0.0/pbmc_1k_v3/pbmc_1k_v3_fastqs.tar
-$ tar xvf pbmc_1k_v3_fastqs.tar
-</code></pre>
+<pre class="bash"><code>$ wget https://cf.10xgenomics.com/samples/cell-exp/3.0.0/pbmc_1k_v3/pbmc_1k_v3_fastqs.tar
+$ tar xvf pbmc_1k_v3_fastqs.tar</code></pre>
 <p>Before running MAESTRO, users need to activate the MAESTRO environment.</p>
-<pre class="bash"><code>
-$ conda activate MAESTRO
-</code></pre>
+<pre class="bash"><code>$ conda activate MAESTRO</code></pre>
 </div>
 <div id="step-1.-configure-the-maestro-workflow" class="section level3">
 <h3>Step 1. Configure the MAESTRO workflow</h3>
 <p>Initialize the MAESTRO scRNA-seq workflow using MAESTRO scrna-init command. This will install a Snakefile and a config file in this directory.</p>
-<pre class="bash"><code>MAESTRO scrna-init \
+<pre class="bash"><code>$ MAESTRO scrna-init \
 --platform 10x-genomics --species GRCh38 \
 --cores 32 --rseqc --directory pbmc_1k_v3_fastqs \
 --count-cutoff 1000 --gene-cutoff 500 --cell-cutoff 10 \
@@ -627,10 +623,9 @@ $ conda activate MAESTRO
 --whitelist references/whitelist/3M-february-2018.txt \
 --barcode-start 1 --barcode-length 16 --umi-start 17 --umi-length 12 \
 --lisadir references/hg38_1000_2.0.h5 \
---signature human.immune.CIBERSORT
-</code></pre>
+--signature human.immune.CIBERSORT</code></pre>
 <p>To get a full description of command-line options, please use the command</p>
-<pre class="bash"><code>MAESTRO scrna-init -h</code></pre>
+<pre class="bash"><code>$ MAESTRO scrna-init -h</code></pre>
 <div id="here-we-list-all-the-arguments-and-their-description." class="section level4">
 <h4>Here we list all the arguments and their description.</h4>
 <p><strong>Input files arguments:</strong></p>
@@ -837,31 +832,28 @@ $ conda activate MAESTRO
 <p>Before running the workflow, please check the <code>config.yaml</code> and see if it is configured correctly. Once <code>config.yaml</code> is configured, users can use snakemake to run the workflow.</p>
 <pre class="bash"><code>$ cd pbmc_1k_v3_fastqs/
 
-$ MAESTRO samples-init --assay_type scrna --platform 10x-genomics --data_typ fastq --data_dir data/pbmc_1k_v3_fastqs/
-</code></pre>
+$ MAESTRO samples-init --assay_type scrna --platform 10x-genomics --data_typ fastq --data_dir data/pbmc_1k_v3_fastqs/</code></pre>
 </div>
 <div id="step-3.-run-snakemake-pipeline" class="section level3">
 <h3>Step 3. Run snakemake pipeline</h3>
 <pre class="bash"><code>$ snakemake -np
 
-$ nohup snakemake -j 16 &gt; run.out &amp;
-</code></pre>
+$ nohup snakemake -j 16 &gt; run.out &amp;</code></pre>
 </div>
 <div id="step-4.-understand-the-final-output-files" class="section level3">
 <h3>Step 4. Understand the final output files</h3>
 <p>The whole pipeline in this example takes about X hours with 12 cores. If MAESTRO runs successfully, an output folder will contain several useful outputs as described below.</p>
 <pre class="bash"><code>$ ls Result
-Analysis  Benchmark  Log  QC  Report  STAR
-</code></pre>
+Analysis  Benchmark  Log  QC  Report  STAR</code></pre>
 <div id="output-files" class="section level4">
 <h4>Output files</h4>
 <ul>
-<li><strong>STAR:</strong> The <code>STAR</code> directory contains all the mapping and analysis files generated by <code>STAR</code> normal (Smartseq2) or solo mode (10x-genomics or Dropseq). For solo mode, <code>Solo.out/Gene/</code> stores raw and filtered count matrix. In MAESTRO pipeline, raw count matrix is used for a further filter according to quality control arguments like <code>--count-cutoff</code> <code>--gene-cutoff</code> and <code>--cell-cutoff</code>.</li>
-<li><strong>QC:</strong> The <code>QC</code> directory contains quality control analysis results of scRNA-seq data, including the filtered count matrix <code>outprefix_filtered_gene_count.h5</code> and RSeQC results (if <code>--rseqc</code> is set).</li>
-<li><strong>Analysis:</strong> The <code>Analysis</code> directory contains a Seurat R object, as well as clustering result, cell type annotation result and driver transcription factor identification result, which we will introduce in the step-by-step analysis.</li>
-<li><strong>Benchmark:</strong> The <code>Benchmark</code> directory stores benchmark files for all rules in Snakefile, each of which contains a tab-separated table of run times and memory usage in MiB.</li>
-<li><strong>Log:</strong> The Log directory contains the log files generated in the pipeline analysis.</li>
-<li><strong>Report:</strong> Contain the <code>{outprefix}_scRNA_report.html</code> file summarizes all the results in an HTML based document. The summary HTML for the example can be found <a href="http://cistrome.org/~galib/MAESTRO/MAESTRO_report/pbmc_1k_v3_scRNA_report.html">here</a>.</li>
+<li><strong>STAR/:</strong> The <code>STAR</code> directory contains all the mapping and analysis files generated by <code>STAR</code> normal (Smartseq2) or solo mode (10x-genomics or Dropseq). For solo mode, <code>Solo.out/Gene/</code> stores raw and filtered count matrix. In MAESTRO pipeline, raw count matrix is used for a further filter according to quality control arguments like <code>--count-cutoff</code> <code>--gene-cutoff</code> and <code>--cell-cutoff</code>.</li>
+<li><strong>QC/:</strong> The <code>QC</code> directory contains quality control analysis results of scRNA-seq data, including the filtered count matrix <code>outprefix_filtered_gene_count.h5</code> and RSeQC results (if <code>--rseqc</code> is set).</li>
+<li><strong>Analysis/:</strong> The <code>Analysis</code> directory contains a Seurat R object, as well as clustering result, cell type annotation result and driver transcription factor identification result, which we will introduce in the step-by-step analysis.</li>
+<li><strong>Benchmark/:</strong> The <code>Benchmark</code> directory stores benchmark files for all rules in Snakefile, each of which contains a tab-separated table of run times and memory usage in MiB.</li>
+<li><strong>Log/:</strong> The Log directory contains the log files generated in the pipeline analysis.</li>
+<li><strong>Report/:</strong> Contain the <code>{outprefix}_scRNA_report.html</code> file summarizes all the results in an HTML based document. The summary HTML for the example can be found <a href="http://cistrome.org/~galib/MAESTRO/MAESTRO_report/pbmc_1k_v3_scRNA_report.html">here</a>.</li>
 </ul>
 <br>
 <p>

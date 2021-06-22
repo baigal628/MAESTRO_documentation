@@ -532,16 +532,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombaigal628MultiSamplescATACseqtreedf5cd89e684667ade7c1390c814fa0c953d006d9targetblankdf5cd89a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/baigal628/MultiSample_scATACseq/tree/df5cd89e684667ade7c1390c814fa0c953d006d9" target="_blank">df5cd89</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombaigal628MultiSamplescATACseqtreece1948a55cd4ec40db4bb0ff2df3f1c620eaa3aetargetblankce1948aa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/baigal628/MultiSample_scATACseq/tree/ce1948a55cd4ec40db4bb0ff2df3f1c620eaa3ae" target="_blank">ce1948a</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombaigal628MultiSamplescATACseqtreedf5cd89e684667ade7c1390c814fa0c953d006d9targetblankdf5cd89a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombaigal628MultiSamplescATACseqtreece1948a55cd4ec40db4bb0ff2df3f1c620eaa3aetargetblankce1948aa" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/baigal628/MultiSample_scATACseq/tree/df5cd89e684667ade7c1390c814fa0c953d006d9" target="_blank">df5cd89</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/baigal628/MultiSample_scATACseq/tree/ce1948a55cd4ec40db4bb0ff2df3f1c620eaa3ae" target="_blank">ce1948a</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -662,20 +662,20 @@ pbmc.gene &lt;- ATACCalculateGenescore(pbmc.peak)</code></pre>
 <pre><code>Warning: The default method for RunUMAP has changed from calling Python UMAP via reticulate to the R-native UWOT using the cosine metric
 To use Python UMAP via reticulate, set umap.method to &#39;umap-learn&#39; and metric to &#39;correlation&#39;
 This message will be shown once per session</code></pre>
-<pre><code>17:09:04 UMAP embedding parameters a = 0.9922 b = 1.112</code></pre>
-<pre><code>17:09:04 Read 580 rows and found 30 numeric columns</code></pre>
-<pre><code>17:09:04 Using Annoy for neighbor search, n_neighbors = 30</code></pre>
-<pre><code>17:09:04 Building Annoy index with metric = cosine, n_trees = 50</code></pre>
+<pre><code>17:39:04 UMAP embedding parameters a = 0.9922 b = 1.112</code></pre>
+<pre><code>17:39:04 Read 580 rows and found 30 numeric columns</code></pre>
+<pre><code>17:39:04 Using Annoy for neighbor search, n_neighbors = 30</code></pre>
+<pre><code>17:39:04 Building Annoy index with metric = cosine, n_trees = 50</code></pre>
 <pre><code>0%   10   20   30   40   50   60   70   80   90   100%</code></pre>
 <pre><code>[----|----|----|----|----|----|----|----|----|----|</code></pre>
 <pre><code>**************************************************|
-17:09:04 Writing NN index file to temp file /var/folders/bx/3yng1lx579x084wwkjz1xc6c0000gp/T//RtmphGJFkv/file143611305def4
-17:09:04 Searching Annoy index using 1 thread, search_k = 3000
-17:09:04 Annoy recall = 100%
-17:09:05 Commencing smooth kNN distance calibration using 1 thread
-17:09:06 Initializing from normalized Laplacian + noise
-17:09:06 Commencing optimization for 500 epochs, with 22356 positive edges
-17:09:07 Optimization finished</code></pre>
+17:39:04 Writing NN index file to temp file /var/folders/bx/3yng1lx579x084wwkjz1xc6c0000gp/T//RtmpcndPO7/file149cc4a865f8
+17:39:04 Searching Annoy index using 1 thread, search_k = 3000
+17:39:04 Annoy recall = 100%
+17:39:05 Commencing smooth kNN distance calibration using 1 thread
+17:39:06 Initializing from normalized Laplacian + noise
+17:39:06 Commencing optimization for 500 epochs, with 22356 positive edges
+17:39:07 Optimization finished</code></pre>
 <pre><code>Warning: The following arguments are not used: dims1, dims2, dims3, dims4,
 dims5, dims6, dims7, dims8, dims9, dims10, dims11, dims12, dims13, dims14,
 dims15, dims16, dims17, dims18, dims19, dims20, dims21, dims22, dims23, dims24,
@@ -935,7 +935,7 @@ p &lt;- VisualizeTFenrichment(TFs = tfs,
                              GIGGLE.table = &quot;atac_pbmc_500_nextgem_giggle.txt&quot;,
                              visual.topnumber = 10,
                              visual.totalnumber = 100,
-                             name = &quot;atac_pbmc_500_nextgem_Monocyte_top&quot;)  </code></pre>
+                             name = &quot;atac_pbmc_500_nextgem_Monocyte_top&quot;)</code></pre>
 <p>To further filter the regulators, users may want to visualize the expression level of the predicted transcription factors. Here, we use the gene regulatory potential score as the predicted gene expression level. We provide the function for visualize TF/genes regulatory potential using Vlnplot and Umap.</p>
 <pre class="r"><code>VisualizeVlnplot(genes = c(&quot;SPI1&quot;,&quot;RARA&quot;),
                         type = &quot;ATAC&quot;,
