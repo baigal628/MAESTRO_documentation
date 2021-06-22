@@ -48,7 +48,7 @@ knitr::include_graphics("assets/MAESTRO_usecase.png", error = FALSE)
 
 The full MAESTRO workflow requires extra annotation and reference files. If you want to take full advantage of the pipeline, please download the following:
 
-* MAESTRO depends on [starsolo](https://github.com/alexdobin/STAR/blob/master/docs/STARsolo.md) for mapping scRNA-seq and chromap or [minimap2](https://github.com/lh3/minimap2) for mapping scATAC-seq dataset. Users need to generate **the reference files** for the alignment software and specify the path of the annotations to MAESTRO through command line options. Here, we will provide the pre-built reference files.
+* MAESTRO depends on [starsolo](https://github.com/alexdobin/STAR/blob/master/docs/STARsolo.md) for mapping scRNA-seq and [chromap](https://github.com/haowenz/chromap) or [minimap2](https://github.com/lh3/minimap2) for mapping scATAC-seq dataset. Users need to generate **the reference files** for the alignment software and specify the path of the annotations to MAESTRO through command line options. Here, we will provide the pre-built reference files.
 
 For *scRNA-seq*, please download STARsolo index from link [STAR human](http://cistrome.org/~galib/MAESTRO/references/scRNA/Refdata_scRNA_MAESTRO_GRCh38_1.2.2.tar.gz) and [STAR mouse](http://cistrome.org/~galib/MAESTRO/references/scRNA/Refdata_scRNA_MAESTRO_GRCm38_1.2.2.tar.gz). If the sequencing platform is Smart-seq2, please also download RSEM prefix from [RSEM human](http://cistrome.org/~galib/MAESTRO/references/scRNA/Refdata_scRNA_MAESTRO_GRCh38_1.1.0.tar.g) and [RSEM mouse](http://cistrome.org/~galib/MAESTRO/references/scRNA/Refdata_scRNA_MAESTRO_GRCm38_1.1.0.tar.gz).
   
