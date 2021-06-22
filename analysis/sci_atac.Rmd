@@ -54,3 +54,9 @@ $ snakemake -np
 $ nohup snakemake -j 16 >run.out &
 ```
 
+### Step3. Final Outputs
+
+```{bash, eval=FALSE}
+$ ls Result
+Analysis  Benchmark  Log  Mapping  QC  Report
+```
