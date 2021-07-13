@@ -441,7 +441,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2021-06-22
+<strong>Last updated:</strong> 2021-07-13
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -532,16 +532,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombaigal628MultiSamplescATACseqtreece1948a55cd4ec40db4bb0ff2df3f1c620eaa3aetargetblankce1948aa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/baigal628/MultiSample_scATACseq/tree/ce1948a55cd4ec40db4bb0ff2df3f1c620eaa3ae" target="_blank">ce1948a</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombaigal628MultiSamplescATACseqtree515f900cd3d8358881e5154921560ee8ad668e9btargetblank515f900a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/baigal628/MultiSample_scATACseq/tree/515f900cd3d8358881e5154921560ee8ad668e9b" target="_blank">515f900</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombaigal628MultiSamplescATACseqtreece1948a55cd4ec40db4bb0ff2df3f1c620eaa3aetargetblankce1948aa" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombaigal628MultiSamplescATACseqtree515f900cd3d8358881e5154921560ee8ad668e9btargetblank515f900a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/baigal628/MultiSample_scATACseq/tree/ce1948a55cd4ec40db4bb0ff2df3f1c620eaa3ae" target="_blank">ce1948a</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/baigal628/MultiSample_scATACseq/tree/515f900cd3d8358881e5154921560ee8ad668e9b" target="_blank">515f900</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -553,26 +553,29 @@ Ignored files:
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
     Ignored:    analysis/.DS_Store
+    Ignored:    code/.DS_Store
     Ignored:    data/.DS_Store
     Ignored:    data/multi-scrna/
 
 Untracked files:
     Untracked:  .RDataTmp
     Untracked:  MAESTRO_documentation.Rproj
-    Untracked:  atac_pbmc_500_nextgem_DiffPeaks.tsv
     Untracked:  atac_pbmc_500_nextgem_Monocyte_umapplot.png
     Untracked:  atac_pbmc_500_nextgem_Monocyte_vlnplot.png
-    Untracked:  atac_pbmc_500_nextgem_cluster.png
     Untracked:  code/Basic_Operations.R
+    Untracked:  code/DE.R
     Untracked:  code/Downstream Analysis.R
+    Untracked:  code/Shirley's pre.R
     Untracked:  code/Venn_diagram.R
+    Untracked:  code/highcharter.R
+    Untracked:  code/muscat.R
     Untracked:  data/fragments/
     Untracked:  data/multi-scatac/
     Untracked:  data/scatac/
     Untracked:  data/scrna/
+    Untracked:  output/UMAP_annot.png
+    Untracked:  output/UMAP_bysamples.png
     Untracked:  pbmc_1k_v3_8k_res.rds
-    Untracked:  pbmc_1k_v3_Monocyte_umapplot.png
-    Untracked:  pbmc_1k_v3_Monocyte_vlnplot.png
 
 Unstaged changes:
     Deleted:    MultiSample_scATACseq.Rproj
@@ -666,58 +669,58 @@ counts[]), : &#39;giveCsparse&#39; has been deprecated; setting &#39;repr = &quo
 <pre><code>Centering and scaling data matrix</code></pre>
 <pre><code>PCA analysis ...</code></pre>
 <pre><code>PC_ 1 
-Positive:  LTB, TRAC, TRBC2, CD3D, LCK, IL32, IL7R, TCF7, BCL11B, ISG20 
+Positive:  LTB, TRAC, TRBC2, CD3D, LCK, ISG20, IL32, IL7R, TCF7, BCL11B 
        LDHB, CD27, CD3G, CD69, ARL4C, PEBP1, SPOCK2, MZT2A, CD2, CD247 
-       NOSIP, CD7, TRBC1, AQP3, CD6, PRKCQ-AS1, PLAAT4, PRDX2, GZMM, SYNE2 
-Negative:  FCN1, LYZ, S100A9, MNDA, S100A8, FGL2, CST3, VCAN, CTSS, SERPINA1 
-       CSTA, NCF2, PSAP, AIF1, KLF4, S100A12, TYMP, MPEG1, MS4A6A, GRN 
-       CYBB, CD14, LST1, CLEC7A, TYROBP, FCER1G, TNFAIP2, CD36, CSF3R, SLC7A7 
+       NOSIP, CD7, TRBC1, AQP3, CD6, PRKCQ-AS1, PRDX2, PLAAT4, GZMM, RORA 
+Negative:  LYZ, FCN1, S100A9, MNDA, S100A8, FGL2, CST3, VCAN, CTSS, SERPINA1 
+       CSTA, NCF2, PSAP, AIF1, KLF4, TYMP, MPEG1, S100A12, GRN, MS4A6A 
+       FTL, CYBB, CD14, CLEC7A, TNFAIP2, LST1, CSF3R, SLC7A7, FCER1G, CD36 
 PC_ 2 
-Positive:  IL32, LCK, CD247, GZMM, CTSW, CD3D, CD7, GZMA, ANXA1, S100A4 
-       NKG7, TRAC, IL7R, BCL11B, CD3G, ARL4C, CST7, PRF1, KLRB1, PLAAT4 
-       RORA, CCL5, ZAP70, CD2, KLRG1, TRBC1, SAMD3, SYNE2, ITGB2, S100A10 
-Negative:  CD79A, MS4A1, IGHM, BANK1, LINC00926, HLA-DQA1, CD79B, IGHD, CD74, HLA-DQB1 
-       CD22, HLA-DRB1, HLA-DRA, HLA-DPA1, HLA-DPB1, TNFRSF13C, TCL1A, SPIB, HLA-DQA2, BCL11A 
-       AFF3, HLA-DRB6, FCER2, VPREB3, RALGPS2, MEF2C, NIBAN3, FCRL1, HVCN1, IGKC 
+Positive:  CD79A, MS4A1, IGHM, BANK1, LINC00926, HLA-DQA1, CD74, CD79B, IGHD, HLA-DQB1 
+       HLA-DRB1, HLA-DRA, CD22, HLA-DPA1, HLA-DPB1, TNFRSF13C, TCL1A, SPIB, HLA-DQA2, AFF3 
+       BCL11A, HLA-DRB6, VPREB3, MEF2C, FCER2, HVCN1, NIBAN3, RALGPS2, IGKC, FCRL1 
+Negative:  IL32, CTSW, GZMM, CD247, LCK, GZMA, CD7, NKG7, S100A4, CD3D 
+       ANXA1, PRF1, KLRB1, CST7, CCL5, PLAAT4, RORA, CD3G, TRAC, KLRG1 
+       ARL4C, IL7R, BCL11B, ZAP70, SAMD3, CD2, SYNE2, MATK, ACTG1, TRBC1 
 PC_ 3 
-Positive:  LDHB, TCF7, LEF1, TRABD2A, MAL, RCAN3, IL7R, CCR7, BCL11B, NOSIP 
-       CD3D, LTB, TRAC, CD3G, NELL2, PASK, CAMK4, CD27, VIM, CD5 
-       TSHZ2, FHIT, FAM153CP, CHRM3-AS2, CD6, INPP4B, SLC2A3, EGR1, ADTRP, PRKCQ-AS1 
-Negative:  GZMB, GNLY, NKG7, KLRD1, KLRF1, PRF1, CST7, CLIC3, SPON2, FGFBP2 
-       GZMA, ADGRG1, HOPX, CCL4, TRDC, MATK, TTC38, IL2RB, CTSW, TBX21 
-       RHOC, APMAP, APOBEC3G, CD160, PTGDR, FCGR3A, CCL5, S1PR5, SH2D1B, C12orf75 
+Positive:  GZMB, GNLY, KLRD1, KLRF1, NKG7, CLIC3, SPON2, PRF1, CST7, FGFBP2 
+       ADGRG1, GZMA, CCL4, TRDC, HOPX, TTC38, RHOC, TBX21, IL2RB, MATK 
+       CD160, FCGR3A, APMAP, SH2D1B, CCL5, CTSW, C12orf75, APOBEC3G, PTGDR, MYOM2 
+Negative:  LDHB, IL7R, TCF7, LEF1, MAL, TRABD2A, RCAN3, CD3D, BCL11B, NOSIP 
+       CCR7, TRAC, LTB, CD3G, VIM, CAMK4, CD27, NELL2, PASK, CD5 
+       CHRM3-AS2, FHIT, CD6, FAM153CP, TSHZ2, INPP4B, PRKCQ-AS1, LINC01550, TRAT1, EGR1 
 PC_ 4 
-Positive:  PRKAR2B, CAVIN2, GNG11, TUBB1, PPBP, PF4, PTCRA, ITGA2B, CLU, GP9 
-       TREML1, ESAM, C2orf88, CTTN, ANKRD9, CD9, GMPR, MTURN, MPIG6B, TMEM158 
-       ITGB3, FAXDC2, SPARC, GP1BA, CXCR2P1, H2AC6, MYLK, LMNA, SMOX, ACRBP 
-Negative:  TMSB10, NKG7, GNLY, CST7, KLRD1, PRF1, KLRF1, GZMA, FGFBP2, HOPX 
-       SPON2, APOBEC3G, CCL4, ITGB2, EFHD2, ADGRG1, MATK, TRDC, TTC38, IL2RB 
-       TBX21, CMC1, CX3CR1, S1PR5, CD160, LSP1, FCGR3A, GZMM, GZMH, MYOM2 
+Positive:  CAVIN2, PRKAR2B, TUBB1, GNG11, PPBP, PF4, ITGA2B, CLU, GP9, TREML1 
+       ESAM, PTCRA, ANKRD9, CTTN, C2orf88, CD9, GMPR, MPIG6B, TMEM158, TNNC2 
+       ITGB3, MTURN, SPARC, GP1BA, FAXDC2, H2AC6, CXCR2P1, ACRBP, MYLK, LMNA 
+Negative:  TMSB10, MT-CO1, GNLY, KLRD1, NKG7, KLRF1, CST7, SPON2, PRF1, FGFBP2 
+       ADGRG1, GZMA, CCL4, HOPX, APOBEC3G, TTC38, TRDC, GZMB, EFHD2, IL2RB 
+       MATK, TBX21, CD160, FCGR3A, CMC1, ITGB2, CLIC3, S1PR5, SH2D1B, MYOM2 
 PC_ 5 
-Positive:  SERPINF1, LILRA4, SMPD3, CLEC4C, AL096865.1, TPM2, DNASE1L3, PACSIN1, DERL3, GAS6 
-       TNFRSF21, IL3RA, NRP1, MYBL2, SCN9A, CIB2, LINC00996, ITM2C, LAMP5, LINC01226 
-       UGCG, MZB1, JCHAIN, SMIM5, NOTCH4, CCDC50, BX571818.1, SLC7A5, SERPINF2, PPM1J 
-Negative:  CDKN1C, HES4, FCGR3A, TCF7L2, MTSS1, AC104809.2, SIGLEC10, SMIM25, RHOC, CKB 
-       ZNF703, NEURL1, RPS15AP30, IFITM3, CAMK1, C3AR1, IFI30, ABI3, CSF1R, FAM110A 
-       HMOX1, MS4A7, RRAS, SECTM1, MYOF, CHST2, ARRB1, GPBAR1, WARS1, PPM1N </code></pre>
+Positive:  CDKN1C, HES4, FCGR3A, TCF7L2, AC104809.2, SIGLEC10, NEURL1, MTSS1, ZNF703, SMIM25 
+       RHOC, CKB, RPS15AP30, IFITM3, C3AR1, IFI30, CSF1R, CAMK1, MYOF, ABI3 
+       MS4A7, RRAS, SECTM1, FAM110A, HMOX1, MS4A4A, FMNL2, GPBAR1, PPM1N, AC064805.1 
+Negative:  SERPINF1, SMPD3, LILRA4, AL096865.1, CLEC4C, TPM2, DERL3, DNASE1L3, PACSIN1, TNFRSF21 
+       GAS6, NRP1, ALOX5AP, ITM2C, IL3RA, MZB1, LAMP5, MYBL2, JCHAIN, SCN9A 
+       LINC01226, BX571818.1, LINC02812, LINC00996, CIB2, SERPINF2, UGCG, CCDC50, APP, RUNX2 </code></pre>
 <pre><code>UMAP analysis ...</code></pre>
 <pre><code>Warning: The default method for RunUMAP has changed from calling Python UMAP via reticulate to the R-native UWOT using the cosine metric
 To use Python UMAP via reticulate, set umap.method to &#39;umap-learn&#39; and metric to &#39;correlation&#39;
 This message will be shown once per session</code></pre>
-<pre><code>17:39:50 UMAP embedding parameters a = 0.9922 b = 1.112</code></pre>
-<pre><code>17:39:50 Read 1160 rows and found 15 numeric columns</code></pre>
-<pre><code>17:39:50 Using Annoy for neighbor search, n_neighbors = 30</code></pre>
-<pre><code>17:39:50 Building Annoy index with metric = cosine, n_trees = 50</code></pre>
+<pre><code>10:23:10 UMAP embedding parameters a = 0.9922 b = 1.112</code></pre>
+<pre><code>10:23:10 Read 1076 rows and found 15 numeric columns</code></pre>
+<pre><code>10:23:10 Using Annoy for neighbor search, n_neighbors = 30</code></pre>
+<pre><code>10:23:10 Building Annoy index with metric = cosine, n_trees = 50</code></pre>
 <pre><code>0%   10   20   30   40   50   60   70   80   90   100%</code></pre>
 <pre><code>[----|----|----|----|----|----|----|----|----|----|</code></pre>
 <pre><code>**************************************************|
-17:39:50 Writing NN index file to temp file /var/folders/bx/3yng1lx579x084wwkjz1xc6c0000gp/T//RtmpGoslEu/file14a9f2153ab4a
-17:39:50 Searching Annoy index using 1 thread, search_k = 3000
-17:39:50 Annoy recall = 100%
-17:39:51 Commencing smooth kNN distance calibration using 1 thread
-17:39:52 Initializing from normalized Laplacian + noise
-17:39:52 Commencing optimization for 500 epochs, with 46456 positive edges
-17:39:54 Optimization finished</code></pre>
+10:23:10 Writing NN index file to temp file /var/folders/bx/3yng1lx579x084wwkjz1xc6c0000gp/T//RtmpQL2Ipn/fileed7e3db870ca
+10:23:10 Searching Annoy index using 1 thread, search_k = 3000
+10:23:10 Annoy recall = 100%
+10:23:11 Commencing smooth kNN distance calibration using 1 thread
+10:23:12 Initializing from normalized Laplacian + noise
+10:23:12 Commencing optimization for 500 epochs, with 43052 positive edges
+10:23:14 Optimization finished</code></pre>
 <pre><code>Warning: The following arguments are not used: dims1, dims2, dims3, dims4,
 dims5, dims6, dims7, dims8, dims9, dims10, dims11, dims12, dims13, dims14,
 dims15</code></pre>
@@ -728,28 +731,28 @@ dims15</code></pre>
 Computing SNN</code></pre>
 <pre><code>Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
 
-Number of nodes: 1160
-Number of edges: 35895
+Number of nodes: 1076
+Number of edges: 32704
 
 Running Louvain algorithm...
-Maximum modularity in 10 random starts: 0.8707
-Number of communities: 9
+Maximum modularity in 10 random starts: 0.8663
+Number of communities: 7
 Elapsed time: 0 seconds</code></pre>
 <pre><code>Identify cluster specific genes ...</code></pre>
 <p><code>RNARunSeurat()</code> generates plots of QC and clustering in the current working directory, and returns a list of a Seurat object <code>RNA</code> and dataframe <code>genes</code>. Please see <a href="https://github.com/satijalab/seurat/wiki">Seurat Github wiki</a> for more details of the Seurat object structure. Users can use the <code>str()</code> command to get an intuitive understanding of the object.</p>
 <pre class="r"><code>pbmc.RNA.res$RNA</code></pre>
 <pre><code>An object of class Seurat 
-13773 features across 1160 samples within 1 assay 
+13773 features across 1076 samples within 1 assay 
 Active assay: RNA (13773 features, 2000 variable features)
  2 dimensional reductions calculated: pca, umap</code></pre>
 <pre class="r"><code>head(pbmc.RNA.res$genes)</code></pre>
-<pre><code>         p_val avg_logFC pct.1 pct.2    p_val_adj cluster gene
-1 2.885224e-69 1.2206186 0.883 0.277 3.973820e-65       0 IL7R
-2 2.297775e-61 0.9914223 0.924 0.308 1.582363e-57       0 IL32
-3 2.688309e-59 0.9542208 0.915 0.360 1.234203e-55       0 TRAC
-4 2.847565e-52 0.8090400 0.897 0.312 9.804877e-49       0 CD3D
-5 6.764645e-51 0.7714020 0.753 0.242 1.863389e-47       0  CD2
-6 1.682254e-50 0.7802363 0.928 0.351 3.861613e-47       0 CD3E</code></pre>
+<pre><code>          p_val avg_logFC pct.1 pct.2     p_val_adj cluster       gene
+1 6.409175e-197  2.984071 0.989 0.064 8.827356e-193       0    S100A12
+2 1.711575e-191  2.630080 0.996 0.085 1.178676e-187       0       VCAN
+3 1.398256e-180  4.074015 1.000 0.143 6.419391e-177       0     S100A8
+4 1.997655e-178  1.882858 0.960 0.076 6.878424e-175       0       CD14
+5 5.492107e-176  2.219625 0.996 0.121 1.512856e-172       0       MNDA
+6 4.352239e-175  1.620355 0.952 0.077 9.990565e-172       0 AC020656.1</code></pre>
 <p><img src="assets/scrna/pbmc_1k_v3.spikein.png" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-pbmc_1k_v3.spikein">
@@ -929,22 +932,22 @@ pbmc.RNA.res$RNA &lt;- RNAAnnotateCelltype(RNA = pbmc.RNA.res$RNA,
                                           signatures = &quot;human.immune.CIBERSORT&quot;,
                                           min.score = 0.05,
                                           outdir = &quot;./docs/assets/scrna/&quot;)</code></pre>
-<pre><code>The following `from` values were not present in `x`: ActDCs, ActMast, ActMemCD4Tcells, ActNK, ActpDCs, CD8Tex, Endothelial, Eosinophils, Fibroblasts, MacrophagesM0, MacrophagesM1, MacrophagesM2, Myofibroblasts, Neutrophils, PlasmaCells, RestDCs, RestMast, RestpDCs, Tfh, TMKI67, Treg</code></pre>
+<pre><code>The following `from` values were not present in `x`: ActDCs, ActMast, ActMemCD4Tcells, ActNK, ActpDCs, CD8Tex, Endothelial, Eosinophils, Fibroblasts, MacrophagesM0, MacrophagesM1, MacrophagesM2, MemoryBcells, Myofibroblasts, Neutrophils, PlasmaCells, RestDCs, RestMast, RestpDCs, Tfh, TMKI67, Treg</code></pre>
 <pre class="r"><code>head(pbmc.RNA.res$RNA@meta.data)</code></pre>
 <pre><code>                 orig.ident nCount_RNA nFeature_RNA percent.mito percent.ercc
-AAACCCAAGGAGAGTA pbmc_1k_v3       8333         2672   0.11844474 0.0001200048
-AAACGCTTCAGCCCAG pbmc_1k_v3       5579         1858   0.09302742 0.0001792436
-AAAGAACAGACGACTG pbmc_1k_v3       4278         1584   0.06778869 0.0000000000
-AAAGAACCAATGGCAG pbmc_1k_v3       2793         1239   0.07375582 0.0003580380
-AAAGAACGTCTGCAAT pbmc_1k_v3       6595         1882   0.07172100 0.0003032600
-AAAGGATAGTAGACAT pbmc_1k_v3       8887         2129   0.08765613 0.0001125239
+AAACCCAAGGAGAGTA pbmc_1k_v3       8333         2672    11.844474   0.01200048
+AAACGCTTCAGCCCAG pbmc_1k_v3       5579         1858     9.302742   0.01792436
+AAAGAACAGACGACTG pbmc_1k_v3       4278         1584     6.778869   0.00000000
+AAAGAACCAATGGCAG pbmc_1k_v3       2793         1239     7.375582   0.03580380
+AAAGAACGTCTGCAAT pbmc_1k_v3       6595         1882     7.172100   0.03032600
+AAAGGATAGTAGACAT pbmc_1k_v3       8887         2129     8.765613   0.01125239
                  RNA_snn_res.0.6 seurat_clusters assign.ident assign.score
-AAACCCAAGGAGAGTA               1               1   Mono/Macro     5.769480
-AAACGCTTCAGCCCAG               4               4            B     6.898449
-AAAGAACAGACGACTG               5               5         CD8T     5.153062
-AAAGAACCAATGGCAG               5               5         CD8T     5.153062
-AAAGAACGTCTGCAAT               0               0     CD4Tconv     2.576955
-AAAGGATAGTAGACAT               6               6            B     4.456919</code></pre>
+AAACCCAAGGAGAGTA               0               0   Mono/Macro     6.686894
+AAACGCTTCAGCCCAG               2               2            B     7.863053
+AAAGAACAGACGACTG               4               4         CD8T     4.862934
+AAAGAACCAATGGCAG               4               4         CD8T     4.862934
+AAAGAACGTCTGCAAT               1               1     CD4Tconv     2.714105
+AAAGGATAGTAGACAT               2               2            B     7.863053</code></pre>
 <p><img src="assets/scrna/pbmc_1k_v3_annotated.png" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-pbmc_1k_v3_annotated">
@@ -1163,6 +1166,7 @@ baigal628
                      name = &quot;pbmc_1k_v3_Monocyte&quot;)</code></pre>
 <pre><code>Warning: CombinePlots is being deprecated. Plots should now be combined using
 the patchwork system.</code></pre>
+<p><img src="figure/scrna_stepbystep.Rmd/unnamed-chunk-14-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="step-5.-save-the-object-for-future-analysis" class="section level3">
 <h3>Step 5. Save the object for future analysis</h3>
@@ -1176,13 +1180,13 @@ the patchwork system.</code></pre>
 </p>
 <div id="workflowr-sessioninfo" class="collapse">
 <pre class="r"><code>sessionInfo()</code></pre>
-<pre><code>R version 4.0.5 (2021-03-31)
+<pre><code>R version 4.1.0 (2021-05-18)
 Platform: x86_64-apple-darwin17.0 (64-bit)
 Running under: macOS Big Sur 10.16
 
 Matrix products: default
-BLAS:   /Library/Frameworks/R.framework/Versions/4.0/Resources/lib/libRblas.dylib
-LAPACK: /Library/Frameworks/R.framework/Versions/4.0/Resources/lib/libRlapack.dylib
+BLAS:   /Library/Frameworks/R.framework/Versions/4.1/Resources/lib/libRblas.dylib
+LAPACK: /Library/Frameworks/R.framework/Versions/4.1/Resources/lib/libRlapack.dylib
 
 locale:
 [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
@@ -1191,112 +1195,112 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] RColorBrewer_1.1-2 ggplot2_3.3.4      SeuratObject_4.0.2 Seurat_4.0.3      
-[5] MAESTRO_1.4.0      workflowr_1.6.2   
+[1] RColorBrewer_1.1-2 ggplot2_3.3.5      SeuratObject_4.0.2 Seurat_4.0.1      
+[5] MAESTRO_1.5.0      workflowr_1.6.2   
 
 loaded via a namespace (and not attached):
   [1] rappdirs_0.3.3              SnowballC_0.7.0            
-  [3] rtracklayer_1.50.0          scattermore_0.7            
-  [5] ragg_1.1.3                  tidyr_1.1.3                
-  [7] bit64_4.0.5                 knitr_1.33                 
-  [9] irlba_2.3.3                 DelayedArray_0.16.3        
- [11] data.table_1.14.0           rpart_4.1-15               
- [13] RCurl_1.98-1.3              AnnotationFilter_1.14.0    
- [15] generics_0.1.0              BiocGenerics_0.36.1        
- [17] GenomicFeatures_1.42.1      callr_3.7.0                
+  [3] rtracklayer_1.52.0          scattermore_0.7            
+  [5] tidyr_1.1.3                 bit64_4.0.5                
+  [7] knitr_1.33                  irlba_2.3.3                
+  [9] DelayedArray_0.18.0         data.table_1.14.0          
+ [11] rpart_4.1-15                KEGGREST_1.32.0            
+ [13] RCurl_1.98-1.3              AnnotationFilter_1.16.0    
+ [15] generics_0.1.0              BiocGenerics_0.38.0        
+ [17] GenomicFeatures_1.44.0      callr_3.7.0                
  [19] cowplot_1.1.1               usethis_2.0.1              
  [21] RSQLite_2.2.7               EnsDb.Mmusculus.v79_2.99.0 
  [23] RANN_2.6.1                  future_1.21.0              
  [25] bit_4.0.4                   spatstat.data_2.1-0        
  [27] xml2_1.3.2                  lubridate_1.7.10           
- [29] httpuv_1.6.1                SummarizedExperiment_1.20.0
+ [29] httpuv_1.6.1                SummarizedExperiment_1.22.0
  [31] assertthat_0.2.1            xfun_0.24                  
  [33] hms_1.1.0                   jquerylib_0.1.4            
  [35] evaluate_0.14               promises_1.2.0.1           
- [37] fansi_0.5.0                 progress_1.2.2             
- [39] caTools_1.18.2              dbplyr_2.1.1               
- [41] igraph_1.2.6                DBI_1.1.1                  
- [43] htmlwidgets_1.5.3           sparsesvd_0.2              
- [45] spatstat.geom_2.2-0         stats4_4.0.5               
- [47] purrr_0.3.4                 ellipsis_0.3.2             
- [49] RSpectra_0.16-0             dplyr_1.0.7                
- [51] backports_1.2.1             biomaRt_2.46.3             
- [53] deldir_0.2-10               MatrixGenerics_1.2.1       
- [55] vctrs_0.3.8                 Biobase_2.50.0             
- [57] remotes_2.4.0               ensembldb_2.14.0           
- [59] ROCR_1.0-11                 abind_1.4-5                
- [61] cachem_1.0.5                withr_2.4.2                
- [63] ggforce_0.3.3               presto_1.0.0               
- [65] checkmate_2.0.0             sctransform_0.3.2          
- [67] GenomicAlignments_1.26.0    prettyunits_1.1.1          
- [69] goftest_1.2-2               cluster_2.1.2              
- [71] lazyeval_0.2.2              crayon_1.4.1               
- [73] hdf5r_1.3.3                 labeling_0.4.2             
- [75] pkgconfig_2.0.3             slam_0.1-48                
- [77] tweenr_1.0.2                GenomeInfoDb_1.26.7        
- [79] nlme_3.1-152                pkgload_1.2.1              
- [81] ProtGenerics_1.22.0         nnet_7.3-16                
- [83] devtools_2.4.2              rlang_0.4.11               
- [85] globals_0.14.0              lifecycle_1.0.0            
- [87] miniUI_0.1.1.1              BiocFileCache_1.14.0       
- [89] rprojroot_2.0.2             polyclip_1.10-0            
- [91] matrixStats_0.59.0          lmtest_0.9-38              
- [93] Matrix_1.3-4                ggseqlogo_0.1              
- [95] zoo_1.8-9                   base64enc_0.1-3            
- [97] whisker_0.4                 ggridges_0.5.3             
- [99] processx_3.5.2              png_0.1-7                  
-[101] viridisLite_0.4.0           bitops_1.0-7               
-[103] KernSmooth_2.23-20          Biostrings_2.58.0          
-[105] blob_1.2.1                  stringr_1.4.0              
-[107] forestplot_1.10.1           parallelly_1.26.0          
-[109] jpeg_0.1-8.1                S4Vectors_0.28.1           
-[111] scales_1.1.1                memoise_2.0.0              
-[113] magrittr_2.0.1              plyr_1.8.6                 
-[115] ica_1.0-2                   gplots_3.1.1               
-[117] zlibbioc_1.36.0             compiler_4.0.5             
-[119] Gmisc_2.0.2                 fitdistrplus_1.1-5         
-[121] Rsamtools_2.6.0             cli_2.5.0                  
-[123] XVector_0.30.0              listenv_0.8.0              
-[125] patchwork_1.1.1             pbapply_1.4-3              
-[127] ps_1.6.0                    htmlTable_2.2.1            
-[129] Formula_1.2-4               MASS_7.3-54                
-[131] mgcv_1.8-36                 tidyselect_1.1.1           
-[133] stringi_1.6.2               textshaping_0.3.5          
-[135] highr_0.9                   yaml_2.2.1                 
-[137] askpass_1.1                 latticeExtra_0.6-29        
-[139] ggrepel_0.9.1               grid_4.0.5                 
-[141] sass_0.4.0                  fastmatch_1.1-0            
-[143] EnsDb.Hsapiens.v86_2.99.0   tools_4.0.5                
-[145] future.apply_1.7.0          parallel_4.0.5             
-[147] rstudioapi_0.13             foreign_0.8-81             
-[149] lsa_0.73.2                  git2r_0.28.0               
-[151] gridExtra_2.3               farver_2.1.0               
-[153] Rtsne_0.15                  digest_0.6.27              
-[155] shiny_1.6.0                 qlcMatrix_0.9.7            
-[157] Rcpp_1.0.6                  GenomicRanges_1.42.0       
-[159] later_1.2.0                 RcppAnnoy_0.0.18           
-[161] httr_1.4.2                  AnnotationDbi_1.52.0       
-[163] colorspace_2.0-1            XML_3.99-0.6               
-[165] fs_1.5.0                    tensor_1.5                 
-[167] reticulate_1.20             IRanges_2.24.1             
-[169] splines_4.0.5               uwot_0.1.10                
-[171] RcppRoll_0.3.0              spatstat.utils_2.2-0       
-[173] systemfonts_1.0.2           sessioninfo_1.1.1          
-[175] plotly_4.9.4.1              xtable_1.8-4               
-[177] jsonlite_1.7.2              testthat_3.0.3             
-[179] R6_2.5.0                    Hmisc_4.5-0                
-[181] pillar_1.6.1                htmltools_0.5.1.1          
-[183] mime_0.10                   glue_1.4.2                 
-[185] fastmap_1.1.0               BiocParallel_1.24.1        
-[187] codetools_0.2-18            pkgbuild_1.2.0             
-[189] Signac_1.2.1                utf8_1.2.1                 
-[191] lattice_0.20-44             bslib_0.2.5.1              
-[193] spatstat.sparse_2.0-0       tibble_3.1.2               
-[195] curl_4.3.1                  leiden_0.3.8               
-[197] gtools_3.9.2                openssl_1.4.4              
+ [37] fansi_0.5.0                 restfulr_0.0.13            
+ [39] progress_1.2.2              caTools_1.18.2             
+ [41] dbplyr_2.1.1                igraph_1.2.6               
+ [43] DBI_1.1.1                   htmlwidgets_1.5.3          
+ [45] sparsesvd_0.2               spatstat.geom_2.2-0        
+ [47] stats4_4.1.0                purrr_0.3.4                
+ [49] ellipsis_0.3.2              RSpectra_0.16-0            
+ [51] dplyr_1.0.7                 backports_1.2.1            
+ [53] biomaRt_2.48.1              deldir_0.2-10              
+ [55] MatrixGenerics_1.4.0        vctrs_0.3.8                
+ [57] Biobase_2.52.0              remotes_2.4.0              
+ [59] ensembldb_2.16.0            ROCR_1.0-11                
+ [61] abind_1.4-5                 cachem_1.0.5               
+ [63] withr_2.4.2                 ggforce_0.3.3              
+ [65] presto_1.0.0                checkmate_2.0.0            
+ [67] sctransform_0.3.2           GenomicAlignments_1.28.0   
+ [69] prettyunits_1.1.1           goftest_1.2-2              
+ [71] cluster_2.1.2               lazyeval_0.2.2             
+ [73] crayon_1.4.1                hdf5r_1.3.3                
+ [75] labeling_0.4.2              pkgconfig_2.0.3            
+ [77] slam_0.1-48                 tweenr_1.0.2               
+ [79] GenomeInfoDb_1.28.0         nlme_3.1-152               
+ [81] pkgload_1.2.1               ProtGenerics_1.24.0        
+ [83] nnet_7.3-16                 devtools_2.4.2             
+ [85] rlang_0.4.11                globals_0.14.0             
+ [87] lifecycle_1.0.0             miniUI_0.1.1.1             
+ [89] filelock_1.0.2              BiocFileCache_2.0.0        
+ [91] rprojroot_2.0.2             polyclip_1.10-0            
+ [93] matrixStats_0.59.0          lmtest_0.9-38              
+ [95] Matrix_1.3-4                ggseqlogo_0.1              
+ [97] zoo_1.8-9                   base64enc_0.1-3            
+ [99] whisker_0.4                 ggridges_0.5.3             
+[101] processx_3.5.2              png_0.1-7                  
+[103] viridisLite_0.4.0           rjson_0.2.20               
+[105] bitops_1.0-7                KernSmooth_2.23-20         
+[107] Biostrings_2.60.1           blob_1.2.1                 
+[109] stringr_1.4.0               forestplot_1.10.1          
+[111] parallelly_1.26.0           jpeg_0.1-8.1               
+[113] S4Vectors_0.30.0            scales_1.1.1               
+[115] memoise_2.0.0               magrittr_2.0.1             
+[117] plyr_1.8.6                  ica_1.0-2                  
+[119] gplots_3.1.1                zlibbioc_1.38.0            
+[121] compiler_4.1.0              Gmisc_1.10.0               
+[123] BiocIO_1.2.0                fitdistrplus_1.1-5         
+[125] Rsamtools_2.8.0             cli_3.0.0                  
+[127] XVector_0.32.0              listenv_0.8.0              
+[129] patchwork_1.1.1             pbapply_1.4-3              
+[131] ps_1.6.0                    htmlTable_2.2.1            
+[133] Formula_1.2-4               MASS_7.3-54                
+[135] mgcv_1.8-36                 tidyselect_1.1.1           
+[137] stringi_1.6.2               highr_0.9                  
+[139] yaml_2.2.1                  latticeExtra_0.6-29        
+[141] ggrepel_0.9.1               grid_4.1.0                 
+[143] sass_0.4.0                  fastmatch_1.1-0            
+[145] EnsDb.Hsapiens.v86_2.99.0   tools_4.1.0                
+[147] future.apply_1.7.0          parallel_4.1.0             
+[149] rstudioapi_0.13             foreign_0.8-81             
+[151] lsa_0.73.2                  git2r_0.28.0               
+[153] gridExtra_2.3               farver_2.1.0               
+[155] Rtsne_0.15                  digest_0.6.27              
+[157] shiny_1.6.0                 qlcMatrix_0.9.7            
+[159] Rcpp_1.0.6                  GenomicRanges_1.44.0       
+[161] later_1.2.0                 RcppAnnoy_0.0.18           
+[163] httr_1.4.2                  AnnotationDbi_1.54.1       
+[165] colorspace_2.0-2            XML_3.99-0.6               
+[167] fs_1.5.0                    tensor_1.5                 
+[169] reticulate_1.20             IRanges_2.26.0             
+[171] splines_4.1.0               uwot_0.1.10                
+[173] RcppRoll_0.3.0              spatstat.utils_2.2-0       
+[175] sessioninfo_1.1.1           plotly_4.9.4.1             
+[177] xtable_1.8-4                jsonlite_1.7.2             
+[179] testthat_3.0.3              R6_2.5.0                   
+[181] Hmisc_4.5-0                 pillar_1.6.1               
+[183] htmltools_0.5.1.1           mime_0.11                  
+[185] glue_1.4.2                  fastmap_1.1.0              
+[187] BiocParallel_1.26.0         codetools_0.2-18           
+[189] pkgbuild_1.2.0              Signac_1.2.1               
+[191] utf8_1.2.1                  lattice_0.20-44            
+[193] bslib_0.2.5.1               spatstat.sparse_2.0-0      
+[195] tibble_3.1.2                curl_4.3.2                 
+[197] leiden_0.3.8                gtools_3.9.2               
 [199] survival_3.2-11             rmarkdown_2.9              
 [201] docopt_0.7.1                desc_1.3.0                 
-[203] munsell_0.5.0               GenomeInfoDbData_1.2.4     
+[203] munsell_0.5.0               GenomeInfoDbData_1.2.6     
 [205] reshape2_1.4.4              gtable_0.3.0               
 [207] spatstat.core_2.2-0        </code></pre>
 </div>
