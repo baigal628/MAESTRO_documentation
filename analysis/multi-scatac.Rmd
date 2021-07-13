@@ -17,7 +17,7 @@ MAESTRO multi-sample scATAC-seq function is the extension of the scATAC-seq pipe
 knitr::include_graphics("assets/flowchart.png", error = FALSE)
 ```
 
-## Tutorial: 10X PBMC scATAC-seq in time-Dependent Sampling Studies
+## Tutorial: PBMC scATAC-seq in time-Dependent Sampling Studies
 
 [Paper](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-020-02032-0)\
 [Data Source](https://www.ncbi.nlm.nih.gov/Traces/study/?acc=PRJNA545828&o=assay_type_s%3Aa)
@@ -54,12 +54,11 @@ SRR11614708
 ```{bash, eval=FALSE}
 #Install sratoolkit through conda
 $ conda install -c bioconda sra-tools
-$ prefetch --option-file SraAccList.txt
 
 #Split .sra to .fastq.gz
 $ cat SraAccList.txt | while read i
   do
-    time fastq-dump --gzip -split-files ${i}.sra
+    time fastq-dump --gzip -split-files ${i}
     echo "** ${i}.sra to fastq done **"
   done
 
@@ -76,17 +75,17 @@ $ mv SRR11614703_S1_L001_R1_001.fastq.gz CLL0_S1_L001_R1_001.fastq.gz
 ```
 
 ### Step 1. Configure the MAESTRO workflow
-Initialize the MAESTRO scATAC-seq workflow using `MAESTRO scATAC-init` command. This will install a Snakefile and a config file in this directory. Here we take the 10X PBMC data as an example. Considering MAESTRO provides built-in immune cell markers, it's recommended to choose the `RP-based` cell-type annotation strategy. If the data is not immune-related, users can choose to provide their own marker gene list, or choose to annotate cell types through the `peak-based` method (see the following argument description for more details), or they can directly skip the annotation step by not setting `--annotation`.
+Initialize the MAESTRO scATAC-seq workflow using `MAESTRO scATAC-init` command. This will install a Snakefile and a config file in this directory. Here we take the 10X PBMC and CLL data as an example. Considering MAESTRO provides built-in immune cell markers, it's recommended to choose the `RP-based` cell-type annotation strategy. If the data is not immune-related, users can choose to provide their own marker gene list, or choose to annotate cell types through the `peak-based` method (see the following argument description for more details), or they can directly skip the annotation step by not setting `--annotation`.
 
 ```{bash, eval=FALSE}
 $ MAESTRO scatac-init --batch --bulk_peaks --downsample \
---target_reads 5000000 --input_path /liulab/galib/sc_CIDC/MAESTRO/test/tutorial/data/time_data \
+--target_reads 5000000 --input_path /single-cell/MAESTRO/test/tutorial/data/time_data \
 --gzip --platform 10x-genomics --format fastq --species GRCh38 \
 --deduplication cell-level --mapping chromap \
---giggleannotation /liulab/galib/sc_CIDC/annotations/giggle.all/ \
---fasta /liulab/galib/sc_CIDC/references/Refdata_scATAC_MAESTRO_GRCh38_1.1.0/GRCh38_genome.fa \
---index /liulab/galib/sc_CIDC/references/chromap/GRCh38_chromap.index \
---whitelist /liulab/galib/sc_CIDC/references/whitelist/737K-cratac-v1.txt \
+--giggleannotation /single-cell/annotations/giggle.all/ \
+--fasta /single-cell/references/Refdata_scATAC_MAESTRO_GRCh38_1.1.0/GRCh38_genome.fa \
+--index /single-cell/references/chromap/GRCh38_chromap.index \
+--whitelist /single-cell/references/whitelist/737K-cratac-v1.txt \
 --cores 16 --directory multi-scatac-chromap \
 --annotation --method RP-based --signature human.immune.CIBERSORT \
 --clusterpeak --shortpeak \
@@ -110,8 +109,8 @@ Arguments  |  Description
 `--consensus_peaks` | When batch is TRUE, users can define whether to merge consensus peaks from each sample.If set as true, users should also set number of cutoff_samples to define consensus.
 `--cutoff_samples` | Minimum number of samples to present consensus peaks. The peaks present in at least cutoff_samples will be kept.
 `--bulk_peaks` | For multi-samples from the same experiment, if set as true, peaks will be called after merging all bam file.Bulk_peaks and consensus_peaks are mutually exclusive.
-`--downsample` | For deeply sequenced samples, bam files can be downsampled to a certain number of reads (target_reads) to get peak set.
-`--target_reads` | Number of reads to be kept in downsampling. If the sample has fewer than the target_reads, the original number of reads will be kept.
+`--downsample` | {True,False} For deeply sequenced samples, bam files can be downsampled to a certain number of reads (target_reads) to get peak set.
+`--target_reads` | Number of reads to be kept in downsampling. If the sample has fewer than the target_reads, the original number of reads will be kept. Effective only when down_sample is true.
 
 **Input files arguments:**
 
@@ -181,10 +180,100 @@ Arguments  |  Description
 
 ### Step 2. Configure samples.json file
 
+In the project directory, we will next run `MAESTRO samples-init` subcommand to configure samples.json file. The purpose of this step is let MAESTRO read the right format and path of input data.
+
 ```{bash, eval=FALSE}
 $ cd multi-scatac-chromap/
 
-$ MAESTRO samples-init --assay_type scatac --platform 10x-genomics --data_type fastq --data_dir /liulab/galib/sc_CIDC/MAESTRO/test/tutorial/data/time_data
+$ MAESTRO samples-init --assay_type scatac --platform 10x-genomics --data_type fastq --data_dir /single-cell/MAESTRO/test/tutorial/data/time_data
+```
+
+To get a full description of command-line options, please use the command
+```{bash, eval=FALSE}
+MAESTRO samples-init -h
+```
+
+**Input files arguments:**
+Arguments  |  Description
+---------  |  -----------
+`--assay_type` | {scrna,scatac} choose the type of assays.
+`--platform` | {10x-genomics,sci-ATAC-seq,microfluidic} choose the type of sequencing platform.
+`--data_type` | {fastq,fragment,bam} choose the type of input data. When using fastq format as input, MAESTRO can only recognize the 10X-like naming: `[Sample Name]_S1_L00[Lane Number]_[Read Type]_001.fastq.gz`.
+`--data_dir` |  the full path to the input file folder.
+
+Once configured, you will find a samples.json file in the current project directory:
+
+```{bash, eval=FALSE}
+cat samples.json
+
+{
+    "CLL0": {
+        "R1": [
+            "/MAESTRO/test/tutorial/data/time_data/CLL0_S1_L001_R1_001.fastq.gz"
+        ],
+        "R2": [
+            "/MAESTRO/test/tutorial/data/time_data/CLL0_S1_L001_R2_001.fastq.gz"
+        ],
+        "R3": [
+            "/MAESTRO/test/tutorial/data/time_data/CLL0_S1_L001_R3_001.fastq.gz"
+        ]
+    },
+    "CLL24": {
+        "R1": [
+            "/MAESTRO/test/tutorial/data/time_data/CLL24_S1_L001_R1_001.fastq.gz"
+        ],
+        "R2": [
+            "/MAESTRO/test/tutorial/data/time_data/CLL24_S1_L001_R2_001.fastq.gz"
+        ],
+        "R3": [
+            "/MAESTRO/test/tutorial/data/time_data/CLL24_S1_L001_R3_001.fastq.gz"
+        ]
+    },
+    "CLL8": {
+        "R1": [
+            "/MAESTRO/test/tutorial/data/time_data/CLL8_S1_L001_R1_001.fastq.gz"
+        ],
+        "R2": [
+            "/MAESTRO/test/tutorial/data/time_data/CLL8_S1_L001_R2_001.fastq.gz"
+        ],
+        "R3": [
+            "/MAESTRO/test/tutorial/data/time_data/CLL8_S1_L001_R3_001.fastq.gz"
+        ]
+    },
+    "PBMC0": {
+        "R1": [
+            "/MAESTRO/test/tutorial/data/time_data/PBMC0_S1_L001_R1_001.fastq.gz"
+        ],
+        "R2": [
+            "/MAESTRO/test/tutorial/data/time_data/PBMC0_S1_L001_R2_001.fastq.gz"
+        ],
+        "R3": [
+            "/MAESTRO/test/tutorial/data/time_data/PBMC0_S1_L001_R3_001.fastq.gz"
+        ]
+    },
+    "PBMC24": {
+        "R1": [
+            "/MAESTRO/test/tutorial/data/time_data/PBMC24_S1_L001_R1_001.fastq.gz"
+        ],
+        "R2": [
+            "/MAESTRO/test/tutorial/data/time_data/PBMC24_S1_L001_R2_001.fastq.gz"
+        ],
+        "R3": [
+            "/MAESTRO/test/tutorial/data/time_data/PBMC24_S1_L001_R3_001.fastq.gz"
+        ]
+    },
+    "PBMC8": {
+        "R1": [
+            "/MAESTRO/test/tutorial/data/time_data/PBMC8_S1_L001_R1_001.fastq.gz"
+        ],
+        "R2": [
+            "/MAESTRO/test/tutorial/data/time_data/PBMC8_S1_L001_R2_001.fastq.gz"
+        ],
+        "R3": [
+            "/MAESTRO/test/tutorial/data/time_data/PBMC8_S1_L001_R3_001.fastq.gz"
+        ]
+    }
+}
 ```
 
 ### Step 3. Run snakemake pipeline
@@ -206,7 +295,7 @@ $ ls Result/Analysis
 Batch  CLL0  CLL24  CLL8  Cluster  PBMC0  PBMC24  PBMC8
 ```
 
-*  **Analysis/:** The Analysis directory contains a Seurat R object, as well as clustering result, cell type annotation result and driver transcription factor identification result.
+*  **Analysis/:** The Analysis directory contains a Seurat R object, as well as clustering result, cell type annotation result and driver transcription factor identification result. Specificly for the multi-sample scATAC-seq, we process a pseudo-bulk peak calling within each cluster and output the fragment files, narrow peak files, and bigwig files.
     + Batch/: All samples merged Results.
     + Cluster/: Fragment and bigwig files for each sample within each cluster.
     

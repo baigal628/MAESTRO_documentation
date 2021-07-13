@@ -122,17 +122,74 @@ Arguments  |  Description
 
 ### Step 2. Configure the samples.json file
 
-Before running the workflow, please check the `config.yaml` and see if it is configured correctly. Once `config.yaml` is configured, users can use snakemake to run the workflow.
-
+In the project directory, we will next run `MAESTRO samples-init` subcommand to configure samples.json file.
 
 ```{bash, eval=FALSE}
 $ cd multi-scrna/
 
-$ MAESTRO samples-init --assay_type scrna --platform 10x-genomics --data_typ fastq --data_dir /liulab/galib/sc_CIDC/MAESTRO/test/tutorial/data/multi-scrna
+$ MAESTRO samples-init --assay_type scrna --platform 10x-genomics --data_typ fastq --data_dir /single-cell/MAESTRO/test/tutorial/data/multi-scrna
 
 ```
 
+To get a full description of command-line options, please use the command
+```{bash, eval=FALSE}
+MAESTRO samples-init -h
+```
+
+**Input files arguments:**
+Arguments  |  Description
+---------  |  -----------
+`--assay_type` | {scrna,scatac} choose the type of assays.
+`--platform` | {10x-genomics,sci-ATAC-seq,microfluidic} choose the type of sequencing platform
+`--data_type` | {fastq,fragment,bam} choose the type of input data.
+`--data_dir` |  the FULL path to the input file folder.
+
+Once configured, you will find a samples.json file in the current project directory:
+
+```{bash, eval=FALSE}
+cat samples.json
+
+{
+    "5k_pbmc_v3": {
+        "I1": [
+            "/single-cell/MAESTRO/test/tutorial/data/multi-scrna/5k_pbmc_v3_S1_L001_I1_001.fastq.gz",
+            "/single-cell/MAESTRO/test/tutorial/data/multi-scrna/5k_pbmc_v3_S1_L002_I1_001.fastq.gz",
+            "/single-cell/MAESTRO/test/tutorial/data/multi-scrna/5k_pbmc_v3_S1_L003_I1_001.fastq.gz",
+            "/single-cell/MAESTRO/test/tutorial/data/multi-scrna/5k_pbmc_v3_S1_L004_I1_001.fastq.gz"
+        ],
+        "R1": [
+            "/single-cell/MAESTRO/test/tutorial/data/multi-scrna/5k_pbmc_v3_S1_L001_R1_001.fastq.gz",
+            "/single-cell/MAESTRO/test/tutorial/data/multi-scrna/5k_pbmc_v3_S1_L002_R1_001.fastq.gz",
+            "/single-cell/MAESTRO/test/tutorial/data/multi-scrna/5k_pbmc_v3_S1_L003_R1_001.fastq.gz",
+            "/single-cell/MAESTRO/test/tutorial/data/multi-scrna/5k_pbmc_v3_S1_L004_R1_001.fastq.gz"
+        ],
+        "R2": [
+            "/single-cell/MAESTRO/test/tutorial/data/multi-scrna/5k_pbmc_v3_S1_L001_R2_001.fastq.gz",
+            "/single-cell/MAESTRO/test/tutorial/data/multi-scrna/5k_pbmc_v3_S1_L002_R2_001.fastq.gz",
+            "/single-cell/MAESTRO/test/tutorial/data/multi-scrna/5k_pbmc_v3_S1_L003_R2_001.fastq.gz",
+            "/single-cell/MAESTRO/test/tutorial/data/multi-scrna/5k_pbmc_v3_S1_L004_R2_001.fastq.gz"
+        ]
+    },
+    "pbmc_1k_v3": {
+        "I1": [
+            "/single-cell/MAESTRO/test/tutorial/data/multi-scrna/pbmc_1k_v3_S1_L001_I1_001.fastq.gz",
+            "/single-cell/MAESTRO/test/tutorial/data/multi-scrna/pbmc_1k_v3_S1_L002_I1_001.fastq.gz"
+        ],
+        "R1": [
+            "/single-cell/MAESTRO/test/tutorial/data/multi-scrna/pbmc_1k_v3_S1_L001_R1_001.fastq.gz",
+            "/single-cell/MAESTRO/test/tutorial/data/multi-scrna/pbmc_1k_v3_S1_L002_R1_001.fastq.gz"
+        ],
+        "R2": [
+            "/single-cell/MAESTRO/test/tutorial/data/multi-scrna/pbmc_1k_v3_S1_L001_R2_001.fastq.gz",
+            "/single-cell/MAESTRO/test/tutorial/data/multi-scrna/pbmc_1k_v3_S1_L002_R2_001.fastq.gz"
+        ]
+    }
+}
+```
+
 ### Step 3. Run snakemake pipeline
+
+Before running the workflow, please check the `config.yaml` and see if it is configured correctly. Once `config.yaml` is configured, users can use snakemake to run the workflow.
 
 ```{bash, eval=FALSE}
 $ snakemake -np
