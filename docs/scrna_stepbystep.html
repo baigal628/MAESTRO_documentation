@@ -327,7 +327,7 @@ div.tocify {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">MAESTRO 1.5.0</a>
+      <a class="navbar-brand" href="index.html">MAESTRO 1.5.1</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -342,7 +342,10 @@ div.tocify {
       <a href="scrna.html">10X PBMC 1k</a>
     </li>
     <li>
-      <a href="scrna_stepbystep.html">10X PBMC 1k_Custom Analysis</a>
+      <a href="scrna_stepbystep.html">10X PBMC 1k Custom Analysis</a>
+    </li>
+    <li>
+      <a href="snrna.html">10X snRNA-seq</a>
     </li>
   </ul>
 </li>
@@ -357,7 +360,7 @@ div.tocify {
       <a href="scatac.html">10X PBMC 500</a>
     </li>
     <li>
-      <a href="scatac_stepbystep.html">10X PBMC 500_Custom Analysis</a>
+      <a href="scatac_stepbystep.html">10X PBMC 500 Custom Analysis</a>
     </li>
     <li>
       <a href="sci_atac.html">sci-ATAC-seq</a>
@@ -441,7 +444,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2021-07-13
+<strong>Last updated:</strong> 2021-07-19
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -532,16 +535,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombaigal628MultiSamplescATACseqtree515f900cd3d8358881e5154921560ee8ad668e9btargetblank515f900a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/baigal628/MultiSample_scATACseq/tree/515f900cd3d8358881e5154921560ee8ad668e9b" target="_blank">515f900</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombaigal628MultiSamplescATACseqtreed02c8c121faf4bc6e4430cccfe2d34ad9506f3adtargetblankd02c8c1a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/baigal628/MultiSample_scATACseq/tree/d02c8c121faf4bc6e4430cccfe2d34ad9506f3ad" target="_blank">d02c8c1</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombaigal628MultiSamplescATACseqtree515f900cd3d8358881e5154921560ee8ad668e9btargetblank515f900a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombaigal628MultiSamplescATACseqtreed02c8c121faf4bc6e4430cccfe2d34ad9506f3adtargetblankd02c8c1a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/baigal628/MultiSample_scATACseq/tree/515f900cd3d8358881e5154921560ee8ad668e9b" target="_blank">515f900</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/baigal628/MultiSample_scATACseq/tree/d02c8c121faf4bc6e4430cccfe2d34ad9506f3ad" target="_blank">d02c8c1</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -560,6 +563,7 @@ Ignored files:
 Untracked files:
     Untracked:  .RDataTmp
     Untracked:  MAESTRO_documentation.Rproj
+    Untracked:  atac_pbmc_500_nextgem.GIGGLE/
     Untracked:  atac_pbmc_500_nextgem_Monocyte_umapplot.png
     Untracked:  atac_pbmc_500_nextgem_Monocyte_vlnplot.png
     Untracked:  code/Basic_Operations.R
@@ -573,9 +577,20 @@ Untracked files:
     Untracked:  data/multi-scatac/
     Untracked:  data/scatac/
     Untracked:  data/scrna/
+    Untracked:  data/snrna/
     Untracked:  output/UMAP_annot.png
     Untracked:  output/UMAP_bysamples.png
+    Untracked:  pbmc_1k_v3.PredictedTFTop10.txt
+    Untracked:  pbmc_1k_v3.lisa/
     Untracked:  pbmc_1k_v3_8k_res.rds
+    Untracked:  pbmc_1k_v3_Monocyte.PredictedTFTop20.txt
+    Untracked:  pbmc_1k_v3_Monocyte.lisa/
+    Untracked:  pbmc_1k_v3_Monocyte_filtered.pdf
+    Untracked:  pbmc_1k_v3_Monocyte_lisa.txt
+    Untracked:  pbmc_1k_v3_Monocyte_top.pdf
+    Untracked:  pbmc_1k_v3_Monocyte_umapplot.png
+    Untracked:  pbmc_1k_v3_Monocyte_vlnplot.png
+    Untracked:  pbmc_1k_v3_lisa.txt
 
 Unstaged changes:
     Deleted:    MultiSample_scATACseq.Rproj
@@ -707,20 +722,20 @@ Negative:  SERPINF1, SMPD3, LILRA4, AL096865.1, CLEC4C, TPM2, DERL3, DNASE1L3, P
 <pre><code>Warning: The default method for RunUMAP has changed from calling Python UMAP via reticulate to the R-native UWOT using the cosine metric
 To use Python UMAP via reticulate, set umap.method to &#39;umap-learn&#39; and metric to &#39;correlation&#39;
 This message will be shown once per session</code></pre>
-<pre><code>10:23:10 UMAP embedding parameters a = 0.9922 b = 1.112</code></pre>
-<pre><code>10:23:10 Read 1076 rows and found 15 numeric columns</code></pre>
-<pre><code>10:23:10 Using Annoy for neighbor search, n_neighbors = 30</code></pre>
-<pre><code>10:23:10 Building Annoy index with metric = cosine, n_trees = 50</code></pre>
+<pre><code>23:07:59 UMAP embedding parameters a = 0.9922 b = 1.112</code></pre>
+<pre><code>23:07:59 Read 1076 rows and found 15 numeric columns</code></pre>
+<pre><code>23:07:59 Using Annoy for neighbor search, n_neighbors = 30</code></pre>
+<pre><code>23:07:59 Building Annoy index with metric = cosine, n_trees = 50</code></pre>
 <pre><code>0%   10   20   30   40   50   60   70   80   90   100%</code></pre>
 <pre><code>[----|----|----|----|----|----|----|----|----|----|</code></pre>
 <pre><code>**************************************************|
-10:23:10 Writing NN index file to temp file /var/folders/bx/3yng1lx579x084wwkjz1xc6c0000gp/T//RtmpQL2Ipn/fileed7e3db870ca
-10:23:10 Searching Annoy index using 1 thread, search_k = 3000
-10:23:10 Annoy recall = 100%
-10:23:11 Commencing smooth kNN distance calibration using 1 thread
-10:23:12 Initializing from normalized Laplacian + noise
-10:23:12 Commencing optimization for 500 epochs, with 43052 positive edges
-10:23:14 Optimization finished</code></pre>
+23:07:59 Writing NN index file to temp file /var/folders/bx/3yng1lx579x084wwkjz1xc6c0000gp/T//RtmpDwq7vj/file7da63cf1346
+23:07:59 Searching Annoy index using 1 thread, search_k = 3000
+23:07:59 Annoy recall = 100%
+23:08:00 Commencing smooth kNN distance calibration using 1 thread
+23:08:01 Initializing from normalized Laplacian + noise
+23:08:01 Commencing optimization for 500 epochs, with 43052 positive edges
+23:08:03 Optimization finished</code></pre>
 <pre><code>Warning: The following arguments are not used: dims1, dims2, dims3, dims4,
 dims5, dims6, dims7, dims8, dims9, dims10, dims11, dims12, dims13, dims14,
 dims15</code></pre>
@@ -753,6 +768,7 @@ Active assay: RNA (13773 features, 2000 variable features)
 4 1.997655e-178  1.882858 0.960 0.076 6.878424e-175       0       CD14
 5 5.492107e-176  2.219625 0.996 0.121 1.512856e-172       0       MNDA
 6 4.352239e-175  1.620355 0.952 0.077 9.990565e-172       0 AC020656.1</code></pre>
+<p>In the <code>outdir/</code> directory you will find the following outputs:</p>
 <p><img src="assets/scrna/pbmc_1k_v3.spikein.png" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-pbmc_1k_v3.spikein">
@@ -776,6 +792,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/baigal628/MultiSample_scATACseq/blob/d02c8c121faf4bc6e4430cccfe2d34ad9506f3ad/docs/assets/scrna/pbmc_1k_v3.spikein.png" target="_blank">d02c8c1</a>
+</td>
+<td>
+baigal628
+</td>
+<td>
+2021-07-19
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/baigal628/MultiSample_scATACseq/blob/30fbad89c063504021ad8704a527bcaee84d24b2/docs/assets/scrna/pbmc_1k_v3.spikein.png" target="_blank">30fbad8</a>
@@ -825,6 +852,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/baigal628/MultiSample_scATACseq/blob/d02c8c121faf4bc6e4430cccfe2d34ad9506f3ad/docs/assets/scrna/pbmc_1k_v3_PCElbowPlot.png" target="_blank">d02c8c1</a>
+</td>
+<td>
+baigal628
+</td>
+<td>
+2021-07-19
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/baigal628/MultiSample_scATACseq/blob/30fbad89c063504021ad8704a527bcaee84d24b2/docs/assets/scrna/pbmc_1k_v3_PCElbowPlot.png" target="_blank">30fbad8</a>
@@ -885,6 +923,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/baigal628/MultiSample_scATACseq/blob/d02c8c121faf4bc6e4430cccfe2d34ad9506f3ad/docs/assets/scrna/pbmc_1k_v3_cluster.png" target="_blank">d02c8c1</a>
+</td>
+<td>
+baigal628
+</td>
+<td>
+2021-07-19
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/baigal628/MultiSample_scATACseq/blob/30fbad89c063504021ad8704a527bcaee84d24b2/docs/assets/scrna/pbmc_1k_v3_cluster.png" target="_blank">30fbad8</a>
@@ -973,6 +1022,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/baigal628/MultiSample_scATACseq/blob/d02c8c121faf4bc6e4430cccfe2d34ad9506f3ad/docs/assets/scrna/pbmc_1k_v3_annotated.png" target="_blank">d02c8c1</a>
+</td>
+<td>
+baigal628
+</td>
+<td>
+2021-07-19
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/baigal628/MultiSample_scATACseq/blob/30fbad89c063504021ad8704a527bcaee84d24b2/docs/assets/scrna/pbmc_1k_v3_annotated.png" target="_blank">30fbad8</a>
 </td>
 <td>
@@ -1011,11 +1071,10 @@ baigal628
 <p>All the reduction results are stored in <code>Object@reductions</code>. For example, users can use <code>Object@reductions$umap@cell.embeddings</code> to extract the cell embedding result of UMAP for custom plotting. Or users can directly use <code>DimPlot()</code> from Seurat and other functions like <code>theme()</code> from ggplot2 to generate a prettier plot.</p>
 <pre class="r"><code>library(ggplot2)
 library(RColorBrewer)
-p &lt;- DimPlot(object = pbmc.RNA.res$RNA, label = TRUE, pt.size = 0.15,
-             group.by = &quot;assign.ident&quot;, label.size = 3,
-             cols = brewer.pal(8,&quot;Set2&quot;)) +
-       theme_linedraw() + NoLegend()
-p</code></pre>
+DimPlot(object = pbmc.RNA.res$RNA, label = TRUE, pt.size = 0.15,
+        group.by = &quot;assign.ident&quot;, label.size = 3,
+        cols = brewer.pal(8,&quot;Set2&quot;)) +
+        theme_linedraw() + NoLegend()</code></pre>
 <p><img src="figure/scrna_stepbystep.Rmd/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-8-1">
@@ -1039,6 +1098,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/baigal628/MultiSample_scATACseq/blob/3e0057c4482bb3cb27d8badd29db34f4ff3f0706/docs/figure/scrna_stepbystep.Rmd/unnamed-chunk-8-1.png" target="_blank">3e0057c</a>
+</td>
+<td>
+baigal628
+</td>
+<td>
+2021-07-13
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/baigal628/MultiSample_scATACseq/blob/71fb9af86c756612a5a5898fbcfbed11cbee6547/docs/figure/scrna_stepbystep.Rmd/unnamed-chunk-8-1.png" target="_blank">71fb9af</a>
@@ -1073,10 +1143,23 @@ baigal628
                                                  genes = pbmc.RNA.res$genes,
                                                  project = pbmc.RNA.res$RNA@project.name,
                                                  organism = &quot;GRCh38&quot;,
-                                                 lisa.path = &quot;/Users/galib/miniconda3/envs/lisa_env/bin/lisa&quot;,
+                                                 lisa.path = &quot;/Users/galib/miniconda3/envs/lisa_env/bin/.venvs/lisa_env/bin/lisa&quot;,
                                                  top.tf = 10,
-                                                 outdir = &quot;./docs/assets/scrna/&quot;)
-pbmc.RNA.tfs[[&quot;0&quot;]]</code></pre>
+                                                 outdir = &quot;./docs/assets/scrna/&quot;)</code></pre>
+<pre><code>Start to run Lisa.</code></pre>
+<pre><code>Lisa in cluster 6 is done!</code></pre>
+<pre><code>Lisa is done.</code></pre>
+<pre class="r"><code>pbmc.RNA.tfs[[&quot;0&quot;]]</code></pre>
+<pre><code> [1] &quot;SPI1 | IRF1 | BCL6 | STAT2 | IRF8 | STAT1 | STAT3 | IRF2 | STAT5A | IRF3 | BCL11A | STAT5B | IRF4 | PRDM1 | SPIB&quot;
+ [2] &quot;CEBPD | CEBPB | ATF4 | CEBPA | CEBPG | NFIL3 | DDIT3 | DBP | BATF | CEBPE | BATF3&quot;                               
+ [3] &quot;SMAD1&quot;                                                                                                           
+ [4] &quot;KMT2A&quot;                                                                                                           
+ [5] &quot;ELF1 | FLI1 | ETV6 | ETS2 | ELF2 | ELK3 | ELK4 | GABPA | NFAT5 | ELK1 | ELF3 | ETS1 | ETV2&quot;                      
+ [6] &quot;BRD4&quot;                                                                                                            
+ [7] &quot;JMJD1C&quot;                                                                                                          
+ [8] &quot;RUNX1 | CBFB | RUNX3 | RUNX2&quot;                                                                                    
+ [9] &quot;LYL1 | ZBTB18 | TCF4 | TCF12 | ASCL2 | TFAP4 | TCF3 | SNAI1 | GATA3&quot;                                             
+[10] &quot;LMO2&quot;                                                                                                            </code></pre>
 <p>Besides identifying TFs for all the clusters, we also support the differential gene list from a single comparison.</p>
 <pre class="r"><code>de.geneset &lt;- FindMarkersMAESTRO(pbmc.RNA.res$RNA, ident.1 = c(3))
 pbmc.RNA.monocyte.tfs &lt;- RNAAnnotateTranscriptionFactor(RNA = pbmc.RNA.res$RNA,
@@ -1085,8 +1168,11 @@ pbmc.RNA.monocyte.tfs &lt;- RNAAnnotateTranscriptionFactor(RNA = pbmc.RNA.res$RN
                                                           project = &quot;pbmc_1k_v3_Monocyte&quot;,
                                                           organism = &quot;GRCh38&quot;,
                                                           top.tf = 20,
-                                                          lisa.path = &quot;/Users/galib/miniconda3/envs/lisa_env/bin/lisa&quot;,
+                                                          lisa.path = &quot;/Users/galib/miniconda3/envs/lisa_env/bin/.venvs/lisa_env/bin/lisa&quot;,
                                                           outdir = &quot;./docs/assets/scrna/&quot;)</code></pre>
+<pre><code>Start to run Lisa.</code></pre>
+<pre><code>Lisa in cluster 3 is done!</code></pre>
+<pre><code>Lisa is done.</code></pre>
 </div>
 <div id="step-4.-visualize-driver-transcription-factors-for-each-cluster" class="section level3">
 <h3>Step 4. Visualize driver transcription factors for each cluster</h3>
@@ -1094,21 +1180,31 @@ pbmc.RNA.monocyte.tfs &lt;- RNAAnnotateTranscriptionFactor(RNA = pbmc.RNA.res$RN
 <p>The output TFs returned from <code>RNAAnnotateTranscriptionFactor</code> have already been pre-filtered based on TF expression level.</p>
 <pre class="r"><code>tfs &lt;- sapply(pbmc.RNA.monocyte.tfs[[1]], function(x){
                 return(unlist(strsplit(x, split = &quot; | &quot;, fixed = TRUE))[1])})
-p &lt;- VisualizeTFenrichment(TFs = tfs,
+VisualizeTFenrichment(TFs = tfs,
                              cluster.1 = 3,
                              type = &quot;RNA&quot;,
                              SeuratObj = pbmc.RNA.res$RNA,
                              LISA.table = &quot;pbmc_1k_v3_Monocyte_lisa.txt&quot;,
                              visual.totalnumber = 100,
                              name = &quot;pbmc_1k_v3_Monocyte_filtered&quot;)</code></pre>
+<pre><code>Warning: Removed 4 rows containing missing values (geom_point).</code></pre>
+<pre><code>Warning: Removed 4 rows containing missing values (geom_text_repel).</code></pre>
+<pre><code>Warning: ggrepel: 7 unlabeled data points (too many overlaps). Consider
+increasing max.overlaps</code></pre>
+<pre><code>Warning: Removed 4 rows containing missing values (geom_point).</code></pre>
+<pre><code>Warning: Removed 4 rows containing missing values (geom_text_repel).</code></pre>
+<pre><code>Warning: ggrepel: 5 unlabeled data points (too many overlaps). Consider
+increasing max.overlaps</code></pre>
+<p><img src="figure/scrna_stepbystep.Rmd/unnamed-chunk-11-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>If users want to visualize the top factors without filtering. Please leave the TFs to NULL, then the top 10 regulators will be visualized.</p>
-<pre class="r"><code>p &lt;- VisualizeTFenrichment(cluster.1 = 3,
+<pre class="r"><code>VisualizeTFenrichment(cluster.1 = 3,
                              type = &quot;RNA&quot;,
                              SeuratObj = pbmc.RNA.res$RNA,
                              LISA.table = &quot;pbmc_1k_v3_Monocyte_lisa.txt&quot;,
                              visual.topnumber = 10,
                              visual.totalnumber = 100,
                              name = &quot;pbmc_1k_v3_Monocyte_top&quot;)</code></pre>
+<p><img src="figure/scrna_stepbystep.Rmd/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>To further filter the regulators, users may want to visualize the expression level of the predicted transcription factors. We provide the function for visualize TF/genes expression level using Vlnplot and Umap.</p>
 <pre class="r"><code>VisualizeVlnplot(genes = c(&quot;SPI1&quot;,&quot;CEBPB&quot;),
                         type = &quot;RNA&quot;,
@@ -1144,6 +1240,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/baigal628/MultiSample_scATACseq/blob/3e0057c4482bb3cb27d8badd29db34f4ff3f0706/docs/figure/scrna_stepbystep.Rmd/unnamed-chunk-13-1.png" target="_blank">3e0057c</a>
+</td>
+<td>
+baigal628
+</td>
+<td>
+2021-07-13
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/baigal628/MultiSample_scATACseq/blob/71fb9af86c756612a5a5898fbcfbed11cbee6547/docs/figure/scrna_stepbystep.Rmd/unnamed-chunk-13-1.png" target="_blank">71fb9af</a>
 </td>
 <td>
@@ -1167,6 +1274,43 @@ baigal628
 <pre><code>Warning: CombinePlots is being deprecated. Plots should now be combined using
 the patchwork system.</code></pre>
 <p><img src="figure/scrna_stepbystep.Rmd/unnamed-chunk-14-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-14-1">
+Past versions of unnamed-chunk-14-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-14-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/baigal628/MultiSample_scATACseq/blob/3e0057c4482bb3cb27d8badd29db34f4ff3f0706/docs/figure/scrna_stepbystep.Rmd/unnamed-chunk-14-1.png" target="_blank">3e0057c</a>
+</td>
+<td>
+baigal628
+</td>
+<td>
+2021-07-13
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="step-5.-save-the-object-for-future-analysis" class="section level3">
 <h3>Step 5. Save the object for future analysis</h3>

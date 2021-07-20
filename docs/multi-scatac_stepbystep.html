@@ -327,7 +327,7 @@ div.tocify {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">MAESTRO 1.5.0</a>
+      <a class="navbar-brand" href="index.html">MAESTRO 1.5.1</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -342,7 +342,10 @@ div.tocify {
       <a href="scrna.html">10X PBMC 1k</a>
     </li>
     <li>
-      <a href="scrna_stepbystep.html">10X PBMC 1k_Custom Analysis</a>
+      <a href="scrna_stepbystep.html">10X PBMC 1k Custom Analysis</a>
+    </li>
+    <li>
+      <a href="snrna.html">10X snRNA-seq</a>
     </li>
   </ul>
 </li>
@@ -357,7 +360,7 @@ div.tocify {
       <a href="scatac.html">10X PBMC 500</a>
     </li>
     <li>
-      <a href="scatac_stepbystep.html">10X PBMC 500_Custom Analysis</a>
+      <a href="scatac_stepbystep.html">10X PBMC 500 Custom Analysis</a>
     </li>
     <li>
       <a href="sci_atac.html">sci-ATAC-seq</a>
@@ -441,7 +444,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2021-07-13
+<strong>Last updated:</strong> 2021-07-19
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -532,16 +535,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombaigal628MultiSamplescATACseqtree515f900cd3d8358881e5154921560ee8ad668e9btargetblank515f900a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/baigal628/MultiSample_scATACseq/tree/515f900cd3d8358881e5154921560ee8ad668e9b" target="_blank">515f900</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombaigal628MultiSamplescATACseqtreed02c8c121faf4bc6e4430cccfe2d34ad9506f3adtargetblankd02c8c1a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/baigal628/MultiSample_scATACseq/tree/d02c8c121faf4bc6e4430cccfe2d34ad9506f3ad" target="_blank">d02c8c1</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombaigal628MultiSamplescATACseqtree515f900cd3d8358881e5154921560ee8ad668e9btargetblank515f900a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombaigal628MultiSamplescATACseqtreed02c8c121faf4bc6e4430cccfe2d34ad9506f3adtargetblankd02c8c1a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/baigal628/MultiSample_scATACseq/tree/515f900cd3d8358881e5154921560ee8ad668e9b" target="_blank">515f900</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/baigal628/MultiSample_scATACseq/tree/d02c8c121faf4bc6e4430cccfe2d34ad9506f3ad" target="_blank">d02c8c1</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -560,6 +563,9 @@ Ignored files:
 Untracked files:
     Untracked:  .RDataTmp
     Untracked:  MAESTRO_documentation.Rproj
+    Untracked:  atac_pbmc_500_nextgem.GIGGLE/
+    Untracked:  atac_pbmc_500_nextgem_Monocyte_umapplot.png
+    Untracked:  atac_pbmc_500_nextgem_Monocyte_vlnplot.png
     Untracked:  code/Basic_Operations.R
     Untracked:  code/DE.R
     Untracked:  code/Downstream Analysis.R
@@ -571,9 +577,20 @@ Untracked files:
     Untracked:  data/multi-scatac/
     Untracked:  data/scatac/
     Untracked:  data/scrna/
+    Untracked:  data/snrna/
     Untracked:  output/UMAP_annot.png
     Untracked:  output/UMAP_bysamples.png
+    Untracked:  pbmc_1k_v3.PredictedTFTop10.txt
+    Untracked:  pbmc_1k_v3.lisa/
     Untracked:  pbmc_1k_v3_8k_res.rds
+    Untracked:  pbmc_1k_v3_Monocyte.PredictedTFTop20.txt
+    Untracked:  pbmc_1k_v3_Monocyte.lisa/
+    Untracked:  pbmc_1k_v3_Monocyte_filtered.pdf
+    Untracked:  pbmc_1k_v3_Monocyte_lisa.txt
+    Untracked:  pbmc_1k_v3_Monocyte_top.pdf
+    Untracked:  pbmc_1k_v3_Monocyte_umapplot.png
+    Untracked:  pbmc_1k_v3_Monocyte_vlnplot.png
+    Untracked:  pbmc_1k_v3_lisa.txt
 
 Unstaged changes:
     Deleted:    MultiSample_scATACseq.Rproj
@@ -770,6 +787,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/baigal628/MultiSample_scATACseq/blob/3e0057c4482bb3cb27d8badd29db34f4ff3f0706/docs/figure/multi-scatac_stepbystep.Rmd/UMAP-plot_default-2.png" target="_blank">3e0057c</a>
+</td>
+<td>
+baigal628
+</td>
+<td>
+2021-07-13
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/baigal628/MultiSample_scATACseq/blob/71fb9af86c756612a5a5898fbcfbed11cbee6547/docs/figure/multi-scatac_stepbystep.Rmd/UMAP-plot_default-2.png" target="_blank">71fb9af</a>
@@ -1052,7 +1080,24 @@ baigal628
 </table>
 </div>
 </div>
-<p><strong>Between Samples</strong></p>
+<p><strong>Between Sampling Time</strong></p>
+<pre class="r"><code>da_peaks_S &lt;- wilcoxauc(ATAC, &#39;hours&#39;, seurat_assay = &#39;ATAC&#39;, assay = &#39;data&#39;)
+head(da_peaks_S)</code></pre>
+<pre><code>                    feature group    avgExpr         logFC statistic       auc
+1 chr10-100009661-100010002     0 0.04611855 -0.0005770281 341659390 0.4999628
+2 chr10-100014067-100014694     0 0.14404458  0.0404261225 349666546 0.5116799
+3 chr10-100020439-100021764     0 0.09657310  0.0199712436 346240384 0.5066663
+4 chr10-100045990-100046440     0 0.02908577  0.0094514711 343258921 0.5023034
+5 chr10-100185585-100186558     0 0.09815266  0.0087679526 343311094 0.5023798
+6 chr10-100228922-100229819     0 0.06185076  0.0129897588 343803122 0.5030998
+          pval         padj   pct_in   pct_out
+1 9.541004e-01 9.601583e-01 2.109095 2.1158525
+2 3.787041e-35 1.646165e-33 6.241636 3.7915858
+3 1.622160e-16 8.640077e-16 4.261014 2.8730762
+4 1.960387e-07 4.401190e-07 1.284728 0.8228315
+5 8.345521e-03 1.156866e-02 4.517959 4.0376152
+6 6.654038e-06 1.278395e-05 2.810342 2.1896613</code></pre>
+<p><strong>Between CLL and Healthy Donors</strong></p>
 <pre class="r"><code>da_peaks_S &lt;- wilcoxauc(ATAC, &#39;sample&#39;, seurat_assay = &#39;ATAC&#39;, assay = &#39;data&#39;)
 head(da_peaks_S)</code></pre>
 <pre><code>                    feature group    avgExpr        logFC statistic       auc
@@ -1163,23 +1208,54 @@ baigal628
 </table>
 </div>
 </div>
-<p><strong>Between Sampling Time</strong></p>
-<pre class="r"><code>da_peaks_S &lt;- wilcoxauc(ATAC, &#39;hours&#39;, seurat_assay = &#39;ATAC&#39;, assay = &#39;data&#39;)
-head(da_peaks_S)</code></pre>
-<pre><code>                    feature group    avgExpr         logFC statistic       auc
-1 chr10-100009661-100010002     0 0.04611855 -0.0005770281 341659390 0.4999628
-2 chr10-100014067-100014694     0 0.14404458  0.0404261225 349666546 0.5116799
-3 chr10-100020439-100021764     0 0.09657310  0.0199712436 346240384 0.5066663
-4 chr10-100045990-100046440     0 0.02908577  0.0094514711 343258921 0.5023034
-5 chr10-100185585-100186558     0 0.09815266  0.0087679526 343311094 0.5023798
-6 chr10-100228922-100229819     0 0.06185076  0.0129897588 343803122 0.5030998
-          pval         padj   pct_in   pct_out
-1 9.541004e-01 9.601583e-01 2.109095 2.1158525
-2 3.787041e-35 1.646165e-33 6.241636 3.7915858
-3 1.622160e-16 8.640077e-16 4.261014 2.8730762
-4 1.960387e-07 4.401190e-07 1.284728 0.8228315
-5 8.345521e-03 1.156866e-02 4.517959 4.0376152
-6 6.654038e-06 1.278395e-05 2.810342 2.1896613</code></pre>
+<pre class="r"><code>FeaturePlot(
+  object = ATAC,
+  features = top2_da_peaks_S$CLL[1],
+  pt.size = 0.1
+)</code></pre>
+<p><img src="figure/multi-scatac_stepbystep.Rmd/da-peaks-2-3.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="pseudobulk-peak-calling-and-genome-trackview" class="section level3">
+<h3>Pseudobulk Peak Calling and Genome Trackview</h3>
+<p>After cell clustering, MAESTRO redo narrow peak calling on each cluster. Users can easily compare chromatin accessibility between samples within a certain cluster based on the bigwig file. Below shows a genome track of region chr2-20675900-20677733 in Cluster 0.</p>
+<p><img src="assets/GDF7_Cluster0.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-GDF7_Cluster0">
+Past versions of GDF7_Cluster0.png
+</button>
+</p>
+<div id="fig-GDF7_Cluster0" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/baigal628/MultiSample_scATACseq/blob/d02c8c121faf4bc6e4430cccfe2d34ad9506f3ad/docs/assets/GDF7_Cluster0.png" target="_blank">d02c8c1</a>
+</td>
+<td>
+baigal628
+</td>
+<td>
+2021-07-19
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">

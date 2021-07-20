@@ -249,7 +249,7 @@ $(document).ready(function () {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">MAESTRO 1.5.0</a>
+      <a class="navbar-brand" href="index.html">MAESTRO 1.5.1</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -264,7 +264,10 @@ $(document).ready(function () {
       <a href="scrna.html">10X PBMC 1k</a>
     </li>
     <li>
-      <a href="scrna_stepbystep.html">10X PBMC 1k_Custom Analysis</a>
+      <a href="scrna_stepbystep.html">10X PBMC 1k Custom Analysis</a>
+    </li>
+    <li>
+      <a href="snrna.html">10X snRNA-seq</a>
     </li>
   </ul>
 </li>
@@ -279,7 +282,7 @@ $(document).ready(function () {
       <a href="scatac.html">10X PBMC 500</a>
     </li>
     <li>
-      <a href="scatac_stepbystep.html">10X PBMC 500_Custom Analysis</a>
+      <a href="scatac_stepbystep.html">10X PBMC 500 Custom Analysis</a>
     </li>
     <li>
       <a href="sci_atac.html">sci-ATAC-seq</a>
@@ -361,7 +364,7 @@ $(document).ready(function () {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2021-07-13
+<strong>Last updated:</strong> 2021-07-19
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -452,16 +455,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombaigal628MultiSamplescATACseqtree515f900cd3d8358881e5154921560ee8ad668e9btargetblank515f900a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/baigal628/MultiSample_scATACseq/tree/515f900cd3d8358881e5154921560ee8ad668e9b" target="_blank">515f900</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombaigal628MultiSamplescATACseqtreed02c8c121faf4bc6e4430cccfe2d34ad9506f3adtargetblankd02c8c1a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/baigal628/MultiSample_scATACseq/tree/d02c8c121faf4bc6e4430cccfe2d34ad9506f3ad" target="_blank">d02c8c1</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombaigal628MultiSamplescATACseqtree515f900cd3d8358881e5154921560ee8ad668e9btargetblank515f900a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombaigal628MultiSamplescATACseqtreed02c8c121faf4bc6e4430cccfe2d34ad9506f3adtargetblankd02c8c1a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/baigal628/MultiSample_scATACseq/tree/515f900cd3d8358881e5154921560ee8ad668e9b" target="_blank">515f900</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/baigal628/MultiSample_scATACseq/tree/d02c8c121faf4bc6e4430cccfe2d34ad9506f3ad" target="_blank">d02c8c1</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -480,6 +483,9 @@ Ignored files:
 Untracked files:
     Untracked:  .RDataTmp
     Untracked:  MAESTRO_documentation.Rproj
+    Untracked:  atac_pbmc_500_nextgem.GIGGLE/
+    Untracked:  atac_pbmc_500_nextgem_Monocyte_umapplot.png
+    Untracked:  atac_pbmc_500_nextgem_Monocyte_vlnplot.png
     Untracked:  code/Basic_Operations.R
     Untracked:  code/DE.R
     Untracked:  code/Downstream Analysis.R
@@ -491,9 +497,20 @@ Untracked files:
     Untracked:  data/multi-scatac/
     Untracked:  data/scatac/
     Untracked:  data/scrna/
+    Untracked:  data/snrna/
     Untracked:  output/UMAP_annot.png
     Untracked:  output/UMAP_bysamples.png
+    Untracked:  pbmc_1k_v3.PredictedTFTop10.txt
+    Untracked:  pbmc_1k_v3.lisa/
     Untracked:  pbmc_1k_v3_8k_res.rds
+    Untracked:  pbmc_1k_v3_Monocyte.PredictedTFTop20.txt
+    Untracked:  pbmc_1k_v3_Monocyte.lisa/
+    Untracked:  pbmc_1k_v3_Monocyte_filtered.pdf
+    Untracked:  pbmc_1k_v3_Monocyte_lisa.txt
+    Untracked:  pbmc_1k_v3_Monocyte_top.pdf
+    Untracked:  pbmc_1k_v3_Monocyte_umapplot.png
+    Untracked:  pbmc_1k_v3_Monocyte_vlnplot.png
+    Untracked:  pbmc_1k_v3_lisa.txt
 
 Unstaged changes:
     Deleted:    MultiSample_scATACseq.Rproj
@@ -671,12 +688,10 @@ chromap -i -r Refdata_scATAC_MAESTRO_GRCh38_1.1.0/GRCh38_genome.fa -o GRCh38_chr
 </div>
 <div id="download-lisa2-data-files-for-grch38" class="section level4">
 <h4>Download lisa2 data files for GRCh38</h4>
-<pre class="bash"><code>
-cd ../
+<pre class="bash"><code>cd ../
 mkdir annotation
 cd annotation/
-wget http://cistrome.org/~alynch/data/lisa_data/hg38_1000_2.0.h5
-</code></pre>
+wget http://cistrome.org/~alynch/data/lisa_data/hg38_1000_2.0.h5</code></pre>
 <ul>
 <li>MAESTRO utilizes <strong>giggle</strong> to identify enrichment of transcription factor peaks in scATAC-seq cluster-specific peaks. By default <a href="https://github.com/ryanlayer/giggle">giggle</a> is installed in MAESTRO environment. The giggle index for Cistrome database can be downloaded <a href="http://cistrome.org/~galib/MAESTRO/references/giggle.all.tar.gz">here</a>. Users need to download the file and provide the location of the giggle annotation to MAESTRO if want to predict TFs on scATAC-seq.</li>
 </ul>
