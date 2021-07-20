@@ -105,11 +105,11 @@ $ MAESTRO scatac-init -h
 
 Arguments  |  Description
 ---------  |  -----------
-`--batch ` | If set as true, peaks will be called on each sample individually first and peaks from all samples will be merged.A count matrix for each sample will be produced based on the merged peak set.
-`--consensus_peaks` | When batch is TRUE, users can define whether to merge consensus peaks from each sample.If set as true, users should also set number of cutoff_samples to define consensus.
+`--batch ` | If set as true, multi-sample pipeline will be initiated. Users can either choose to go through consensus-peaks path or bulk-peaks path (illustrated in workflow above), which are mutually exclusive. A count matrix for each sample will be produced based on the merged peak set.
+`--consensus_peaks` | If true, --batch needs to be also set as true. Users can define whether to merge consensus peaks from each sample. In this way, MAESTRO will call peaks on each sample individually first and merge consensus peaks from all samples. Users should also set number of cutoff_samples to define the consensus (i.e. peaks called in >= cutoff_samples).
 `--cutoff_samples` | Minimum number of samples to present consensus peaks. The peaks present in at least cutoff_samples will be kept.
-`--bulk_peaks` | For multi-samples from the same experiment, if set as true, peaks will be called after merging all bam file.Bulk_peaks and consensus_peaks are mutually exclusive.
-`--downsample` | {True,False} For deeply sequenced samples, bam files can be downsampled to a certain number of reads (target_reads) to get peak set.
+`--bulk_peaks` | For multi-samples from the same experiment, if set as true, peaks will be called after merging all bam file. Bulk_peaks and consensus_peaks are mutually exclusive.
+`--downsample` | {True,False} For deeply sequenced samples, bam files can be downsampled to a certain number of reads (target_reads) to get peak set. Effective only when bulk_peaks is true. 
 `--target_reads` | Number of reads to be kept in downsampling. If the sample has fewer than the target_reads, the original number of reads will be kept. Effective only when down_sample is true.
 
 **Input files arguments:**
@@ -204,7 +204,7 @@ Arguments  |  Description
 Once configured, you will find a samples.json file in the current project directory:
 
 ```{bash, eval=FALSE}
-cat samples.json
+$ cat samples.json
 
 {
     "CLL0": {
@@ -283,6 +283,7 @@ Before running the workflow, please check the `config.yaml` and see if it is con
 $ snakemake -np
 
 $ nohup snakemake --cores 32 > multi-scatac-chromap &
+##Instead of using nohup, submitting $ snakemake -j 16 by slurm is highly recommended.
 ```
 
 ### Step4. Final Outputs

@@ -1,19 +1,21 @@
 name: "MAESTRO"
 output_dir: ../docs
 navbar:
-  title: "MAESTRO 1.5.0"
+  title: "MAESTRO 1.5.1"
   left:
   - text: "scRNA-seq"
     menu:
       - text: "10X PBMC 1k"
         href: scrna.html
-      - text: "10X PBMC 1k_Custom Analysis"
+      - text: "10X PBMC 1k Custom Analysis"
         href: scrna_stepbystep.html
+      - text: "10X snRNA-seq"
+        href: snrna.html
   - text: "scATAC-seq"
     menu:
       - text: "10X PBMC 500"
         href: scatac.html
-      - text: "10X PBMC 500_Custom Analysis"
+      - text: "10X PBMC 500 Custom Analysis"
         href: scatac_stepbystep.html
       - text: "sci-ATAC-seq"
         href: sci_atac.html

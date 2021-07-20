@@ -79,18 +79,18 @@ chromap -i -r Refdata_scATAC_MAESTRO_GRCh38_1.1.0/GRCh38_genome.fa -o GRCh38_chr
 * MAESTRO utilizes **LISA2** to evaluate the enrichment of transcription factors based on the marker genes from scRNA-seq clusters. If users want to use LISA2, they need to download and install reference data either for [human](/project/dev/alynch/public_data/lisa_data/hg38_1000_2.0.h5) or for [mouse](http://cistrome.org/~alynch/data/lisa_data/mm10_1000_2.0.h5). The input gene set can be constituted of only official gene symbols, only RefSeq ids, only Ensembl ids, only Entrez ids, or a mixture of these identifiers.
 
 #### Download lisa2 data files for GRCh38
-```{bash, eval = FALSE}
 
+```{bash, eval = FALSE}
 cd ../
 mkdir annotation
 cd annotation/
 wget http://cistrome.org/~alynch/data/lisa_data/hg38_1000_2.0.h5
-
 ```
 
 * MAESTRO utilizes **giggle** to identify enrichment of transcription factor peaks in scATAC-seq cluster-specific peaks. By default [giggle](https://github.com/ryanlayer/giggle) is installed in MAESTRO environment. The giggle index for Cistrome database can be downloaded [here](http://cistrome.org/~galib/MAESTRO/references/giggle.all.tar.gz). Users need to download the file and provide the location of the giggle annotation to MAESTRO if want to predict TFs on scATAC-seq.
 
 #### Download giggle annotation files for GRCh38
+
 ```{bash, eval = FALSE}
 wget http://cistrome.org/~galib/MAESTRO/references/giggle.all.tar.gz
 tar xvzf giggle.all.tar.gz

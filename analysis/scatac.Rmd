@@ -154,6 +154,7 @@ Arguments  |  Description
 Once configured, you will find a samples.json file in the current project directory:
 
 ```{bash, eval=FALSE}
+$ cat samples.json
 {
     "atac_pbmc_500_nextgem": {
         "I1": [
@@ -178,14 +179,17 @@ Once configured, you will find a samples.json file in the current project direct
 
 ### Step 3. Run snakemake pipeline
 Before running the workflow, please check the `config.yaml` and see if it is configured correctly. Once configured, users can use snakemake to run the workflow.
+
 ```{bash, eval=FALSE}
 $ snakemake -np
 
 $ nohup snakemake --cores 32 > atac_pbmc_500_nextgem.out &
+##Instead of using nohup, submitting $ snakemake -j 16 by slurm is highly recommended.
 ```
 
 ### Step 4. Understand the final output files   
 The whole pipeline in this example takes about 6 hours with 10 cores. Here, we assume users have run MAESTRO from fastq files successfully. An output directory is specified in the run call, and will contain several useful outputs as described below.
+
 ```{bash, eval=FALSE}
 $ ls Result/
 Analysis  Benchmark  Log  Mapping  QC  Report

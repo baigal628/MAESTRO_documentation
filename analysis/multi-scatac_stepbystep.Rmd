@@ -94,7 +94,14 @@ FeaturePlot(
 )
 ```
 
-**Between Samples**
+**Between Sampling Time**
+```{r, da-peaks-3}
+da_peaks_S <- wilcoxauc(ATAC, 'hours', seurat_assay = 'ATAC', assay = 'data')
+head(da_peaks_S)
+```
+
+
+**Between CLL and Healthy Donors**
 ```{r, da-peaks-2}
 da_peaks_S <- wilcoxauc(ATAC, 'sample', seurat_assay = 'ATAC', assay = 'data')
 head(da_peaks_S)
@@ -116,12 +123,18 @@ VlnPlot(
   pt.size = 0.1,
   idents = c("CLL", "PBMC")
 )
+
+FeaturePlot(
+  object = ATAC,
+  features = top2_da_peaks_S$CLL[1],
+  pt.size = 0.1
+)
 ```
 
-**Between Sampling Time**
-```{r, da-peaks-3}
-da_peaks_S <- wilcoxauc(ATAC, 'hours', seurat_assay = 'ATAC', assay = 'data')
-head(da_peaks_S)
+### Pseudobulk Peak Calling and Genome Trackview
+
+After cell clustering, MAESTRO redo narrow peak calling on each cluster. Users can easily compare chromatin accessibility between samples within a certain cluster based on the bigwig file. Below shows a genome track of region chr2-20675900-20677733 in Cluster 0.
+
+```{r echo=FALSE}
+knitr::include_graphics("assets/GDF7_Cluster0.png", error = FALSE)
 ```
-
-

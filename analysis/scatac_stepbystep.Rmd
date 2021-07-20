@@ -117,6 +117,7 @@ pbmc.ATAC.res$ATAC <- ATACAnnotateChromatinAccessibility(ATAC = pbmc.ATAC.res$AT
                                                   project = "atac_pbmc_500_nextgem",
                                                   giggle.path = "/Users/galib/Downloads/giggle.all",
                                                   organism = "GRCh38")
+
 p <- DimPlot(pbmc.ATAC.res$ATAC, label = TRUE, reduction = "umap", group.by = "biological_resource", repel=T, pt.size = 0.5, label.size = 2.5)
 ggsave(file.path(paste0(result$ATAC@project.name, "_CistromeTop_annotated.png")), p, width=7.5, height=4)
 

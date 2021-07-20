@@ -1,7 +1,7 @@
 ---
-title: "scRNA-seq"
+title: "snRNA-seq"
 author: "Gali Bai"
-date: "2021-06-06"
+date: "2021-07-19"
 output: workflowr::wflow_html
 editor_options:
   chunk_output_type: console
@@ -9,7 +9,7 @@ editor_options:
 
 ## Introduction
 
-In this example, we will be analyzing a scRNA-seq dataset of 1K human peripheral blood mononuclear cells (PBMCs) freely available from 10X Genomics. The raw dataset can be downloaded from the 10X Genomics website. We will show you how to run through the whole MAESTRO pipeline from the raw sequencing fastq files to the final results.
+In this example, we will perform a single-nuclei RNA-seq using 10X dataset of 750 Sorted Nuclei from Human Brain. The raw dataset can be downloaded from the 10X Genomics website. We will show you how to run through the whole MAESTRO pipeline from the raw sequencing fastq files to the final results.
 
 
 ## Run MAESTRO pipeline
@@ -20,8 +20,8 @@ In this example, we will be analyzing a scRNA-seq dataset of 1K human peripheral
 Please download the raw data from 10X genomics website.
 
 ```{bash, eval=FALSE}
-$ wget https://cf.10xgenomics.com/samples/cell-exp/3.0.0/pbmc_1k_v3/pbmc_1k_v3_fastqs.tar
-$ tar xvf pbmc_1k_v3_fastqs.tar
+$ wget https://cf.10xgenomics.com/samples/cell-exp/6.0.0/Brain_3p_LT/Brain_3p_LT_fastqs.tar
+$ tar xvf Brain_3p_LT_fastqs.tar
 ```
 
 Before running MAESTRO, users need to activate the MAESTRO environment.
@@ -35,9 +35,11 @@ $ conda activate MAESTRO
 Initialize the MAESTRO scRNA-seq workflow using MAESTRO scrna-init command. This will install a Snakefile and a config file in this directory.
 
 ```{bash, eval=FALSE}
-$ MAESTRO scrna-init \
+MAESTRO scrna-init \
 --platform 10x-genomics --species GRCh38 \
---cores 32 --rseqc --directory pbmc_1k_v3_fastqs \
+--STARsolo_Features GeneFull \
+--STARsolo_threads 12 \
+--cores 32 --rseqc --directory Brain_3p_LT \
 --count-cutoff 1000 --gene-cutoff 500 --cell-cutoff 10 \
 --mapindex references/Refdata_scRNA_MAESTRO_GRCh38_1.2.2/GRCh38_STAR_2.7.6a \
 --whitelist references/whitelist/3M-february-2018.txt \
@@ -125,9 +127,9 @@ Arguments  |  Description
 In the project directory, we will next run `MAESTRO samples-init` subcommand to configure samples.json file. The purpose of this step is let MAESTRO read the right format and path of input data.
 
 ```{bash, eval=FALSE}
-$ cd pbmc_1k_v3_fastqs/
+$ cd Brain_3p_LT/
 
-$ MAESTRO samples-init --assay_type scrna --platform 10x-genomics --data_typ fastq --data_dir data/pbmc_1k_v3_fastqs/
+$ MAESTRO samples-init --assay_type scrna --platform 10x-genomics --data_typ fastq --data_dir MAESTRO/test/snRNA/data/Brain_3p_LT_fastqs
 ```
 
 To get a full description of command-line options, please use the command
@@ -149,18 +151,30 @@ Once configured, you will find a samples.json file in the current project direct
 ```{bash,eval=FALSE}
 $ cat samples.json
 {
-    "pbmc_1k_v3": {
+    "mm_LT_750": {
         "I1": [
-            "/MAESTRO/test/tutorial/data/pbmc_1k_v3_fastqs/pbmc_1k_v3_S1_L001_I1_001.fastq.gz",
-            "/MAESTRO/test/tutorial/data/pbmc_1k_v3_fastqs/pbmc_1k_v3_S1_L002_I1_001.fastq.gz"
+            "/liulab/galib/sc_CIDC/MAESTRO/test/snRNA/data/Brain_3p_LT_fastqs/mm_LT_750_S5_L001_I1_001.fastq.gz",
+            "/liulab/galib/sc_CIDC/MAESTRO/test/snRNA/data/Brain_3p_LT_fastqs/mm_LT_750_S5_L002_I1_001.fastq.gz",
+            "/liulab/galib/sc_CIDC/MAESTRO/test/snRNA/data/Brain_3p_LT_fastqs/mm_LT_750_S5_L003_I1_001.fastq.gz",
+            "/liulab/galib/sc_CIDC/MAESTRO/test/snRNA/data/Brain_3p_LT_fastqs/mm_LT_750_S5_L004_I1_001.fastq.gz"
+        ],
+        "I2": [
+            "/liulab/galib/sc_CIDC/MAESTRO/test/snRNA/data/Brain_3p_LT_fastqs/mm_LT_750_S5_L001_I2_001.fastq.gz",
+            "/liulab/galib/sc_CIDC/MAESTRO/test/snRNA/data/Brain_3p_LT_fastqs/mm_LT_750_S5_L002_I2_001.fastq.gz",
+            "/liulab/galib/sc_CIDC/MAESTRO/test/snRNA/data/Brain_3p_LT_fastqs/mm_LT_750_S5_L003_I2_001.fastq.gz",
+            "/liulab/galib/sc_CIDC/MAESTRO/test/snRNA/data/Brain_3p_LT_fastqs/mm_LT_750_S5_L004_I2_001.fastq.gz"
         ],
         "R1": [
-            "/MAESTRO/test/tutorial/data/pbmc_1k_v3_fastqs/pbmc_1k_v3_S1_L001_R1_001.fastq.gz",
-            "/MAESTRO/test/tutorial/data/pbmc_1k_v3_fastqs/pbmc_1k_v3_S1_L002_R1_001.fastq.gz"
+            "/liulab/galib/sc_CIDC/MAESTRO/test/snRNA/data/Brain_3p_LT_fastqs/mm_LT_750_S15_L001_R1_001.fastq.gz",
+            "/liulab/galib/sc_CIDC/MAESTRO/test/snRNA/data/Brain_3p_LT_fastqs/mm_LT_750_S5_L002_R1_001.fastq.gz",
+            "/liulab/galib/sc_CIDC/MAESTRO/test/snRNA/data/Brain_3p_LT_fastqs/mm_LT_750_S5_L003_R1_001.fastq.gz",
+            "/liulab/galib/sc_CIDC/MAESTRO/test/snRNA/data/Brain_3p_LT_fastqs/mm_LT_750_S5_L004_R1_001.fastq.gz"
         ],
         "R2": [
-            "/MAESTRO/test/tutorial/data/pbmc_1k_v3_fastqs/pbmc_1k_v3_S1_L001_R2_001.fastq.gz",
-            "/MAESTRO/test/tutorial/data/pbmc_1k_v3_fastqs/pbmc_1k_v3_S1_L002_R2_001.fastq.gz"
+            "/liulab/galib/sc_CIDC/MAESTRO/test/snRNA/data/Brain_3p_LT_fastqs/mm_LT_750_S5_L001_R2_001.fastq.gz",
+            "/liulab/galib/sc_CIDC/MAESTRO/test/snRNA/data/Brain_3p_LT_fastqs/mm_LT_750_S5_L002_R2_001.fastq.gz",
+            "/liulab/galib/sc_CIDC/MAESTRO/test/snRNA/data/Brain_3p_LT_fastqs/mm_LT_750_S5_L003_R2_001.fastq.gz",
+            "/liulab/galib/sc_CIDC/MAESTRO/test/snRNA/data/Brain_3p_LT_fastqs/mm_LT_750_S5_L004_R2_001.fastq.gz"
         ]
     }
 }
@@ -181,7 +195,7 @@ $ nohup snakemake -j 16 > run.out &
 
 ### Step 4. Understand the final output files
 
-The whole pipeline in this example takes about 4 hours with 12 cores. If MAESTRO runs successfully, an output folder will contain several useful outputs as described below.
+The whole pipeline in this example takes about 3 hours with 12 cores. If MAESTRO runs successfully, an output folder will contain several useful outputs as described below.
 
 ```{bash,eval = FALSE}
 $ ls Result
