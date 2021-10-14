@@ -143,13 +143,16 @@ To get a full description of command-line options, please use the command
 MAESTRO samples-init -h
 ```
 
+
 **Input files arguments:**
+
 Arguments  |  Description
 ---------  |  -----------
 `--assay_type` | {scrna,scatac} choose the type of assays.
 `--platform` | {10x-genomics,sci-ATAC-seq,microfluidic} choose the type of sequencing platform.
 `--data_type` | {fastq,fragment,bam} choose the type of input data. When using fastq format as input, MAESTRO can only recognize the 10X-like naming: `[Sample Name]_S1_L00[Lane Number]_[Read Type]_001.fastq.gz`.
-`--data_dir` |  the full path to the input file folder.
+`--data_dir` | the full path to the input file folder.
+
 
 Once configured, you will find a samples.json file in the current project directory:
 

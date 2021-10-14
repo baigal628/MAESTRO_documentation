@@ -136,5 +136,5 @@ FeaturePlot(
 After cell clustering, MAESTRO redo narrow peak calling on each cluster. Users can easily compare chromatin accessibility between samples within a certain cluster based on the bigwig file. Below shows a genome track of region chr2-20675900-20677733 in Cluster 0.
 
 ```{r echo=FALSE}
-knitr::include_graphics("assets/GDF7_Cluster0.png", error = FALSE)
+knitr::include_graphics("assets/GDF7_Cluster0_bed.png", error = FALSE)
 ```
